@@ -7,7 +7,9 @@ global rootEngine;
 %% Handles assigned to the "Number of Balloons and Flight Area" section
 
 % Get edit-text-box values using object handles
+
 numBalloons = str2num(get(handles.editNumBalloons,'String'));
+
 minLat = str2num(get(handles.editMinLat,'String'));
 minLon = str2num(get(handles.editMinLon,'String'));
 maxLat = str2num(get(handles.editMaxLat,'String'));
