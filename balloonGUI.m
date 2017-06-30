@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 23-Jun-2017 16:19:55
+% Last Modified by GUIDE v2.5 30-Jun-2017 14:14:12
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -650,3 +650,136 @@ function balloonTable_CellSelectionCallback(hObject, eventdata, handles)
 global selected_cells;
 
 selected_cells = eventdata.Indices;
+
+
+
+function editNumBalloonOutput_Callback(hObject, eventdata, handles)
+% hObject    handle to editNumBalloonOutput (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editNumBalloonOutput as text
+%        str2double(get(hObject,'String')) returns contents of editNumBalloonOutput as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editNumBalloonOutput_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editNumBalloonOutput (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editLatCovg_Callback(hObject, eventdata, handles)
+% hObject    handle to editLatCovg (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editLatCovg as text
+%        str2double(get(hObject,'String')) returns contents of editLatCovg as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editLatCovg_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editLatCovg (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editLonCovg_Callback(hObject, eventdata, handles)
+% hObject    handle to editLonCovg (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editLonCovg as text
+%        str2double(get(hObject,'String')) returns contents of editLonCovg as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editLonCovg_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editLonCovg (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbuttonCOVGcalc.
+function pushbuttonCOVGcalc_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonCOVGcalc (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Execute calculation by pressing "calculate" button
+pushbuttonAREA_gui;
+
+% --- Executes on button press in pushbuttonNUMcalc.
+function pushbuttonNUMcalc_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonNUMcalc (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Execute calculation by pressing "calculate" button
+pushbuttonNUM_gui;
+
+
+function editFloatAlt2_Callback(hObject, eventdata, handles)
+% hObject    handle to editFloatAlt2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFloatAlt2 as text
+%        str2double(get(hObject,'String')) returns contents of editFloatAlt2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editFloatAlt2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFloatAlt2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editFloatAlt1_Callback(hObject, eventdata, handles)
+% hObject    handle to editFloatAlt1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFloatAlt1 as text
+%        str2double(get(hObject,'String')) returns contents of editFloatAlt1 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editFloatAlt1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFloatAlt1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
