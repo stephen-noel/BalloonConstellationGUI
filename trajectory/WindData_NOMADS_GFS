@@ -1,0 +1,32 @@
+%% Initialize
+
+% 1) Download nctoolbox: ('https://github.com/nctoolbox/nctoolbox/releases')
+% 2) run setup_nctoolbox.m to add nctoolbox to the path, etc. 
+     setup_nctoolbox;
+
+%% Access GrADS Data Server via URL
+
+mydate = '20170610';
+url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p50/gfs',mydate,'/gfs_0p50_00z'];
+
+
+%% Instantiate the data set
+% the data sets used by the CUSF Predictor are 'hgtprs', 'ugrdprs' and 'vgrdprs'
+    % 'hgtprs':     geopotential height
+    % 'ugrdprs':    u-component velocity
+    % 'vgrdprs':    v-component velocity
+
+% NOTE:    
+    % The u-component velocity is the northerly wind component
+    % The v-component velocity is the easterly wind component
+
+
+nco = ncgeodataset(url);
+
+geopotentialHeight = double(squeeze(nco{'hgtprs'}(1,:,:,:))); %all data at first time
+%geopotentialHeight_time = nco{'hgtprs'}(:,1,1,1); %time array
+
+uComponentVelocity = double(squeeze(nco{'ugrdprs'}(1,:,:,:))); %all data at first time
+
+vComponentVelocity = double(squeeze(nco{'vgrdprs'}(1,:,:,:))); %all data at first time
+
