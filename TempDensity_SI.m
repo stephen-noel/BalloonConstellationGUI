@@ -1,4 +1,5 @@
 %% Temp and Density according to altitude
+%http://www.engineeringtoolbox.com/standard-atmosphere-d_604.html
 
 function [Temp,AirDensity] = TempDensity_SI(z)
 % NOTE: z is altitude in meters, Temp is in Celsius and Density is kg/m^3
