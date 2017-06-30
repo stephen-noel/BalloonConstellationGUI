@@ -1,4 +1,5 @@
 %% Temp and Density according to altitude
+%http://www.engineeringtoolbox.com/standard-atmosphere-d_604.html
 
 function [Temp,AirDensity] = TempDensity_Imperial(z)
 % NOTE: z is altitude in feet, Temp is in Fahrenheit and Density is
