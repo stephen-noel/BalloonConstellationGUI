@@ -4,10 +4,11 @@
 
 %% Code to run Number calculation
 
+% Get inputs from GUI strings
 FlightArea_inputsGUI;
 
-% BalloonNumCalc.m
-[BalloonNumforCalc] = BalloonNumCalc(flen,floatalt2,minLat,minLon,maxLat,maxLon)
+% RUN: BalloonNumCalc.m
+[BalloonNumforCalc] = BalloonNumCalc(flen,floatalt2,minLat,minLon,maxLat,maxLon);
 
-% Set GUI handles
+% Set GUI handles to output answers
 set(handles.editNumBalloonOutput,'String',num2str(BalloonNumforCalc));

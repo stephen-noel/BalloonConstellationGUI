@@ -6,12 +6,22 @@
 % area
 
 function [BalloonNumforCalc] = BalloonNumCalc(flen,floatalt2,minLat,minLon,maxLat,maxLon)
-%% FOVcoverage
+% INPUTS: 
+    %flen ---------- focal length multiplier
+    %floatalt2 ----- float altitude
+    %minLat -------- minimum latitude
+    %minLon -------- minimum longitude
+    %maxLat -------- maximum latitude
+    %maxLon -------- maximum longitude
+% OUTPUTS:
+    %BalloonNumforCalc -- number of balloons needed for area coverage
 
-%error handling
+%%
+
+% Error handling
 if (minLat < maxLat && minLon < maxLon)
 
-%constants
+% Constants
 xsensor = 36;       % Width of sensor, [mm]
 ysensor = 24;       % Height of sensor, [mm]
 
@@ -37,13 +47,15 @@ totalYrange = maxLon - minLon;
 numX = totalXrange/xrange;
 numY = totalYrange/yrange;
 
+%IF-ELSE: choose lowest value of balloons needed to cover X or Y regions
 if numX < numY
     BalloonNumforCalc = numX;
 else
     BalloonNumforCalc = numY;
 end
 
+
 else
-    warndlg('Minimum Lat/Lon must be less than maximum Lat/Lon.');
+    warndlg('Minimum Lat/Lon must be less than maximum Lat/Lon.'); %ELSE from error handling IF-ELSE statement
 end
 end

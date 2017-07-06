@@ -2,6 +2,7 @@
 % Julianna Evans
 % 06.23.17
 
+%% Global Variables
 global selected_cells;
 global rootEngine;
 

@@ -2,11 +2,20 @@
 % Julianna Evans
 % 06.29.17
 
-
 % Area that can be covered with N balloons at a given altitude
 
 function [totalXArea,totalYArea] = AreaCalc(flen,floatalt1,nballoons)
-%% FOVcoverage
+% INPUTS: 
+    %flen ---------- focal length multiplier
+    %floatalt1 ----- float altitude
+    %nballoons ----- minimum latitude
+% OUTPUTS:
+    %totalXArea ---- range of X area that can be covered 
+    %totalYArea ---- range of Y area that can be covered
+    
+%%
+
+% Camera Sensor 
 xsensor = 36;       % Width of sensor, [mm]
 ysensor = 24;       % Height of sensor, [mm]
 

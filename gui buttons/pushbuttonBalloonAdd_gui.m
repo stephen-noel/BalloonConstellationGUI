@@ -2,6 +2,8 @@
 % Julianna Evans
 % 06.22.17
 
+%% Global Variables
+
 global rootEngine;
 
 %% Code assigned to the 'pushbuttonBalloonAdd' pushbutton in the GUI
@@ -9,12 +11,13 @@ global rootEngine;
 % Instantiate balloon object
 balloon = balloonObj;
 
-% IF-ELSE NESTED STRUCTURE
+%% IF-ELSE NESTED STRUCTURE
+% If the radio buttons for Custom and Default balloon/payload inputs are not selected
 if (get(handles.radiobuttonCustom,'Value') == 0 && get(handles.radiobuttonDefault,'Value') == 0)
     %user did not select any radio button, display error
     warndlg('Please select Custom or Default balloon/payload specs.');
 else
-    if (get(handles.radiobuttonCustom,'Value') == 1)
+    if (get(handles.radiobuttonCustom,'Value') == 1) %Custom button is pressed
         %use CUSTOM PROPERTIES
         % Get edit-text-box values from GUI using object handles
         balloon_Name = get(handles.editBalloonName,'String');
@@ -45,7 +48,7 @@ else
         balloon.BalloonMass = balloon_balloonMass;
     end
     
-    if (get(handles.radiobuttonDefault,'Value') == 1)
+    if (get(handles.radiobuttonDefault,'Value') == 1) %Default button is pressed
         %use DEFAULT PROPERTIES
         % Get values from launch names/coords
         balloon_Name = get(handles.editBalloonName,'String');
@@ -63,7 +66,7 @@ else
         balloon_balloonInfVolume_Default = 500;   %[m^3]
         balloon_balloonMass_Default = 100;        %[kg]
         
-        % Assign GUI handle values into the balloon object
+        % Assign default values into the balloon object
         balloon.Name = balloon_Name;
         balloon.LaunchLat = balloon_Lat;
         balloon.LaunchLon = balloon_Lon;
@@ -78,9 +81,6 @@ else
         balloon.BalloonMass = balloon_balloonMass_Default;
         
         % set default values to display
-        %balloon_Name = set(handles.editBalloonName,'String',balloon_Name);
-        %balloon_Lat = num2str(set(handles.editBalloonLat,'String'));
-        %balloon_Lon = num2str(set(handles.editBalloonLon,'String'));
         balloon_Flen = num2str(set(handles.editLensFocalLength,'String',balloon_Flen_Default));
         balloon_FlenMult = num2str(set(handles.editFocalLengthMult,'String',balloon_FlenMult_Default));
         balloon_ImgRatio = num2str(set(handles.editImageRatio,'String',balloon_ImgRatio_Default));
@@ -90,9 +90,7 @@ else
         balloon_PayloadZdim = num2str(set(handles.editPayloadZdim,'String',balloon_PayloadZdim_Default));
         balloon_balloonInfVolume = num2str(set(handles.editBalloonVolume,'String',balloon_balloonInfVolume_Default));
         balloon_balloonMass = num2str(set(handles.editBalloonMass,'String',balloon_balloonMass_Default));
-        
     end
-    
 end
 
 % Set up into row data for the GUI table
@@ -113,7 +111,7 @@ balloonNames = oldData(:,1);
 
 %% Error handling
 
-% Error handling for object name
+% Error handling for object name (names cannot repeat)
 if  ~any(strcmp(balloonNames,newName))
     
     %Error handling for latitude and longitude string entry
@@ -132,6 +130,9 @@ if  ~any(strcmp(balloonNames,newName))
 else
     warndlg('Balloon names must not repeat.');
 end
+
+
+%% NOTE: Not using the aircraft model for now. Just using the facility objects until waypoints can be created and propogated 
 
 
 %% Create new Aircraft with Waypoints 

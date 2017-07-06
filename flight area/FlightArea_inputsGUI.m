@@ -4,10 +4,8 @@
 
 global rootEngine;
 
-%% Handles assigned to the "Number of Balloons and Flight Area" section
+%% Get handles from GUI edit-textboxes to store as inputs
 
-
-% Get edit-text-box values using object handles
 nballoons = str2num(get(handles.editNumBalloons,'String'));
 
 minLat = str2num(get(handles.editMinLat,'String'));

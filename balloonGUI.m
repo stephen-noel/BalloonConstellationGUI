@@ -98,7 +98,6 @@ set(handles.editBalloonLon,'Enable','off');
 set(handles.balloonTable,'Enable','off');
 set(handles.pushbuttonBalloonAdd,'Enable','off');
 set(handles.pushbuttonBalloonDelete,'Enable','off');
-
 set(handles.editLensFocalLength,'Enable','off');
 set(handles.editFocalLengthMult,'Enable','off');
 set(handles.editImageRatio,'Enable','off');
@@ -106,10 +105,8 @@ set(handles.editPayloadMass,'Enable','off');
 set(handles.editPayloadXdim,'Enable','off');
 set(handles.editPayloadYdim,'Enable','off');
 set(handles.editPayloadZdim,'Enable','off');
-
 set(handles.editBalloonVolume,'Enable','off');
 set(handles.editBalloonMass,'Enable','off');
-
 set(handles.radiobuttonDefault,'Enable','off');
 set(handles.radiobuttonCustom,'Enable','off');
 
@@ -131,6 +128,7 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+%unload scenario using invoke method
 invoke(handles.activex1.Application,'ExecuteCommand','Unload / *'); 
 
 global STKXapp;
@@ -146,6 +144,7 @@ function pushbuttonInit_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonInit (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
 global rootEngine
 
 % Grey out buttons until "Initialize Scenario" is pressed
@@ -160,7 +159,6 @@ set(handles.editBalloonLon,'Enable','on');
 set(handles.balloonTable,'Enable','on');
 set(handles.pushbuttonBalloonAdd,'Enable','on');
 set(handles.pushbuttonBalloonDelete,'Enable','on');
-
 set(handles.editLensFocalLength,'Enable','on');
 set(handles.editFocalLengthMult,'Enable','on');
 set(handles.editImageRatio,'Enable','on');
@@ -168,10 +166,8 @@ set(handles.editPayloadMass,'Enable','on');
 set(handles.editPayloadXdim,'Enable','on');
 set(handles.editPayloadYdim,'Enable','on');
 set(handles.editPayloadZdim,'Enable','on');
-
 set(handles.editBalloonVolume,'Enable','on');
 set(handles.editBalloonMass,'Enable','on');
-
 set(handles.radiobuttonDefault,'Enable','on');
 set(handles.radiobuttonCustom,'Enable','on');
 
@@ -229,7 +225,6 @@ function pushbuttonIncTimestep_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global rootEngine;
 rootEngine.Faster();
-
 
 
 function editNumBalloons_Callback(hObject, eventdata, handles)
@@ -652,7 +647,6 @@ function balloonTable_CellSelectionCallback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 global selected_cells;
-
 selected_cells = eventdata.Indices;
 
 
@@ -731,7 +725,7 @@ function pushbuttonCOVGcalc_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Execute calculation by pressing "calculate" button
+% Execute coverage calculation by pressing "calculate" button
 pushbuttonAREA_gui;
 
 % --- Executes on button press in pushbuttonNUMcalc.
@@ -740,7 +734,7 @@ function pushbuttonNUMcalc_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Execute calculation by pressing "calculate" button
+% Execute constellation calculation by pressing "calculate" button
 pushbuttonNUM_gui;
 
 

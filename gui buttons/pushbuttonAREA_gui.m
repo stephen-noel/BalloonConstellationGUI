@@ -4,11 +4,12 @@
 
 %% Code to run Area calculation
 
+% Get inputs from GUI strings
 FlightArea_inputsGUI;
 
-% AreaCalc.m calculation
+% RUN: AreaCalc.m calculation
 [totalXArea,totalYArea] = AreaCalc(flen,floatalt1,nballoons)
 
-% Set GUI output handles
+% Set GUI handles to output answers
 set(handles.editLatCovg,'String',num2str(totalXArea));
 set(handles.editLonCovg,'String',num2str(totalYArea));
