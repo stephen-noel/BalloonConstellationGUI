@@ -9,33 +9,91 @@ global rootEngine;
 % Instantiate balloon object
 balloon = balloonObj;
 
-% Get edit-text-box values using object handles
-balloon_Name = get(handles.editBalloonName,'String');
-balloon_Lat = str2num(get(handles.editBalloonLat,'String'));
-balloon_Lon = str2num(get(handles.editBalloonLon,'String'));
-balloon_Flen = str2num(get(handles.editLensFocalLength,'String'));
-balloon_FlenMult = str2num(get(handles.editFocalLengthMult,'String'));
-balloon_ImgRatio = str2num(get(handles.editImageRatio,'String'));
-balloon_PayloadMass = str2num(get(handles.editPayloadMass,'String'));
-balloon_PayloadXdim = str2num(get(handles.editPayloadXdim,'String'));
-balloon_PayloadYdim = str2num(get(handles.editPayloadYdim,'String'));
-balloon_PayloadZdim = str2num(get(handles.editPayloadZdim,'String'));
-balloon_balloonInfVolume = str2num(get(handles.editBalloonVolume,'String'));
-balloon_balloonMass = str2num(get(handles.editBalloonMass,'String'));
-
-% Assign GUI handle values into the balloon object
-balloon.Name = balloon_Name;
-balloon.LaunchLat = balloon_Lat;
-balloon.LaunchLon = balloon_Lon;
-balloon.LensFocalLength = balloon_Flen;
-balloon.FlenMultiplier = balloon_FlenMult;
-balloon.ImgRatio = balloon_ImgRatio;
-balloon.PayloadMass = balloon_PayloadMass;
-balloon.PayloadXdim = balloon_PayloadXdim;
-balloon.PayloadYdim = balloon_PayloadYdim;
-balloon.PayloadZdim = balloon_PayloadZdim;
-balloon.BalloonVolInf = balloon_balloonInfVolume;
-balloon.BalloonMass = balloon_balloonMass;
+% IF-ELSE NESTED STRUCTURE
+if (get(handles.radiobuttonCustom,'Value') == 0 && get(handles.radiobuttonDefault,'Value') == 0)
+    %user did not select any radio button, display error
+    warndlg('Please select Custom or Default balloon/payload specs.');
+else
+    if (get(handles.radiobuttonCustom,'Value') == 1)
+        %use CUSTOM PROPERTIES
+        % Get edit-text-box values from GUI using object handles
+        balloon_Name = get(handles.editBalloonName,'String');
+        balloon_Lat = str2num(get(handles.editBalloonLat,'String'));
+        balloon_Lon = str2num(get(handles.editBalloonLon,'String'));
+        balloon_Flen = str2num(get(handles.editLensFocalLength,'String'));
+        balloon_FlenMult = str2num(get(handles.editFocalLengthMult,'String'));
+        balloon_ImgRatio = str2num(get(handles.editImageRatio,'String'));
+        balloon_PayloadMass = str2num(get(handles.editPayloadMass,'String'));
+        balloon_PayloadXdim = str2num(get(handles.editPayloadXdim,'String'));
+        balloon_PayloadYdim = str2num(get(handles.editPayloadYdim,'String'));
+        balloon_PayloadZdim = str2num(get(handles.editPayloadZdim,'String'));
+        balloon_balloonInfVolume = str2num(get(handles.editBalloonVolume,'String'));
+        balloon_balloonMass = str2num(get(handles.editBalloonMass,'String'));
+        
+        % Assign GUI handle values into the balloon object
+        balloon.Name = balloon_Name;
+        balloon.LaunchLat = balloon_Lat;
+        balloon.LaunchLon = balloon_Lon;
+        balloon.LensFocalLength = balloon_Flen;
+        balloon.FlenMultiplier = balloon_FlenMult;
+        balloon.ImgRatio = balloon_ImgRatio;
+        balloon.PayloadMass = balloon_PayloadMass;
+        balloon.PayloadXdim = balloon_PayloadXdim;
+        balloon.PayloadYdim = balloon_PayloadYdim;
+        balloon.PayloadZdim = balloon_PayloadZdim;
+        balloon.BalloonVolInf = balloon_balloonInfVolume;
+        balloon.BalloonMass = balloon_balloonMass;
+    end
+    
+    if (get(handles.radiobuttonDefault,'Value') == 1)
+        %use DEFAULT PROPERTIES
+        % Get values from launch names/coords
+        balloon_Name = get(handles.editBalloonName,'String');
+        balloon_Lat = str2num(get(handles.editBalloonLat,'String'));
+        balloon_Lon = str2num(get(handles.editBalloonLon,'String'));
+        
+        % Set default values
+        balloon_Flen_Default = 50;                %[mm]
+        balloon_FlenMult_Default = 1.6;           %[]
+        balloon_ImgRatio_Default = 1.5;           %[]
+        balloon_PayloadMass_Default = 500;        %[kg]
+        balloon_PayloadXdim_Default = 5;          %[m]
+        balloon_PayloadYdim_Default = 5;          %[m]
+        balloon_PayloadZdim_Default = 5;          %[m]
+        balloon_balloonInfVolume_Default = 500;   %[m^3]
+        balloon_balloonMass_Default = 100;        %[kg]
+        
+        % Assign GUI handle values into the balloon object
+        balloon.Name = balloon_Name;
+        balloon.LaunchLat = balloon_Lat;
+        balloon.LaunchLon = balloon_Lon;
+        balloon.LensFocalLength = balloon_Flen_Default;
+        balloon.FlenMultiplier = balloon_FlenMult_Default;
+        balloon.ImgRatio = balloon_ImgRatio_Default;
+        balloon.PayloadMass = balloon_PayloadMass_Default;
+        balloon.PayloadXdim = balloon_PayloadXdim_Default;
+        balloon.PayloadYdim = balloon_PayloadYdim_Default;
+        balloon.PayloadZdim = balloon_PayloadZdim_Default;
+        balloon.BalloonVolInf = balloon_balloonInfVolume_Default;
+        balloon.BalloonMass = balloon_balloonMass_Default;
+        
+        % set default values to display
+        %balloon_Name = set(handles.editBalloonName,'String',balloon_Name);
+        %balloon_Lat = num2str(set(handles.editBalloonLat,'String'));
+        %balloon_Lon = num2str(set(handles.editBalloonLon,'String'));
+        balloon_Flen = num2str(set(handles.editLensFocalLength,'String',balloon_Flen_Default));
+        balloon_FlenMult = num2str(set(handles.editFocalLengthMult,'String',balloon_FlenMult_Default));
+        balloon_ImgRatio = num2str(set(handles.editImageRatio,'String',balloon_ImgRatio_Default));
+        balloon_PayloadMass = num2str(set(handles.editPayloadMass,'String',balloon_PayloadMass_Default));
+        balloon_PayloadXdim = num2str(set(handles.editPayloadXdim,'String',balloon_PayloadXdim_Default));
+        balloon_PayloadYdim = num2str(set(handles.editPayloadYdim,'String',balloon_PayloadYdim_Default));
+        balloon_PayloadZdim = num2str(set(handles.editPayloadZdim,'String',balloon_PayloadZdim_Default));
+        balloon_balloonInfVolume = num2str(set(handles.editBalloonVolume,'String',balloon_balloonInfVolume_Default));
+        balloon_balloonMass = num2str(set(handles.editBalloonMass,'String',balloon_balloonMass_Default));
+        
+    end
+    
+end
 
 % Set up into row data for the GUI table
 newRow = {balloon.Name, balloon.LaunchLat, balloon.LaunchLon};

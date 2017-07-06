@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 30-Jun-2017 14:14:12
+% Last Modified by GUIDE v2.5 06-Jul-2017 13:30:53
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -110,6 +110,8 @@ set(handles.editPayloadZdim,'Enable','off');
 set(handles.editBalloonVolume,'Enable','off');
 set(handles.editBalloonMass,'Enable','off');
 
+set(handles.radiobuttonDefault,'Enable','off');
+set(handles.radiobuttonCustom,'Enable','off');
 
 
 % --- OutputFcn: Outputs from this function are returned to the command line.
@@ -170,6 +172,8 @@ set(handles.editPayloadZdim,'Enable','on');
 set(handles.editBalloonVolume,'Enable','on');
 set(handles.editBalloonMass,'Enable','on');
 
+set(handles.radiobuttonDefault,'Enable','on');
+set(handles.radiobuttonCustom,'Enable','on');
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
@@ -783,3 +787,39 @@ function editFloatAlt1_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in checkboxDefault.
+function checkboxDefault_Callback(hObject, eventdata, handles)
+% hObject    handle to checkboxDefault (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkboxDefault
+
+
+% --- Executes on button press in checkboxCustom.
+function checkboxCustom_Callback(hObject, eventdata, handles)
+% hObject    handle to checkboxCustom (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of checkboxCustom
+
+
+% --- Executes on button press in radiobuttonDefault.
+function radiobuttonDefault_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobuttonDefault (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobuttonDefault
+
+
+% --- Executes on button press in radiobuttonCustom.
+function radiobuttonCustom_Callback(hObject, eventdata, handles)
+% hObject    handle to radiobuttonCustom (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of radiobuttonCustom

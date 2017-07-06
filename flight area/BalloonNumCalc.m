@@ -7,6 +7,11 @@
 
 function [BalloonNumforCalc] = BalloonNumCalc(flen,floatalt2,minLat,minLon,maxLat,maxLon)
 %% FOVcoverage
+
+%error handling
+if (minLat < maxLat && minLon < maxLon)
+
+%constants
 xsensor = 36;       % Width of sensor, [mm]
 ysensor = 24;       % Height of sensor, [mm]
 
@@ -38,4 +43,7 @@ else
     BalloonNumforCalc = numY;
 end
 
+else
+    warndlg('Minimum Lat/Lon must be less than maximum Lat/Lon.');
+end
 end
