@@ -47,8 +47,8 @@ totalYrange = maxLon - minLon;
 numX = totalXrange/xrange;
 numY = totalYrange/yrange;
 
-%IF-ELSE: choose lowest value of balloons needed to cover X or Y regions
-if numX < numY
+%IF-ELSE: choose highest value of balloons needed to cover X or Y regions
+if numX > numY
     BalloonNumforCalc = numX;
 else
     BalloonNumforCalc = numY;
