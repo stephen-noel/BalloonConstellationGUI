@@ -121,6 +121,10 @@ if  ~any(strcmp(balloonNames,newName))
         facility = rootEngine.CurrentScenario.Children.New('eFacility', newName);
         facility.Position.AssignGeodetic(newLat,newLon,0); % AssignGeodetic argument: Latitude, Longitude, Altitude
         
+        % NOTE: aircraft object placed here, and add propogation underneath
+        %aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', cell2mat(newRow(1))); %cell2mat(newRow(1)) is obj NAME
+        %aircraftWaypoints;
+        
         set(handles.balloonTable,'Data', newData);
         
     else
@@ -131,38 +135,4 @@ else
     warndlg('Balloon names must not repeat.');
 end
 
-
-%% NOTE: Not using the aircraft model for now. Just using the facility objects until waypoints can be created and propogated 
-
-
-%% Create new Aircraft with Waypoints 
-% NOTE: Must include a second waypoint in order to be propogated. Using a facility for now to model the launch locations.  
-
-%{
-
-aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', cell2mat(newRow(1))); %cell2mat(newRow(1)) is obj NAME
-
-% Add Waypoints to Aircraft
-aircraft.SetRouteType('ePropagatorGreatArc');
-route = aircraft.Route;
-route.Method = 'eDetermineTimeAccFromVel';
-route.SetAltitudeRefType('eWayPtAltRefMSL');
-
-% Add first point
-waypoint = route.Waypoints.Add();
-waypoint.Latitude = cell2mat(newRow(2));    %cell2mat(newRow(2)) is obj LAT
-waypoint.Longitude = cell2mat(newRow(3));   %cell2mat(newRow(3)) is obj LON
-waypoint.Altitude = 5;  % km
-waypoint.Speed = .1;    % km/sec
-
-% Add second point
-waypoint2 = route.Waypoints.Add();
-waypoint2.Latitude = 30;
-waypoint2.Longitude = 50;   
-waypoint2.Altitude = 5; % km
-waypoint2.Speed = .1;   % km/sec
-
-% Propagate the route
-route.Propagate;
-
-%}
+% NOTE: Not using the aircraft model for now. Just using the facility objects until waypoints can be created and propogated 
