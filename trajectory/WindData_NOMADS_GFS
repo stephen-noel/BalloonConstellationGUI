@@ -6,15 +6,15 @@
 
 %% Access GrADS Data Server via URL
 
-mydate = '20170610';
-url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p50/gfs',mydate,'/gfs_0p50_00z'];
+mydate = '20170710';
+url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr',mydate,'/gfs_0p25_1hr_00z'];
 
 
 %% Instantiate the data set
 % the data sets used by the CUSF Predictor are 'hgtprs', 'ugrdprs' and 'vgrdprs'
     % 'hgtprs':     geopotential height
-    % 'ugrdprs':    u-component velocity
-    % 'vgrdprs':    v-component velocity
+    % 'ugrd_3658m':    u-component velocity
+    % 'vgrd_3658m':    v-component velocity
 
 % NOTE:    
     % The u-component velocity is the northerly wind component
