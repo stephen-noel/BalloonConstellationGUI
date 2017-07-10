@@ -26,7 +26,7 @@ nco = ncgeodataset(url);
 geopotentialHeight = double(squeeze(nco{'hgtprs'}(1,:,:,:))); %all data at first time
 %geopotentialHeight_time = nco{'hgtprs'}(:,1,1,1); %time array
 
-uComponentVelocity = double(squeeze(nco{'ugrdprs'}(1,:,:,:))); %all data at first time
+uComponentVelocity = double(squeeze(nco{'ugrd_3658m'}(1,:,:,:))); %all data at first time
 
-vComponentVelocity = double(squeeze(nco{'vgrdprs'}(1,:,:,:))); %all data at first time
+vComponentVelocity = double(squeeze(nco{'vgrd_3658m'}(1,:,:,:))); %all data at first time
 
