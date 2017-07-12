@@ -12,9 +12,9 @@ url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr',mydate,'/gfs_0p25_1h
 
 %% Instantiate the data set
 % the data sets used by the CUSF Predictor are 'hgtprs', 'ugrdprs' and 'vgrdprs'
-    % 'hgtprs':     geopotential height
-    % 'ugrd_3658m':    u-component velocity
-    % 'vgrd_3658m':    v-component velocity
+    % 'hgtprs':     geopotential height 
+    % 'ugrd_3658m':    u-component velocity (121, 721, 1440) -- resolutions: (0.041666668, 0.25, 0.25)
+    % 'vgrd_3658m':    v-component velocity (121, 721, 1440) -- resolutions: (0.041666668, 0.25, 0.25)
 
 % NOTE:    
     % The u-component velocity is the northerly wind component
