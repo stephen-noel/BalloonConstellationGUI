@@ -18,7 +18,7 @@ selected_name = tableData(selected_cells_row,1);
 
 % Delete the STK object that matches the selected name
 balloonToDelete = cell2mat(selected_name);
-rootEngine.CurrentScenario.Children.Unload('eFacility',balloonToDelete);
+rootEngine.CurrentScenario.Children.Unload('eAircraft',balloonToDelete);
 
 % Delete table row based on selected row index
 % NOTE: can delete the row by clicking on any column in the row
