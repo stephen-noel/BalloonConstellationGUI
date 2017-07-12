@@ -13,6 +13,7 @@ addpath('flight area');
 addpath('trajectory');
 addpath('initialize');
 addpath('Atmosphere');
+addpath('gui integration');
 
 % Set Balloon Table to have empty rows and three columns (name, lat, lon)
 emptyTable = cell(0,3);

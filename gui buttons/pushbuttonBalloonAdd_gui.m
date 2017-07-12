@@ -135,4 +135,3 @@ else
     warndlg('Balloon names must not repeat.');
 end
 
-% NOTE: Not using the aircraft model for now. Just using the facility objects until waypoints can be created and propogated 
