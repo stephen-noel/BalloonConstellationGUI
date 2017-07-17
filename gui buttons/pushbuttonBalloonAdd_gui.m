@@ -117,11 +117,7 @@ if  ~any(strcmp(balloonNames,newName))
     %Error handling for latitude and longitude string entry
     if newLat >= -90 && newLat <= 90 && newLon >= -180 && newLon <= 180
 
-        %Assign facility name and coords (**place aircraft stuff here later**)
-        %facility = rootEngine.CurrentScenario.Children.New('eFacility', newName);
-        %facility.Position.AssignGeodetic(newLat,newLon,0); % AssignGeodetic argument: Latitude, Longitude, Altitude
-        
-        % NOTE: aircraft object placed here, and add propogation underneath
+        % Add aircraft, external file for waypoint propogation
         aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', cell2mat(newRow(1))); %cell2mat(newRow(1)) is obj NAME
         aircraftWaypoints;
         
