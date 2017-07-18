@@ -1,9 +1,11 @@
 %% convertWind
 % Converts NOAA ADDS wind data (.*txt) into MATLAB variables
 % inputs are user inputs
-% outputs are what NOAA gives us
+% outputs are what x(aka u) y(aka v) wind speeds NOAA gives us
 
-function [output1, output2] = convertWind(input1,input2)
+function [ugrd_3658m, vgrd_3658m] = convertWind(inputlat1,inputlong2)
+
+
 % NOTE: inputs and outputs are placeholders
 
 
