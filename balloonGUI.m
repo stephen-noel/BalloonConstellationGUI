@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 06-Jul-2017 13:30:53
+% Last Modified by GUIDE v2.5 17-Jul-2017 16:52:35
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -109,7 +109,15 @@ set(handles.editBalloonVolume,'Enable','off');
 set(handles.editBalloonMass,'Enable','off');
 set(handles.radiobuttonDefault,'Enable','off');
 set(handles.radiobuttonCustom,'Enable','off');
-
+set(handles.editFloatAlt,'Enable','off');
+set(handles.editFloatDur,'Enable','off');
+set(handles.popupmenuGasList,'Enable','off');
+set(handles.editOtherBalloon,'Enable','off');
+set(handles.editFloatAlt1,'Enable','off');
+set(handles.editFloatAlt2,'Enable','off');
+set(handles.editLatCovg,'Enable','off');
+set(handles.editLonCovg,'Enable','off');
+set(handles.editNumBalloonOutput,'Enable','off');
 
 % --- OutputFcn: Outputs from this function are returned to the command line.
 function varargout = balloonGUI_OutputFcn(hObject, eventdata, handles) 
@@ -170,6 +178,14 @@ set(handles.editBalloonVolume,'Enable','on');
 set(handles.editBalloonMass,'Enable','on');
 set(handles.radiobuttonDefault,'Enable','on');
 set(handles.radiobuttonCustom,'Enable','on');
+set(handles.editFloatAlt,'Enable','on');
+set(handles.editFloatDur,'Enable','on');
+set(handles.popupmenuGasList,'Enable','on');
+set(handles.editFloatAlt1,'Enable','on');
+set(handles.editFloatAlt2,'Enable','on');
+set(handles.editLatCovg,'Enable','on');
+set(handles.editLonCovg,'Enable','on');
+set(handles.editNumBalloonOutput,'Enable','on');
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
@@ -817,3 +833,95 @@ function radiobuttonCustom_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobuttonCustom
+
+
+
+function editFloatAlt_Callback(hObject, eventdata, handles)
+% hObject    handle to editFloatAlt (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFloatAlt as text
+%        str2double(get(hObject,'String')) returns contents of editFloatAlt as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editFloatAlt_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFloatAlt (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editFloatDur_Callback(hObject, eventdata, handles)
+% hObject    handle to editFloatDur (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFloatDur as text
+%        str2double(get(hObject,'String')) returns contents of editFloatDur as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editFloatDur_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFloatDur (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on selection change in popupmenuGasList.
+function popupmenuGasList_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenuGasList (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenuGasList contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenuGasList
+
+
+% --- Executes during object creation, after setting all properties.
+function popupmenuGasList_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenuGasList (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editOtherBalloon_Callback(hObject, eventdata, handles)
+% hObject    handle to editOtherBalloon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editOtherBalloon as text
+%        str2double(get(hObject,'String')) returns contents of editOtherBalloon as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editOtherBalloon_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editOtherBalloon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

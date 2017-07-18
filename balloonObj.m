@@ -21,5 +21,7 @@ classdef balloonObj
         
         BalloonVolInf;      % [m^3]
         BalloonMass;        % [kg]
+        
+        BalloonGas;         % [g/mol]
     end
 end
