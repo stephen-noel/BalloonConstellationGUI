@@ -99,7 +99,7 @@ end
 
 %---- FLOAT ----
 last_asc_idx = t_asc;           %get value of the "balloon" at the last time step
-float_alt = z(last_asc_idx);    %set float_alt to value at end of ascent
+float_alt = z_array(last_asc_idx);    %set float_alt to value at end of ascent
 
 for t = start_fl:stop_fl
     z = float_alt;
