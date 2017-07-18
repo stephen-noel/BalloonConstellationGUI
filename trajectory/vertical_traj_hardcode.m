@@ -145,7 +145,7 @@ for t = start_dec:stop_dec
     
     old_z = z;    
     
-    z = -(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
+    z = float_alt-(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
     z_array(t) = z;
     
      dz = z - old_z; %this is the change in altitude from the last second
