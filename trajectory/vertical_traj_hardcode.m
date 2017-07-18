@@ -84,8 +84,8 @@ for t_asc = start_asc:stop_asc
     old_z = z;
     
     
-    z(t_asc) = (A/C).*log(cosh( (sqrt(B).*sqrt(C).*t_asc)/A) );
-    
+    z = (A/C).*log(cosh( (sqrt(B).*sqrt(C).*t_asc)/A) );
+    z_array(t_asc) = z;
     
     dz = z - old_z; %this is the change in altitude from the last second
     
@@ -102,7 +102,8 @@ last_asc_idx = t_asc;           %get value of the "balloon" at the last time ste
 float_alt = z(last_asc_idx);    %set float_alt to value at end of ascent
 
 for t = start_fl:stop_fl
-    z(t) = float_alt;
+    z = float_alt;
+    z_array(t) = z;
 end
 
 
@@ -144,8 +145,8 @@ for t = start_dec:stop_dec
     
     old_z = z;    
     
-    z(t) = (start_dec+float_alt)-(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
-    
+    z = (start_dec+float_alt)-(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
+    z_array(t) = z;
     
      dz = z - old_z; %this is the change in altitude from the last second
     
@@ -157,18 +158,18 @@ end
 
 %{
 %Normal Plot
-plot(z);
+plot(z_array);
 %}
 
 %Scatter plot
-t = 1:length(z);
-scatter(t,z,'filled');
+t = 1:length(z_array);
+scatter(t,z_array,'filled');
 
 
 %{
 %Zeroline
 hold on;
-zeroline = zeros(length(z));
+zeroline = zeros(length(z_array));
 plot(zeroline);
 hold off;
 %}
