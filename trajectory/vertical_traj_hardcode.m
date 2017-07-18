@@ -145,7 +145,7 @@ for t = start_dec:stop_dec
     
     old_z = z;    
     
-    z = (start_dec+float_alt)-(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
+    z = -(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
     z_array(t) = z;
     
      dz = z - old_z; %this is the change in altitude from the last second
@@ -156,21 +156,14 @@ for t = start_dec:stop_dec
     
 end
 
-%{
-%Normal Plot
-plot(z_array);
-%}
 
 %Scatter plot
 t = 1:length(z_array);
 scatter(t,z_array,'filled');
 
+%Scatter plot for real component (just a working hack for now)
+t = 1:length(z_array);
+realz_array = real(z_array);
+scatter(t,realz_array,'filled');
 
-%{
-%Zeroline
-hold on;
-zeroline = zeros(length(z_array));
-plot(zeroline);
-hold off;
-%}
-%}
+

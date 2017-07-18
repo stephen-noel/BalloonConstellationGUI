@@ -2,9 +2,18 @@
 % Julianna Evans
 % 07.18.17
 
-function[scenarioStartTime, launchLat, launchLon] = GUIwindInputs(scenario_starttime, scenario_launchlat, scenario_launchlon)
+%% Global Variables
+global rootEngine;
+
+%% Function
+function[scenarioStartTime, launchLat, launchLon] = GUIwindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI)
+%INPUTS: GUI user-input (as strings)
+%OUTPUTS: MATLAB variables
+
 
 %Get GUI string inputs
+starttime_GUI = 
+
 
 %Convert Scenario starttime to NOAA form
 
