@@ -21,13 +21,13 @@ p = 101325;             %Inital atmospheric pressure [Pa] or [kg/ms^2]
 temp = 15;              %Initial temperature, [C]
 tempK = temp + 273.15;  %Temperature, [K]
 RhoA = p/(287*tempK);   %Density of air [kg/m^3]
-Wg = Mb*p*vol/(r*tempK);
+Wg = Mb*p*vol/(r*tempK);%Weight of gas
 Wf = BMass*0.0098;      %Weight of the balloon, [Newtons] (Bmass is in grams)
-Wp = PMass*0.0098;      %Weight of the payload, [Newtons]
+Wp = PMass*0.0098;      %Weight of the payload, [Newtons] (PMass is in grams)
 cb = 0.55;              %Apparent additional mass coefficient for balloons (based on a study from UMich in 1995)
 g = 9.81;               %Acceleration caused by gravity [m/s^2]
 dt = 1;                 %timestep intialization
-radius = ((3/(4*pi))*vol)^(1/3);
+radius = ((3/(4*pi))*vol)^(1/3); % [meters]
 
 %Duration of float mode (GUI input -- get string)
 float_dur = 22; % [s]
@@ -141,12 +141,12 @@ for t = start_dec:stop_dec
     %Differential Equation Constants
     A = (Wp + Wf + Wg + cb*p*vol); 
     B = (1/2*g * realCD * RhoA * Ca); 
-    C = (RhoA*vol - Wg - Wp - Wf);
+    C = abs((RhoA*vol - Wg - Wp - Wf)); % As the balloon descends, volume decreases which causes this term to be negative: abs() added
     
     old_z = z;    
     
     %Altitude Array
-    z = -(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) );
+    z = float_alt-(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) ); %added the float_alt constant out front
     z_array(t) = z;
     
     dz = z - old_z; %this is the change in altitude from the last second
