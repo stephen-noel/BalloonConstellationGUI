@@ -1,7 +1,7 @@
 %% convertWind
 % Converts NOAA ADDS wind data (.*txt) into MATLAB variables
 % inputs are user inputs
-% outputs are what x(aka u) y(aka v) wind speeds NOAA gives us
+% outputs are what x(aka v) y(aka u) wind speeds NOAA gives us
 
 function [windspeed, direction] = convertWind(scenarioStartTime, launchLat, launchLon)
 
