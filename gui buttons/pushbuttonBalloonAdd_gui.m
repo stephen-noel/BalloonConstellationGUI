@@ -5,6 +5,7 @@
 %% Global Variables
 
 global rootEngine;
+global aircraft;
 
 %% Code assigned to the 'pushbuttonBalloonAdd' pushbutton in the GUI
 
@@ -108,6 +109,9 @@ oldData = get(handles.balloonTable,'Data');
 newData = [oldData; newRow];
 balloonNames = oldData(:,1);
 
+% Copy all data into the Trajectory tab table
+balloonDataTraj = set(handles.balloonTableTraj,'Data',newData);
+
 
 %% Error handling
 
@@ -117,9 +121,13 @@ if  ~any(strcmp(balloonNames,newName))
     %Error handling for latitude and longitude string entry
     if newLat >= -90 && newLat <= 90 && newLon >= -180 && newLon <= 180
 
-        % Add aircraft, external file for waypoint propogation
+        % Add aircraft object
         aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', cell2mat(newRow(1))); %cell2mat(newRow(1)) is obj NAME
-        aircraftWaypoints;
+        %aircraftWaypoints;
+        
+        %show facility during debugging
+        facility = rootEngine.CurrentScenario.Children.New('eFacility',newName);
+        facility.Position.AssignGeodetic(newLat,newLon,0); % AssignGeodetic(lat,lon,alt)
         
         set(handles.balloonTable,'Data', newData);
         

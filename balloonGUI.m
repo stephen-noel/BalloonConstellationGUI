@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 20-Jul-2017 11:05:01
+% Last Modified by GUIDE v2.5 20-Jul-2017 12:17:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -118,6 +118,7 @@ set(handles.editFloatAlt2,'Enable','off');
 set(handles.editLatCovg,'Enable','off');
 set(handles.editLonCovg,'Enable','off');
 set(handles.editNumBalloonOutput,'Enable','off');
+set(handles.editFilename,'Enable','off');
 
 % --- OutputFcn: Outputs from this function are returned to the command line.
 function varargout = balloonGUI_OutputFcn(hObject, eventdata, handles) 
@@ -186,6 +187,8 @@ set(handles.editFloatAlt2,'Enable','on');
 set(handles.editLatCovg,'Enable','on');
 set(handles.editLonCovg,'Enable','on');
 set(handles.editNumBalloonOutput,'Enable','on');
+set(handles.editFilename,'Enable','on');
+
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
@@ -932,21 +935,21 @@ function pushbuttonCalcTraj_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonCalcTraj (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+pushbuttonCalcTraj_gui;
 
 
-
-function edit30_Callback(hObject, eventdata, handles)
-% hObject    handle to edit30 (see GCBO)
+function editFilename_Callback(hObject, eventdata, handles)
+% hObject    handle to editFilename (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Hints: get(hObject,'String') returns contents of edit30 as text
-%        str2double(get(hObject,'String')) returns contents of edit30 as a double
+% Hints: get(hObject,'String') returns contents of editFilename as text
+%        str2double(get(hObject,'String')) returns contents of editFilename as a double
 
 
 % --- Executes during object creation, after setting all properties.
-function edit30_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit30 (see GCBO)
+function editFilename_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFilename (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -955,3 +958,14 @@ function edit30_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes when selected cell(s) is changed in balloonTableTraj.
+function balloonTableTraj_CellSelectionCallback(hObject, eventdata, handles)
+% hObject    handle to balloonTableTraj (see GCBO)
+% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)
+%	Indices: row and column indices of the cell(s) currently selecteds
+% handles    structure with handles and user data (see GUIDATA)
+
+global selected_cells_traj;
+selected_cells_traj = eventdata.Indices;
