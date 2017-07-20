@@ -15,6 +15,11 @@ addpath('initialize');
 addpath('Atmosphere');
 addpath('gui integration');
 
-% Set Balloon Table to have empty rows and three columns (name, lat, lon)
+% Set Balloon Table on Constellation page to have empty rows and three columns (name, lat, lon)
 emptyTable = cell(0,3);
 oldData = set(handles.balloonTable,'Data',emptyTable);
+
+% Set Balloon Table on Trajectory page to have empty rows and three columns (name, lat, lon)
+emptyTable = cell(0,3);
+oldDataTraj = set(handles.balloonTableTraj,'Data',emptyTable);
+

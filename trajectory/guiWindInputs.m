@@ -51,7 +51,7 @@ switch month
         warndlg('Not valid month signification');
 end
         
-%NOAA formatted string
+%NOAA formatted date string
 NOAAstring = strcat(year,monthNUM,day);
 
 %% Convert lat/lon and set as outputs

@@ -144,11 +144,11 @@ for t = start_dec:stop_dec
     C = abs((RhoA*vol - Wg - Wp - Wf)); % As the balloon descends, volume decreases which causes this term to be negative: abs() added
     
     old_z = z;    
-    
+
     %Altitude Array
     z = float_alt-(A/C)*log(cosh( (sqrt(B)*sqrt(C)*t)/A) ); %added the float_alt constant out front
     z_array(t) = z;
-    
+ 
     dz = z - old_z; %this is the change in altitude from the last second
     
     %Change in Volume
@@ -168,5 +168,4 @@ scatter(t,z_array,'filled');
 t = 1:length(z_array);
 realz_array = real(z_array);
 scatter(t,realz_array,'filled');
-
 
