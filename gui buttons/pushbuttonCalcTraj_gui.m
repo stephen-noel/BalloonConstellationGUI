@@ -23,6 +23,16 @@ selected_name = tableData(selected_cells_row_traj,1);
 selected_lat = cell2mat(tableData(selected_cells_row_traj,2));
 selected_lon = cell2mat(tableData(selected_cells_row_traj,3));
 
+%% Get GUI string inputs (need to move this to another section)
+starttime_GUI = rootEngine.CurrentScenario.StartTime;
+disp(starttime_GUI);
+
+launchlat_GUI = selected_lat;
+launchlon_GUI = selected_lon;
+
+[NOAAstring, launchLat, launchLon] = guiWindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI);
+
+
 
 %% Calculate Trajectory
 aircraftWaypoints;

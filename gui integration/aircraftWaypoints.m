@@ -12,7 +12,6 @@
 %% Global Variables
 global selected_lat;
 global selected_lon;
-
 global aircraft;
 
 %% test data (NEEDS TO BE BALLOON DYNAMICS DATA)

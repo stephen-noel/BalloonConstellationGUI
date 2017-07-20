@@ -1,8 +1,13 @@
 %% Initialize
 
-% 1) Download nctoolbox: ('https://github.com/nctoolbox/nctoolbox/releases')
-% 2) run setup_nctoolbox.m to add nctoolbox to the path, etc. 
-     setup_nctoolbox;
+%Nctoolbox downloaded from: ('https://github.com/nctoolbox/nctoolbox/releases')
+
+%NOTE: Nctoolbox must be downloaded and included in the same MATLAB
+%directory for the "ncgeodataset" function to work. In the final product
+%these files will be packaged with the GUI files.
+
+%Add nctoolbox to the path
+setup_nctoolbox;
 
 %% Access GrADS Data Server via URL
 
@@ -11,7 +16,7 @@ url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr',mydate,'/gfs_0p25_1h
 
 
 %% Instantiate the data set
-% the data sets used by the CUSF Predictor are 'hgtprs', 'ugrdprs' and 'vgrdprs'
+% the data sets used by the code are 'hgtprs', 'ugrdprs' and 'vgrdprs'
     % 'hgtprs':     geopotential height (121, 721, 1440) -- resolutions: (0.041666668, 0.25, 0.25)
     % 'ugrd_3658m':    u-component velocity (121, 721, 1440) -- resolutions: (0.041666668, 0.25, 0.25)
     % 'vgrd_3658m':    v-component velocity (121, 721, 1440) -- resolutions: (0.041666668, 0.25, 0.25)
