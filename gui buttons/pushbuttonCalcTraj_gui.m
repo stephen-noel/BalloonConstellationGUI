@@ -24,13 +24,14 @@ selected_lat = cell2mat(tableData(selected_cells_row_traj,2));
 selected_lon = cell2mat(tableData(selected_cells_row_traj,3));
 
 
-%% Get GUI string inputs
+%% Get GUI string inputs (****will be inputs for guiWindInputs function****)
 starttime_GUI = rootEngine.CurrentScenario.StartTime;
 launchlat_GUI = selected_lat;
 launchlon_GUI = selected_lon;
 
-[NOAAstring, launchLat, launchLon] = guiWindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI);
+%[NOAAstring, launchLat, launchLon] = guiWindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI);
 
+%call wind data stuff here (???)
 
 %% Get values of textboxes and set into balloon object
 
