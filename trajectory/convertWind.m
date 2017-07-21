@@ -14,7 +14,7 @@ T1 = WindData_NOMADS_GFS(1:2,:);
 windspeed = sqrt((ugrd_3658m)^2+(vgrd_3658m)^2); %m/s
 direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m)); %in degrees
 
-for launchLat > 0
+for launchLat = 1:360
   time = time + 1;
   latitude = vgrd_3658m * time;
   longitude = ugrd_3658m * time;
