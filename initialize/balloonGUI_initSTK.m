@@ -12,8 +12,17 @@ global rootEngine;
 
 %% Scenario Time Interval
 % Set Scenario Time Intervals
-rootEngine.CurrentScenario.SetTimePeriod('01 Sep 2019 16:00:00.000', '10 Sep 2019 16:00:00.000');
-rootEngine.CurrentScenario.Epoch = '01 Sep 2019 16:00:00.000';
+
+% Set date units to UTCG
+rootEngine.UnitPreferences.Item('DateFormat').SetCurrentUnit('UTCG');
+
+% Scenario start and stop times
+STKstarttime = 'today';     %local midnight today (12:00AM UTC displayed in computer's local timezone)
+STKstoptime = 'tomorrow';   %local midnight tomorrow (12:00AM UTC displayed in computer's local timezone)
+
+% Set time period, epoch, rewind
+rootEngine.CurrentScenario.SetTimePeriod(STKstarttime,STKstoptime);
+rootEngine.CurrentScenario.Epoch = STKstarttime;
 rootEngine.Rewind;
 
 
@@ -21,6 +30,6 @@ rootEngine.Rewind;
 %  NOTE: Everything below is just to test functionality, and will be
 %  modified for the actual scenario
 
-% Create New Facility (Default)
+% Create New Default Facility in Roswell, NM
 facility = rootEngine.CurrentScenario.Children.New('eFacility', 'MyFacility');
 facility.Position.AssignGeodetic(33.3943, -104.5230, 0); % Argument: Latitude, Longitude, Altitude

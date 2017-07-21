@@ -45,6 +45,8 @@ balloon.FloatAlt = balloon_float_alt;
 balloon.FloatDur = balloon_float_dur;
 
 % Get value of balloon gas popup
+
+%{
 switch get(handles.popupmenuGasList,'Value')  
     case '1'
         %nothing, "--select--" default chosen
@@ -60,7 +62,7 @@ switch get(handles.popupmenuGasList,'Value')
     otherwise
         warndlg('Not a valid gas selection.');
 end
-    
+%}    
 
 %% Calculate Trajectory
 
