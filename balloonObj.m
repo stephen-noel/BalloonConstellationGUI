@@ -23,5 +23,11 @@ classdef balloonObj
         BalloonMass;        % [kg]
         
         BalloonGas;         % [g/mol]
+        
+        FloatAlt;           % [km]
+        FloatDur;           % [s]
+        MolWeight;          % [g/mol]
+        
+        
     end
 end
