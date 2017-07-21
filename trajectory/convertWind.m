@@ -16,10 +16,13 @@ direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m))
 
 
 
-for time = 0:1:10800
-  latitude = vgrd_3658m * time;
-  longitude = ugrd_3658m * time;
+for time = 0:1:10800 %%in seconds
+  dx = vgrd_3658m * time;
+  dy = ugrd_3658m * time;
+  latitude = dx + launchLat;
+ longitude = dy + launchLon;
 end
+
 
 
   
