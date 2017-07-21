@@ -5,7 +5,6 @@
 %% Global Variables
 
 global rootEngine;
-global aircraft;
 
 %% Code assigned to the 'pushbuttonBalloonAdd' pushbutton in the GUI
 
@@ -121,14 +120,12 @@ if  ~any(strcmp(balloonNames,newName))
     %Error handling for latitude and longitude string entry
     if newLat >= -90 && newLat <= 90 && newLon >= -180 && newLon <= 180
 
-        % Add aircraft object
-        aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', cell2mat(newRow(1))); %cell2mat(newRow(1)) is obj NAME
-        %aircraftWaypoints;
-        
-        %show facility during debugging
-        facility = rootEngine.CurrentScenario.Children.New('eFacility',newName);
+        % Add placeholder facility object 
+        % NOTE: used to signify launch locations, could be deleted or kept in code 
+        facility = rootEngine.CurrentScenario.Children.New('eFacility', newName);
         facility.Position.AssignGeodetic(newLat,newLon,0); % AssignGeodetic(lat,lon,alt)
         
+        %Set new table data
         set(handles.balloonTable,'Data', newData);
         
     else
@@ -138,4 +135,3 @@ if  ~any(strcmp(balloonNames,newName))
 else
     warndlg('Balloon names must not repeat.');
 end
-

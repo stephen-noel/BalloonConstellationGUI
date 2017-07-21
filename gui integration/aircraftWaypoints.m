@@ -9,10 +9,15 @@
 % (lat,lon,alt) data needs to be parsed in. Test data below where an
 % external script could be referenced. 
 
+%function [] = aircraftWaypoints(selected_lat,selected_lon);
+
 %% Global Variables
+
+global rootEngine;
+global selected_name;
 global selected_lat;
 global selected_lon;
-global aircraft;
+
 
 %% test data (NEEDS TO BE BALLOON DYNAMICS DATA)
 NumWaypoints = 10;
@@ -23,6 +28,8 @@ wd_altitude = [10 20 30 40 50 60 70 80 90 100]; %from vertical trajectory stuff
 wd_speed = [4 5 6 5 6 5 4 5 6 7];
 
 %% Set Aircraft Route Method (and associated properties)
+
+aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', selected_name); 
 aircraft.SetRouteType('ePropagatorGreatArc');
 route = aircraft.Route;
 route.Method = 'eDetermineTimeAccFromVel';
