@@ -6,7 +6,7 @@ function ConversionsLatLon(obj) %Compute lengths of degrees
      deglat = 90;   
      radlat = deglat*((2.0*pi)/360.0); %Converts degrees to radians
      
-     deglong = 90;
+     deglong = 90; %I don't understand why this isn't a part of the calculations??????????
      radlong = deglong*((2.0*pi)/360.0); %Converts degrees to radians
 
 		%Convert latitude to radians
@@ -23,7 +23,9 @@ function ConversionsLatLon(obj) %Compute lengths of degrees
 
 		%Calculate the length of a degree of latitude and longitude in meters
 		latlen = m1 + (m2 * cos(2 * radlat)) + (m3 * cos(4 * radlat)) + (m4 * cos(6 * radlat));
-		longlen = (p1 * cos(radlong)) + (p2 * cos(3 * radlong)) +(p3 * cos(5 * radlong));
+		longlen = (p1 * cos(radlat)) + (p2 * cos(3 * radlat)) +(p3 * cos(5 * radlat));
         display(latlen);
         display(longlen);
 end
+
+ 
