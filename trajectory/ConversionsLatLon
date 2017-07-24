@@ -2,9 +2,15 @@
 
 
 function ConversionsLatLon(obj) %Compute lengths of degrees
-        rad = deg*((2.0*Math.PI)/360.0); %Converts degrees to radians
+     
+     deglat = 90;   
+     radlat = deglat*((2.0*pi)/360.0); %Converts degrees to radians
+     
+     deglong = 90;
+     radlong = deglong*((2.0*pi)/360.0); %Converts degrees to radians
 
-		       
+		%Convert latitude to radians
+        
 
 		%Set up "Constants"
 		m1 = 111132.92;		% latitude calculation term 1
@@ -16,9 +22,8 @@ function ConversionsLatLon(obj) %Compute lengths of degrees
 		p3 = 0.118;			% longitude calculation term 3
 
 		%Calculate the length of a degree of latitude and longitude in meters
-		latlen = m1 + (m2 * cos(2 * lat)) + (m3 * cos(4 * lat)) + (m4 * cos(6 * lat));
-		longlen = (p1 * cos(lat)) + (p2 * cos(3 * lat)) +(p3 * cos(5 * lat));
+		latlen = m1 + (m2 * cos(2 * radlat)) + (m3 * cos(4 * radlat)) + (m4 * cos(6 * radlat));
+		longlen = (p1 * cos(radlong)) + (p2 * cos(3 * radlong)) +(p3 * cos(5 * radlong));
+        display(latlen);
+        display(longlen);
 end
-        
- output(latlen); %lat in m
- output(longlen); %long in m
