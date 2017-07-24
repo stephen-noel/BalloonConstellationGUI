@@ -17,15 +17,15 @@ direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m))
 
 for t = scenarioStartTime
   S = seconds(t); %where S is timestep in seconds
-  latitude(t) = LaunchLat + vvel*S;
-  longitude(t) = LaunchLon + uvel*S;
-  t = t+1;
-  
+  latitude(t) = launchLat + vvel*S;
+  longitude(t) = launchLon + uvel*S;
+  t = t + 1;
+ end
   output(latitude);
   output(longitude);
+ 
   
 
-end
   
 
 
