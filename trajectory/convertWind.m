@@ -15,14 +15,20 @@ windspeed = sqrt((ugrd_3658m)^2+(vgrd_3658m)^2); %m/s
 direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m)); %in degrees
 
 
-
-for time = 0:1:10800 %%in seconds
-
-latitude(t) = launchLat + uvel.*time;
-longitude(t) = launchLon + vvel.*time;
-
+for t = scenarioStartTime
+  S = seconds(t); %where S is timestep in seconds
+  latitude(t) = LaunchLat + vvel*S;
+  longitude(t) = LaunchLon + uvel*S;
+  t = t+1;
+  
+  output(latitude);
+  output(longitude);
+  
 
 end
+  
+
+
 
 
 
