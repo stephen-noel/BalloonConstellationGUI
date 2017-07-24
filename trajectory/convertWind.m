@@ -58,8 +58,4 @@ newLon(t) = oldLon + windSignLon*deltaLon_deg;
 oldLat = newLat(t);
 oldLon = newLon(t);
 
-%check outputs 
-%disp(newLat);
-%disp(newLon);
-
 end

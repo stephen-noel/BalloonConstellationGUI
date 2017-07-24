@@ -18,9 +18,8 @@ global selected_name;
 global selected_lat;
 global selected_lon;
 
-
-%% test data (NEEDS TO BE BALLOON DYNAMICS DATA)
 %{
+%% test data (NEEDS TO BE BALLOON DYNAMICS DATA)
 NumWaypoints = 10;
 wd_time = {'13 Jul 2017 00:00:00.000' '13 Jul 2017 00:00:10.000' '13 Jul 2017 00:20:00.000' '13 Jul 2017 00:30:00.000' '13 Jul 2017 00:40:00.000' '13 Jul 2017 00:50:00.000' '13 Jul 2017 01:00:00.000' '13 Jul 2017 10:10:00.000' '13 Jul 2017 01:20:00.000' '13 Jul 2017 01:30:00.000'};
 wd_latitude = [30 40 50 60 70 80 70 60 50 40];
@@ -29,15 +28,17 @@ wd_altitude = [10 20 30 40 50 60 70 80 90 100]; %from vertical trajectory stuff
 wd_speed = 5*ones(1,length(wd_latitude));
 %}
 
-%Semi test data
+
+%% Semi test data (Correct Lat/Lon stuff)
 wd_latitude = newLat;
 wd_longitude = newLon;
 NumWaypoints = length(wd_latitude);
-wd_altitude = 50*ones(1,length(wd_latitude));
+wd_altitude = realz_array;
+%wd_altitude = 50*ones(1,length(wd_latitude));
 wd_speed = 5*ones(1,length(wd_latitude));
 
-%% Set Aircraft Route Method (and associated properties)
 
+%% Set Aircraft Route Method (and associated properties)
 aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', selected_name); 
 aircraft.SetRouteType('ePropagatorGreatArc');
 route = aircraft.Route;
