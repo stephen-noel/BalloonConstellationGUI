@@ -4,8 +4,7 @@
 function ConversionsLatLon(obj) %Compute lengths of degrees
         rad = deg*((2.0*Math.PI)/360.0); %Converts degrees to radians
 
-		%Convert latitude to radians
-        
+		       
 
 		%Set up "Constants"
 		m1 = 111132.92;		% latitude calculation term 1
