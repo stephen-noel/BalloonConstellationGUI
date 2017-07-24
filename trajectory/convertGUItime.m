@@ -2,7 +2,7 @@
 % Julianna Evans
 % 07.18.17
 
-function [NOAAstring, launchLat, launchLon] = guiWindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI)
+function [NOAAstring] = convertGUItime(starttime_GUI)
 %INPUTS: GUI user-input (as strings)
 %OUTPUTS: MATLAB variables
 
@@ -55,9 +55,5 @@ end
         
 %NOAA formatted date string
 NOAAstring = strcat(year,monthNUM,day);
-
-%% Convert lat/lon types and set as outputs
-launchLat = launchlat_GUI;
-launchLon = launchlon_GUI;
 
 end

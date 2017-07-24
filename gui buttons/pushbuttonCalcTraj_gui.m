@@ -10,6 +10,7 @@ global selected_cells_traj;
 global selected_name;
 global selected_lat;
 global selected_lon;
+global starttime_GUI;
 
 
 %% Select Balloon to Calculate Trajectory For
@@ -29,9 +30,9 @@ starttime_GUI = rootEngine.CurrentScenario.StartTime;
 launchlat_GUI = selected_lat;
 launchlon_GUI = selected_lon;
 
-%[NOAAstring, launchLat, launchLon] = guiWindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI);
+% call wind integration stuff here
+latlonaltTime;
 
-%call wind data stuff here (???)
 
 %% Get values of textboxes and set into balloon object
 

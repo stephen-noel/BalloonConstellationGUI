@@ -1,39 +1,65 @@
-%% convertWind
-% Converts NOAA ADDS wind data (.*txt) into MATLAB variables
-% inputs are user inputs
-% outputs are what x(aka v) y(aka u) wind speeds NOAA gives us
+%% convertWind.m
 
-function [time, latitude, longitude] = convertWind(scenarioStartTime, launchLat, launchLon)
+% Calculates lat and lon arrays as functions of time with given wind data
+% points (u-vel and v-vel) at launch. Dynamic indexing of wind datasets to
+% be implemented in the future. 
 
-%load WindData_NOMADS_GFS;
+function [newLat, newLon] = convertWind(uvel, vvel, LaunchLat, LaunchLon)
 
-%WindData = table(ugrd_3658m, vgrd_3658m,'RowNames',XY);
-%summary(WindData);
-%T1 = WindData(1:2,:);
+%Initialized time/timestep stuff
+timespan = 3*60*60;  % 3hrs in [s]
+timestep = 1;       % [s]
 
-%windspeed = sqrt((ugrd_3658m)^2+(vgrd_3658m)^2); %m/s
-%direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m)); %in degrees
+%% Vector Instantiation
+%Instantiate old values (to be iterated on in loop)
+oldLat = LaunchLat;
+oldLon = LaunchLon;
 
+%set first value of arrays as initial Lat/Lon
+newLat(1) = oldLat;
+newLon(1) = oldLon;
 
-for t = scenarioStartTime
-  S = seconds(t); %where S is timestep in seconds
-  latitude(t) = launchLat + vvel*S;
-  longitude(t) = launchLon + uvel*S;
-  t = t + 1;
- end
-  output(latitude);
-  output(longitude);
- 
-  
+%% Latitude and Longitude Array Loop
+for t = 2:timespan  %starts at t = 2, t=1 is the initial point
 
-  
- 
-
-% use variables windspeed with direction for trajectory calculations
-
-% OUTPUTS: TIME, LONGITITUDE, LATITUDE, ALTITUDE ~ global variables
+%Find change in distance due to wind, [m]
+deltaLat_m = vvel*timestep; 
+deltaLon_m = uvel*timestep;
 
 
+%Input the latitude value and get m-to-deg conversion multipliers
+[latlen, longlen] = ConversionsLatLon(oldLat);
 
+%calculate the change in distance [deg]
+deltaLat_deg = deltaLat_m*(1/latlen);    
+deltaLon_deg = deltaLon_m*(1/longlen);
+    
+
+% Check wind's sign: U-vel and Latitude
+if (uvel > 0)
+    windSignLat = 1;
+else
+    windSignLat = -1;
+end
+
+% Check wind's sign: V-vel and Longitude
+if (vvel > 0)
+    windSignLon = 1;
+else
+    windSignLon = -1;    
+end
+    
+    
+% Calculate new Lat/Lon position
+newLat(t) = oldLat + windSignLat*deltaLat_deg;
+newLon(t) = oldLon + windSignLon*deltaLon_deg;
+    
+% Set current Lat/Lon as next iterations' oldLat and oldLon
+oldLat = newLat(t);
+oldLon = newLon(t);
+
+%check outputs 
+disp(newLat);
+disp(newLon);
 
 end

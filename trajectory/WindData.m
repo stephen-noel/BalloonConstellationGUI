@@ -6,21 +6,16 @@
 %directory for the "ncgeodataset" function to work. In the final product
 %these files will be packaged with the GUI files.
 
+%% Function
+function [uvel, vvel] = WindData(NOAAstring, launchLat, launchLon)
+
+
 %Add nctoolbox to the path
 setup_nctoolbox;
 
 %% Access GrADS Data Server via URL
 
-%test values for function (call real values from pushbuttonCalcTraj_gui.m later)
-starttime_GUI = '20 Jul 2017 16:00:00.000';
-launchlat_GUI = 30.33;
-launchlon_GUI = 35.72;
-
-% Call 'guiWindInputs' function to get NOAA-formated datetime string
-[NOAAstring, launchLat, launchLon] = guiWindInputs(starttime_GUI, launchlat_GUI, launchlon_GUI);
-
 mydate = NOAAstring;
-%mydate = '20170710';
 url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr/gfs',mydate,'/gfs_0p25_1hr_00z'];
 
 
@@ -118,6 +113,4 @@ uvel = double(squeeze(nco{'ugrd_3658m'}(1,index_lat,index_lon))); %datapoint at 
 % V Component Velocity
 vvel = double(squeeze(nco{'vgrd_3658m'}(1,index_lat,index_lon))); %datapoint at first time, indexed lat/lon
 
-disp(uvel);
-disp(vvel);
-
+end
