@@ -1,7 +1,7 @@
 %turning HTML code into Matlab to convert m to deg for lat/long
 
 
-function  [latlen,longlen] = ConversionsLatLong(deglat, deglong) %Compute lengths of degrees
+function  [latlen,longlen] = ConversionsLatLon(deglat, deglong) %Compute lengths of degrees
      
      % USER INPUT: deglat ;   
      radlat = deglat*((2.0*pi)/360.0); %Converts degrees to radians
