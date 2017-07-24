@@ -5,14 +5,14 @@
 
 function [time, latitude, longitude] = convertWind(scenarioStartTime, launchLat, launchLon)
 
-load WindData_NOMADS_GFS;
+%load WindData_NOMADS_GFS;
 
-WindData = table(ugrd_3658m, vgrd_3658m,'RowNames',XY);
-summary(WindData);
-T1 = WindData(1:2,:);
+%WindData = table(ugrd_3658m, vgrd_3658m,'RowNames',XY);
+%summary(WindData);
+%T1 = WindData(1:2,:);
 
-windspeed = sqrt((ugrd_3658m)^2+(vgrd_3658m)^2); %m/s
-direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m)); %in degrees
+%windspeed = sqrt((ugrd_3658m)^2+(vgrd_3658m)^2); %m/s
+%direction = atan2(norm(cross(ugrd_3658m,vgrd_3658m)),dot(ugrd_3658m,vgrd_3658m)); %in degrees
 
 
 for t = scenarioStartTime
@@ -27,12 +27,7 @@ for t = scenarioStartTime
   
 
   
-
-
-
-
-
-  
+ 
 
 % use variables windspeed with direction for trajectory calculations
 
