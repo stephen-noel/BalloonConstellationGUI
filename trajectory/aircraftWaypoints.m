@@ -9,8 +9,6 @@
 % (lat,lon,alt) data needs to be parsed in. Test data below where an
 % external script could be referenced. 
 
-%function [] = aircraftWaypoints(selected_lat,selected_lon);
-
 %% Global Variables
 
 global rootEngine;
