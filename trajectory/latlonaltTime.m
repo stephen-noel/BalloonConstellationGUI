@@ -11,11 +11,14 @@ global selected_lat;
 global selected_lon;
 global starttime_GUI;
 
+global launchLat;
+global launchLon;
+
 
 %% Get initial values (global variables from pushbuttonCalcTraj.m script)
 
-launchlat_GUI = selected_lat;
-launchlon_GUI = selected_lon;
+launchLat = selected_lat;
+launchLon = selected_lon;
 
 %% Function calls
 % Call 'guiWindInputs'
@@ -25,7 +28,7 @@ launchlon_GUI = selected_lon;
 [uvel, vvel] = WindData(NOAAstring, launchLat, launchLon);
 
 %Call 'convertWind'
-[newLat, newLon] = convertWind(uvel, vvel, LaunchLat, LaunchLon);
+[newLat, newLon] = convertWind(uvel, vvel, launchLat, launchLon);
 
 %% Data matrix formatting
 

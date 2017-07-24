@@ -4,7 +4,7 @@
 % points (u-vel and v-vel) at launch. Dynamic indexing of wind datasets to
 % be implemented in the future. 
 
-function [newLat, newLon] = convertWind(uvel, vvel, LaunchLat, LaunchLon)
+function [newLat, newLon] = convertWind(uvel, vvel, launchLat, launchLon)
 
 %Initialized time/timestep stuff
 timespan = 3*60*60;  % 3hrs in [s]
@@ -12,8 +12,8 @@ timestep = 1;       % [s]
 
 %% Vector Instantiation
 %Instantiate old values (to be iterated on in loop)
-oldLat = LaunchLat;
-oldLon = LaunchLon;
+oldLat = launchLat;
+oldLon = launchLon;
 
 %set first value of arrays as initial Lat/Lon
 newLat(1) = oldLat;
@@ -59,7 +59,7 @@ oldLat = newLat(t);
 oldLon = newLon(t);
 
 %check outputs 
-disp(newLat);
-disp(newLon);
+%disp(newLat);
+%disp(newLon);
 
 end

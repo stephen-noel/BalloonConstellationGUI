@@ -20,12 +20,21 @@ global selected_lon;
 
 
 %% test data (NEEDS TO BE BALLOON DYNAMICS DATA)
+%{
 NumWaypoints = 10;
 wd_time = {'13 Jul 2017 00:00:00.000' '13 Jul 2017 00:00:10.000' '13 Jul 2017 00:20:00.000' '13 Jul 2017 00:30:00.000' '13 Jul 2017 00:40:00.000' '13 Jul 2017 00:50:00.000' '13 Jul 2017 01:00:00.000' '13 Jul 2017 10:10:00.000' '13 Jul 2017 01:20:00.000' '13 Jul 2017 01:30:00.000'};
 wd_latitude = [30 40 50 60 70 80 70 60 50 40];
 wd_longitude = [40 45 50 55 60 65 70 70 70 70];
 wd_altitude = [10 20 30 40 50 60 70 80 90 100]; %from vertical trajectory stuff
-wd_speed = [4 5 6 5 6 5 4 5 6 7];
+wd_speed = 5*ones(1,length(wd_latitude));
+%}
+
+%Semi test data
+wd_latitude = newLat;
+wd_longitude = newLon;
+NumWaypoints = length(wd_latitude);
+wd_altitude = 50*ones(1,length(wd_latitude));
+wd_speed = 5*ones(1,length(wd_latitude));
 
 %% Set Aircraft Route Method (and associated properties)
 
