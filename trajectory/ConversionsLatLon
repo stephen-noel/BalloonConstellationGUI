@@ -1,7 +1,7 @@
 %turning HTML code into Matlab to convert m to deg for lat/long
 
 
-function ConversionsLatLon(obj) %Compute lengths of degrees
+function  [latlen,longlen] = ConversionsLatLong(deglat, deglong) %Compute lengths of degrees
      
      deglat = 90;   
      radlat = deglat*((2.0*pi)/360.0); %Converts degrees to radians
@@ -22,7 +22,7 @@ function ConversionsLatLon(obj) %Compute lengths of degrees
 		p3 = 0.118;			% longitude calculation term 3
 
 		%Calculate the length of a degree of latitude and longitude in meters
-		latlen = m1 + (m2 * cos(2 * radlat)) + (m3 * cos(4 * radlat)) + (m4 * cos(6 * radlat));
+		latlen = m1 + (m2 * cos(2 * radlat)) + (m3 * cos(4 * radlat)) + (m4 * cos(6 * radlat)); 
 		longlen = (p1 * cos(radlat)) + (p2 * cos(3 * radlat)) +(p3 * cos(5 * radlat));
         display(latlen);
         display(longlen);
