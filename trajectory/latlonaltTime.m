@@ -36,6 +36,3 @@ launchLon = selected_lon;
 %Call 'vertTraj' to get the altitude vector
 [realz_array] = vertTraj();
 
-%% Data matrix formatting
-
-% ...
