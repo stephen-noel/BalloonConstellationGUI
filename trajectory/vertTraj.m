@@ -6,7 +6,7 @@ function [realz_array] = vertTraj()
 %Hardcoded inputs
 realCD = .47;
 BMass = .12; %kg
-PMass = 50; %kg
+PMass = 11; %kg
 GVol = 10; % m^3
 z = 1; %initial altitude in meters
 dz = 0; %initial change in altitude is 0 meters
@@ -92,7 +92,7 @@ end
 % Reset variables
 realCD = .47;
 BMass = .12; %kg
-PMass = 50; %kg
+PMass = 11; %kg
 GVol = 1000; % m^3
 z = 1; %initial altitude in meters
 dz = 0; %initial change in altitude is 0 meters

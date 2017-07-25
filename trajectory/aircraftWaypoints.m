@@ -54,6 +54,7 @@ waypoint.Altitude = 5;                       % [km] SHOULD PROBABLY BE ZERO SINC
 waypoint.Speed = 4;
 
 %% FOR LOOP: Create 2nd-end waypoints
+tic;
 for i=2:NumWaypoints
     
     % Add waypoints by dynamically adding variables in loop
@@ -66,6 +67,6 @@ for i=2:NumWaypoints
     eval(sprintf('waypoint%d.Speed = %d;',i,wd_speed(i)));
     
 end 
-
+toc;
 %% Propagate the route
 route.Propagate;
