@@ -1,5 +1,18 @@
 % http://12000.org/my_notes/mma_matlab_control/KERNEL/KEse159.htm#x164-2050004.22
 
+% Let z = z(t), z'(t) = v(t) and v'(t)=z"(t)=f(z,v,t)
+
+% Equation:
+% z"(t)=(g*(RhoA*vol-mass)-.5*RhoA*realCD*z'(t)*abs(z'(t))*Ca)/(mass+cb*RhoA*vol)
+%mass = PMass+BMass+Mb
+
+% f = @(z,v,t) (g*(RhoA*vol-mass)-.5*RhoA*realCD*v(t)*abs(v(t))*Ca)/(mass+cb*RhoA*vol)
+
+% h: time step
+% t: total time
+% z0: initial altitude
+% v0: initial velocity
+
 clear;
 clc;
 
