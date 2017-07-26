@@ -6,7 +6,7 @@ function [z,v] = runge_kutta(h,t,f,z0,v0)
 
 % Equation:
 % z"(t)=(g*(RhoA*vol-mass)-.5*RhoA*realCD*z'(t)*abs(z'(t))*Ca)/(mass+cb*RhoA*vol)
-%mass = Pmass+Bmass+Mb
+%mass = PMass+BMass+Mb
 
 % f = @(z,v,t) (g*(RhoA*vol-mass)-.5*RhoA*realCD*v(t)*abs(v(t))*Ca)/(mass+cb*RhoA*vol)
 
