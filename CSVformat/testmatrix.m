@@ -11,3 +11,6 @@ lon_array = 5*rand(length(time_array),1);
 
 %test matrix
 test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
+
+%CSV writing method
+csvwrite('csvlist.dat',test_matrix) 

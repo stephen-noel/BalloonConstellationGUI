@@ -28,10 +28,10 @@ wd_speed = 5*ones(1,length(wd_latitude));
 
 
 %% Semi test data (Correct Lat/Lon stuff)
-wd_latitude = newLat;
-wd_longitude = newLon;
+wd_latitude = data_lat;
+wd_longitude = data_lon;
 NumWaypoints = length(wd_latitude);
-wd_altitude = realz_array;
+wd_altitude = data_alt;
 %wd_altitude = 50*ones(1,length(wd_latitude));
 wd_speed = 5*ones(1,length(wd_latitude));
 

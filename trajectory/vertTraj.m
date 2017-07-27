@@ -1,7 +1,7 @@
 % Vertical Balloon Dynamics Semi-hardcode (basic function variables,
 % hardcoded inputs)
 
-function [realz_array] = vertTraj()
+function [realz_at_timestep] = vertTraj(timeidx)
 
 %Hardcoded inputs
 realCD = .47;
@@ -79,7 +79,7 @@ for t_asc = 1:total_time
     
     for t_asc=1:100:total_time
         if abs(dz) <= .01
-            float_alt = z 
+            float_alt = z; 
             flag = 1;
             break;          
        end
@@ -194,6 +194,7 @@ end
 %% Real component of altitude array
 realz_array = real(z_array);
 
+realz_at_timestep = realz_array(timeidx);
 
 %% Plotting
 %Scatter plot

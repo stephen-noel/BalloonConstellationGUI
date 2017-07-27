@@ -7,7 +7,8 @@
 % in order to match the closest dataset index.
 
 
-% based off of calculation from: 'https://www.weather.gov/media/epz/wxcalc/pressureAltitude.pdf'
+% based off of equation and matlab script from: 
+% 'https://physics.stackexchange.com/questions/14678/pressure-at-a-given-altitude'
 
 function [pressure_mbar] = pressurealt(h)
 
@@ -23,7 +24,7 @@ A = (g*M)/(R*L);
 B = L/T0;
 
 pressure_Pa = p0.*(1-B.*h).^A;       %Pressure, [Pa]
-pressure_mbar = pressure_Pa*0.01;   %Pressure, [mbar]
+pressure_mbar = pressure_Pa*0.01;    %Pressure, [mbar]
 
 end
 
