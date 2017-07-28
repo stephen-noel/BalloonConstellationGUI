@@ -14,3 +14,12 @@ test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
 
 %CSV writing method
 csvwrite('csvlist.dat',test_matrix) 
+
+
+
+%Get data into CSV format
+csvwrite('csvlist.csv',test_matrix) %where test_matrix would be the matrix
+type csvlist.csv
+
+%open CSV as an excel file
+open csvlist.csv
