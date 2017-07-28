@@ -16,10 +16,14 @@ test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
 csvwrite('csvlist.dat',test_matrix) 
 
 
-
 %Get data into CSV format
 csvwrite('csvlist.csv',test_matrix) %where test_matrix would be the matrix
 type csvlist.csv
 
-%open CSV as an excel file
+%open CSV as an excel file in Matlab
 open csvlist.csv
+
+%user input to save as an Excel filename of their choice
+y = [test_matrix];
+xlsFileName = input('Enter the name for the xls file: ', 's');
+xlswrite(xlsFileName, y);
