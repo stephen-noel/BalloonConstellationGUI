@@ -14,22 +14,19 @@ test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
 
 %CSV writing method
 csvwrite('csvlist.dat',test_matrix) 
-%xlswrite('csvlist.dat',test_matrix,'Sheet1','A2'); %write data
-%xlswrite('csvlist.dat',TimeVector,'Sheet1','B1'); %write column 1 header
-%xlswrite('csvlist.dat',Column2,'Sheet1','A1'); %column 2 header
-%xlswrite('csvlist.dat',Column3,'Sheet1','B1'); %column 3 header
-%xlswrite('csvlist.dat',Column4,'Sheet1','C1'); %column 4 header
 
 %get data into CSV format
-csvwrite('csvlist.csv',test_matrix) %where m would be the matrix
+csvwrite('csvlist.csv',test_matrix) %where test_matrix is matrix output by GUI
 type csvlist.csv
 
 %user input to save as an Excel filename of their choice
-y = [test_matrix]; %#ok<NBRAK>
-xlsFileName = 'CSV';
+y = test_matrix; 
+xlsFileName = 'CSV'; %the file will save as CSV.xls
 xlswrite(xlsFileName, y);
-col_header={'Time Vector','Column 1','Column 2','Column 3'};
-xlswrite('CSV.xls',col_header,'Sheet1','A1'); %write column 1 header
+col_header={'Time Vector','Column 1','Column 2','Column 3','','','','','','',''};
+xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
+
+
 
 %Automatically opens the excel file
 winopen('CSV.xls');
