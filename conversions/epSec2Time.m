@@ -1,13 +1,13 @@
-%% epSecTimeSTR.m
+%% epSec2Time.m
 % Julianna Evans
 % 07.31.17
 
 % Converts elapsed time from the launch time into a new datestring to be
 % inputted into the data table
 
-function [newDateSTR] = epSecTimeSTR(epSec, oldDateSTR)
+function [newDateSTR] = epSec2Time(epSec, oldDateSTR)
 
-[t1] = STKtoDatetime(oldDateSTR);
+[t1] = STK2Datetime(oldDateSTR);
 
 %Second timevector 
 t2 = t1 + seconds(epSec);

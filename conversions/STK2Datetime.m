@@ -1,4 +1,4 @@
-%% STKtoDatetime.m
+%% STK2Datetime.m
 % Julianna Evans
 % 08.01.2017
 
