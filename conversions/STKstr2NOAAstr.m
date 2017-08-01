@@ -10,11 +10,13 @@ function [NOAAstring] = STKstr2NOAAstr(starttime_GUI)
 
 %Check if the STK datetime string has a 1-digit day or a 2-digit day
 if length(starttime_GUI) == 23  %datetime string has 1 digit day
+len = 23;
 day = starttime_GUI(1);         %type: char
 month = starttime_GUI(3:5);     %type: char
 year = starttime_GUI(7:10);     %type: char
 
 elseif length(starttime_GUI) == 24 %datetime string has 1 digit day
+len = 24;
 day = starttime_GUI(1:2);       %type: char
 month = starttime_GUI(4:6);     %type: char
 year = starttime_GUI(8:11);     %type: char
@@ -52,7 +54,15 @@ switch month
     otherwise
         warndlg('Check the scenario datetime for valid month signifier.');
 end
-        
+       
+
+%Make sure that if the day only has 1 digit then the day also includes a zero in front of the value.
+if len == 23
+    day = num2str(day);
+    day = strcat('0',day);
+end
+
+
 %NOAA formatted date string
 NOAAstring = strcat(year,monthNUM,day);
 
