@@ -7,8 +7,6 @@
 function [datetimeVAR] = STKtoDatetime(stkSTR)
 
 % STK string format: 'DD MMM YYYY HH:MM:SS.SSS'
-stkSTR1 = '01 Aug 2017 16:23:02.030'; %test
-stkSTR2 = '1 Aug 2017 16:50:14.440';  %test
 
 %% Check if the STK datetime string has a 1-digit day or a 2-digit day
 if length(stkSTR) == 23  %datetime string has 1 digit day
