@@ -5,17 +5,9 @@
 % Converts elapsed time from the launch time into a new datestring to be
 % inputted into the data table
 
-function [newDateSTR,t2,t1] = epSecTimeSTR(epSec, oldDateSTR)
+function [newDateSTR] = epSecTimeSTR(epSec, oldDateSTR)
 
-% DATETIME: set timevectors using MATLAB's "datetime" function
-%   dd --- day of the month using 2 digits
-%   MMM -- month, abbreviated name
-%   yyyy - year
-%   HH --- hour, 24h clock notation with 2 digits
-%   mm --- minute, using 2 digits
-%   ss --- second, using 2 digits
-%   SSS -- fractional sections, 3 digits
-t1 = datetime(oldDateSTR,'InputFormat','dd MMM yyyy HH:mm:ss.SSS');
+[t1] = STKtoDatetime(oldDateSTR);
 
 %Second timevector 
 t2 = t1 + seconds(epSec);

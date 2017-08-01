@@ -4,7 +4,7 @@
 
 %% Converts STK strings to MATLAB datetime variable
 
-function [datetimeVAR] = STKtoDatetime(stkSTR)
+function [datetimeVAR] = STK2Datetime(stkSTR)
 
 % STK string format: 'DD MMM YYYY HH:MM:SS.SSS'
 

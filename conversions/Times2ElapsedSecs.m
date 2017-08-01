@@ -12,6 +12,8 @@ t1 = datevec(SCNstarttime,'dd mmm yyyy HH:MM:SS.FFF');
 t2 = datevec(BALLOONstarttime,'dd mmm yyyy HH:MM:SS.FFF');
 
 %calculate elapsed time [s]
+%NOTE: etime doesn't work with MATLAB's "datetime" function so we have to
+%use "datevec", which has a slightly different format. 
 elapsedSecs = etime(t2,t1);
 
 end

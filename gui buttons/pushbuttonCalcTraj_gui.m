@@ -25,10 +25,10 @@ setup_nctoolbox;
 %% Instantiate Time/Position Matrix Stuff
 % converts the scenario start time to the date to be entered in NOAA retrieval
 starttime_GUI = rootEngine.CurrentScenario.StartTime;
-[NOAAstring] = convertGUItime(starttime_GUI);
+[NOAAstring] = STKstr2NOAAstr(starttime_GUI);
 
 % Get elapsed time between scenario start and the balloon's inputted start time
-[init_elapsedSecs] = timeIndexing(starttime_GUI, launchTime);
+[init_elapsedSecs] = Times2ElapsedSecs(starttime_GUI, launchTime);
 
 
 %instantiate old values for loop (initializes as launch values)
@@ -38,7 +38,7 @@ oldLat = launchLat;     %latitude at launch
 oldLon = launchLon;     %longitude at launch
 
 %Convert to new datetime string to put into table
-[newDateSTR] = epSecTimeSTR(init_elapsedSecs, starttime_GUI);
+[newDateSTR] = epSec2Time(init_elapsedSecs, starttime_GUI);
 
 %store old values into first index of data arrays
 data_time{1} = newDateSTR;
@@ -68,8 +68,8 @@ epSec = init_elapsedSecs + time_interval;
 %Call 'vertTraj' to get the new altitude point
 [newAlt] = vertTraj(timestep); 
 
-%Call 'epSecTimeSTR' to get the new time string
-[newDateSTR] = epSecTimeSTR(epSec, newDateSTR);
+%Call 'epSec2Time' to get the new time string
+[newDateSTR] = epSec2Time(epSec, newDateSTR);
 
 %Export values (newTime, newAlt, newLat, newLon) into arrays
 data_lat(timestep) = newLat(end);

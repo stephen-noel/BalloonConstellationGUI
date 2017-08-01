@@ -16,7 +16,7 @@ deltaLat_m = vvel*timeint;
 deltaLon_m = uvel*timeint;
 
 %Input the latitude value and get m-to-deg conversion multipliers
-[latlen, longlen] = ConversionsLatLon(oldLat);
+[latlen, longlen] = Lat2metersInLatLon(oldLat);
 
 %calculate the change in distance in degrees (from meters)
 deltaLat_deg = deltaLat_m*(1/latlen);    
