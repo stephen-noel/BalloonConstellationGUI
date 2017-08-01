@@ -23,7 +23,7 @@ type csvlist.csv
 y = test_matrix; 
 xlsFileName = 'CSV'; %the file will save as CSV.xls
 xlswrite(xlsFileName, y);
-col_header={'Time Vector','Column 1','Column 2','Column 3','','','','','','',''};
+col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
 xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
 
 
