@@ -13,10 +13,10 @@ lon_array = 5*rand(length(time_array),1);
 test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
 
 %CSV writing method
-csvwrite('csvlist.dat',test_matrix) 
+csvwrite('csvlist.dat',test_matrix,'Sheet1','A2') 
 
 %get data into CSV format
-csvwrite('csvlist.csv',test_matrix) %where test_matrix is matrix output by GUI
+csvwrite('csvlist.csv',test_matrix,'Sheet1','A2') %where test_matrix is matrix output by GUI
 type csvlist.csv
 
 %user input to save as an Excel filename of their choice
