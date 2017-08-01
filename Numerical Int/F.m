@@ -1,3 +1,6 @@
+%command line: [t,x]=ode45('F',[0,10800],[1,0]);
+% plot(t,x(:,1))
+
 function xp = F(t,x)
 %Initial conditions
 realCD = .47;
