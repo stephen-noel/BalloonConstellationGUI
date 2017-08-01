@@ -23,6 +23,7 @@ else
         balloon_Name = get(handles.editBalloonName,'String');
         balloon_Lat = str2num(get(handles.editBalloonLat,'String'));
         balloon_Lon = str2num(get(handles.editBalloonLon,'String'));
+        balloon_Time = str2num(get(handles.editLaunchTime,'String'));
         balloon_Flen = str2num(get(handles.editLensFocalLength,'String'));
         balloon_FlenMult = str2num(get(handles.editFocalLengthMult,'String'));
         balloon_ImgRatio = str2num(get(handles.editImageRatio,'String'));
@@ -37,6 +38,7 @@ else
         balloon.Name = balloon_Name;
         balloon.LaunchLat = balloon_Lat;
         balloon.LaunchLon = balloon_Lon;
+        balloon.LaunchTime = balloon_Time;
         balloon.LensFocalLength = balloon_Flen;
         balloon.FlenMultiplier = balloon_FlenMult;
         balloon.ImgRatio = balloon_ImgRatio;
@@ -54,6 +56,7 @@ else
         balloon_Name = get(handles.editBalloonName,'String');
         balloon_Lat = str2num(get(handles.editBalloonLat,'String'));
         balloon_Lon = str2num(get(handles.editBalloonLon,'String'));
+        balloon_Time = get(handles.editLaunchTime,'String');
         
         % Set default values
         balloon_Flen_Default = 50;                %[mm]
@@ -70,6 +73,7 @@ else
         balloon.Name = balloon_Name;
         balloon.LaunchLat = balloon_Lat;
         balloon.LaunchLon = balloon_Lon;
+        balloon.LaunchTime = balloon_Time;
         balloon.LensFocalLength = balloon_Flen_Default;
         balloon.FlenMultiplier = balloon_FlenMult_Default;
         balloon.ImgRatio = balloon_ImgRatio_Default;
@@ -94,7 +98,7 @@ else
 end
 
 % Set up into row data for the GUI table
-newRow = {balloon.Name, balloon.LaunchLat, balloon.LaunchLon};
+newRow = {balloon.Name, balloon.LaunchLat, balloon.LaunchLon, balloon.LaunchTime};
 
 %% Data Entry Setup
 
@@ -102,6 +106,7 @@ newRow = {balloon.Name, balloon.LaunchLat, balloon.LaunchLon};
 newName = cell2mat(newRow(1));
 newLat = cell2mat(newRow(2));
 newLon = cell2mat(newRow(3));
+newTime = cell2mat(newRow(4));
 
 % Balloon names list
 oldData = get(handles.balloonTable,'Data');

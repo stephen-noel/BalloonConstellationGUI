@@ -9,15 +9,10 @@
 
 %% WindData function
 function [uvel, vvel] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx)
-
-%Add nctoolbox to the path
-%setup_nctoolbox;
+% Nctoolbox set-up occurs in 'pushbuttomCalcTraj_gui.m' for optimization
 
 %% Access GrADS Data Server via URL
-
-mydate = NOAAstring;
-url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr/gfs',mydate,'/gfs_0p25_1hr_00z'];
-
+url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr/gfs',NOAAstring,'/gfs_0p25_1hr_00z'];
 
 %% Data set indices list
 % the data set used by the code is 'ugrdprs' and 'vgrdprs'
@@ -33,11 +28,9 @@ url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr/gfs',mydate,'/gfs_0p2
 % Instantiate ncgeodataset object using url
 nco = ncgeodataset(url);
 
-% INDEXED at one point only
 % U Component Velocity
 uvel = double(squeeze(nco{'ugrdprs'}(time_idx, alt_idx, lat_idx, lon_idx))); %indexed at all parameters
 % V Component Velocity
 vvel = double(squeeze(nco{'vgrdprs'}(time_idx, alt_idx, lat_idx, lon_idx))); %indexed at all parameters
-
 
 end

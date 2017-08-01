@@ -9,6 +9,7 @@ classdef balloonObj
         Name;           
         LaunchLat;          % [deg]
         LaunchLon;          % [deg]
+        LaunchTime;         % ['DD MMM YYYY HH:MM:SS.SSS']
         
         LensFocalLength;    % [mm]
         FlenMultiplier;     % []

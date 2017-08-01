@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 20-Jul-2017 12:17:19
+% Last Modified by GUIDE v2.5 31-Jul-2017 12:03:29
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -119,6 +119,7 @@ set(handles.editLatCovg,'Enable','off');
 set(handles.editLonCovg,'Enable','off');
 set(handles.editNumBalloonOutput,'Enable','off');
 set(handles.editFilename,'Enable','off');
+set(handles.editLaunchTime,'Enable','off');
 
 % --- OutputFcn: Outputs from this function are returned to the command line.
 function varargout = balloonGUI_OutputFcn(hObject, eventdata, handles) 
@@ -156,7 +157,7 @@ function pushbuttonInit_Callback(hObject, eventdata, handles)
 
 global rootEngine
 
-% Grey out buttons until "Initialize Scenario" is pressed
+% Un-grey out buttons when "Initialize Scenario" is pressed
 set(handles.editNumBalloons,'Enable','on');
 set(handles.editMinLat,'Enable','on');
 set(handles.editMinLon,'Enable','on');
@@ -188,13 +189,16 @@ set(handles.editLatCovg,'Enable','on');
 set(handles.editLonCovg,'Enable','on');
 set(handles.editNumBalloonOutput,'Enable','on');
 set(handles.editFilename,'Enable','on');
-
+set(handles.editLaunchTime,'Enable','on');
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
 
 % Execute external STK scenario initialization
 balloonGUI_initSTK;
+
+%Set launch textbox as scenario start time in STK format
+set(handles.editLaunchTime,'String',STKdatetime);
 
 
 % --- Executes on button press in pushbuttonPlayForw.
@@ -969,3 +973,39 @@ function balloonTableTraj_CellSelectionCallback(hObject, eventdata, handles)
 
 global selected_cells_traj;
 selected_cells_traj = eventdata.Indices;
+
+
+
+function editLaunchTime_Callback(hObject, eventdata, handles)
+% hObject    handle to staticLaunchTime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of staticLaunchTime as text
+%        str2double(get(hObject,'String')) returns contents of staticLaunchTime as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function staticLaunchTime_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to staticLaunchTime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function editLaunchTime_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editLaunchTime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end

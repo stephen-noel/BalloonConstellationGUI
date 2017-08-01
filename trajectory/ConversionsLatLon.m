@@ -1,5 +1,6 @@
 %turning HTML code into Matlab to convert m to deg for lat/long
 
+%% calculates how many meters in 1 deg of lat/lon at the given latitude
 
 function  [latlen,longlen] = ConversionsLatLon(deglat) %Compute lengths of degrees
      

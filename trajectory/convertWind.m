@@ -3,20 +3,11 @@
 % Converts wind velocities and initial lat/lon coords to calculate new
 % lat/lon coordinates.
 
-function [newLat, newLon] = convertWind(timestep, uvel, vvel, launchLat, launchLon)
+function [newLat, newLon] = convertWind(uvel, vvel, oldLat, oldLon)
 
-%Initialized time/timestep stuff
-timespan = 3*60*60;  % 3hrs in [s]
+%Initialized time stuff
 timeint = 1;         % [s]
 
-%% Vector Instantiation
-%Instantiate old values (to be iterated on in loop)
-oldLat = launchLat;
-oldLon = launchLon;
-
-%set first value of arrays as initial Lat/Lon
-%newLat(1) = oldLat;
-%newLon(1) = oldLon;
 
 %% Latitude and Longitude Array Loop
 
@@ -27,10 +18,10 @@ deltaLon_m = uvel*timeint;
 %Input the latitude value and get m-to-deg conversion multipliers
 [latlen, longlen] = ConversionsLatLon(oldLat);
 
-%calculate the change in distance [deg]
+%calculate the change in distance in degrees (from meters)
 deltaLat_deg = deltaLat_m*(1/latlen);    
 deltaLon_deg = deltaLon_m*(1/longlen);
-    
+
 
 % Check wind's sign: U-vel and Latitude
 if (uvel > 0)
@@ -51,8 +42,5 @@ end
 newLat = oldLat + windSignLat*deltaLat_deg;
 newLon = oldLon + windSignLon*deltaLon_deg;
     
-% Set current Lat/Lon as next iterations' oldLat and oldLon
-oldLat = newLat;
-oldLon = newLon;
 
 end
