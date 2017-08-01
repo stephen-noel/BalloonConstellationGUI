@@ -14,14 +14,12 @@ GVol = 50; % m^3
 
 mass = PMass+BMass+Mb;
 
-% Define function handle
-f=@(v) (g*(RhoA*vol-mass)-.5*RhoA*realCD*v*abs(v)*Ca)/(mass+cb*RhoA*vol);
-
 % Step size
 h=.01;
 tfinal=20000;
 N=ceil(tfinal/h);% ceil rounds up
 
+%{
 % Preallocate t, z, and v
 t=zeros(1,N);
 z=zeros(1,N);
@@ -40,6 +38,7 @@ oldTemp=zeros(1,N);
 old_z=zeros(1,N);
 dz=zeros(1,N);
 Wg=zeros(1,N);
+%}
 
 % Initial conditions
 t(1)=0;
@@ -54,7 +53,8 @@ RhoA(1) = p(1)/(.2869*tempK(1));
 Ca(1) = pi*radius(1).^2;
 Wg(1) = Mb.*(1000*p(1)).*vol(1)/(r.*tempK(1));
 
-
+% Define function handle
+f=@(v) (g*(RhoA(1)*vol-mass)-.5*RhoA(1)*realCD*v*abs(v)*Ca)/(mass+cb*RhoA(1)*vol);
 
 % Update loop
 for i=1:N
