@@ -19,26 +19,6 @@ h=.01;
 tfinal=20000;
 N=ceil(tfinal/h);% ceil rounds up
 
-%{
-% Preallocate t, z, and v
-t=zeros(1,N);
-z=zeros(1,N);
-v=zeros(1,N);
-vol=zeros(1,N);
-dVol=zeros(1,N);
-temp=zeros(1,N);
-tempK=zeros(1,N);
-p=zeros(1,N);
-radius=zeros(1,N);
-RhoA=zeros(1,N);
-Ca=zeros(1,N);
-dTempK=zeros(1,N);
-oldTempK=zeros(1,N);
-oldTemp=zeros(1,N);
-old_z=zeros(1,N);
-dz=zeros(1,N);
-Wg=zeros(1,N);
-%}
 
 % Initial conditions
 t(1)=0;
@@ -53,11 +33,14 @@ RhoA(1) = p(1)/(.2869*tempK(1));
 Ca(1) = pi*radius(1).^2;
 Wg(1) = Mb.*(1000*p(1)).*vol(1)/(r.*tempK(1));
 
-% Define function handle
-f=@(v) (g*(RhoA(1)*vol-mass)-.5*RhoA(1)*realCD*v*abs(v)*Ca)/(mass+cb*RhoA(1)*vol);
+
 
 % Update loop
 for i=1:N
+    
+    % Define function handle
+    f=@(v) (g*(RhoA(i)*vol(i)-mass)-.5*RhoA(i)*realCD*v*abs(v)*Ca(i))/(mass+cb*RhoA(i)*vol(i));
+    
     % Update atmosphere properties
     oldTemp(i) = temp(i);
     oldTempK(i) = tempK(i); % https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html
@@ -108,8 +91,10 @@ for i=1:N
     
         v(i+1) = v(i)+1/6*(s1+2*s2+2*s3+s4);
         
+    temp(i+1)=temp(i);    
+    tempK(i+1)=tempK(i);
     dt = h;    
-    dz(i) = z(i) - old_z(i);
+    dz(i) = z(i+1) - old_z(i);
     dVol(i) = (r/(p(i)*Mb))*(Wg(i)*dTempK(i)/dt)*dt + (RhoA(i)/p(i))*(vol(i))*dz(i);
     if t<=10800
         vol(i+1) = vol(i) + dVol(i);
