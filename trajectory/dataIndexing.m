@@ -9,7 +9,7 @@ function [time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(epSec, newAlt, new
 % values) with a resolution of 0.041666668 days / 150 seconds.
 
 %time index resolution
-res_sec = 150; %[s]
+res_sec = 3600.00115; %[s]
 
 %create vector of epSec per index (add 150 sec for each increased timestep)
 for timeIndex = 2:121

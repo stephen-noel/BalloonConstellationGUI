@@ -6,6 +6,12 @@
 global rootEngine;
 global selected_cells_traj;
 
+global time_interval;
+
+%global variable instantiation
+time_interval = 1*60*60; %every hour
+
+
 %% Select Balloon to Calculate Trajectory For, Get Associated Table Properties
 
 % Retrieve the index of the selected cell in the table
@@ -33,7 +39,7 @@ starttime_GUI = rootEngine.CurrentScenario.StartTime;
 totalEpSec = init_elapsedSecs + init_from00z;
 
 %% instantiate old values for loop (initializes as launch values)
-oldTime = 0;            %WHAT TO PUT HEREEEEE
+oldTime = 0;            %elapsed time is zero seconds
 oldAlt = 0;             %altitude is zero, balloon at ground-level
 oldLat = launchLat;     %latitude at launch
 oldLon = launchLon;     %longitude at launch
@@ -55,29 +61,31 @@ data_lon(1) = oldLon;
 
 
 %time variable instantiation
-time_interval = 60;
-epsecs_loop = 0;
+epSec = time_interval;
 
 %% FOR LOOP: 
 for timestep = 2:20
 %% get new lat/lon/alt values    
-%Increase EpSec iteration by one interval
-epSec = epsecs_loop + time_interval;
-    
+
+epvector(timestep) = epSec; %debugging
+
 %Call 'convertWind' to get the new latitude and longitude points
 [newLat, newLon] = convertWind(uvelOLD, vvelOLD, oldLat, oldLon);
 
 %Call 'vertTraj' to get the new altitude point
-[newAlt] = vertTraj(timestep); 
+[newAlt] = vertTraj(epSec); 
 
 %Call 'epSec2Time' to get the new time string
-[newDateSTR] = epSec2Time(epSec, newDateSTR);
+[newDateSTR] = epSec2Time(time_interval, newDateSTR);
 
 %Export values (newTime, newAlt, newLat, newLon) into arrays
 data_lat(timestep) = newLat(end);
 data_lon(timestep) = newLon(end);
 data_alt(timestep) = newAlt(end);
 data_time{timestep} = cellstr(newDateSTR);
+
+data_uvel(timestep) = uvelOLD;
+data_vvel(timestep) = vvelOLD;
 
 %% calculate wind velocities based on current data for next step 
 %(create updated "old" variables by setting to current variables)
@@ -91,13 +99,14 @@ data_time{timestep} = cellstr(newDateSTR);
 uvelOLD = newUvel;
 vvelOLD = newVvel;
 
-% -- Debugging -- display certain values
-disp(timestep);
+%Increase EpSec iteration by one interval
+epSec = epSec + time_interval;
+
+%Debugging
 disp(data_lat);
 disp(data_lon);
 disp(data_alt);
 disp(data_time);
-
 
 end
 
@@ -142,7 +151,7 @@ wd_longitude = data_lon;
 NumWaypoints = length(wd_latitude);
 wd_altitude = data_alt;
 %wd_altitude = 50*ones(1,length(wd_latitude));
-wd_speed = 5*ones(1,length(wd_latitude));
+%wd_speed = 5*ones(1,length(wd_latitude));
 
 
 %% Set Aircraft Route Method (and associated properties)

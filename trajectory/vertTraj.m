@@ -28,7 +28,8 @@ radius = ((3/(4*pi))*vol)^(1/3);
 
 
 flag = 0; %use flag to break out of loop when looking for float altitude
-total_time = 3*60*60; %N must be at least 2000 for the float_alt variable to kick in, (modified to 3hrs of seconds)
+%N must be at least 2000 for the float_alt variable to kick in
+total_time = 5*24*60*60; %5 days of seconds
 
 for t_asc = 1:total_time
     
@@ -201,11 +202,11 @@ realz_at_timestep = realz_array(timeidx);
 %t = 1:length(z_array);
 %scatter(t,z_array,'filled');
 
-%{
+
 %Scatter plot for real component (just a working hack for now)
 t = 1:length(z_array);
 realz_array = real(z_array);
 scatter(t,realz_array,'filled');
-%}
+
 
 end

@@ -6,14 +6,14 @@
 function [newLat, newLon] = convertWind(uvel, vvel, oldLat, oldLon)
 
 %Initialized time stuff
-timeint = 1;         % [s]
+global time_interval;
 
 
 %% Latitude and Longitude Array Loop
 
 %Find change in distance due to wind, [m]
-deltaLat_m = vvel*timeint; 
-deltaLon_m = uvel*timeint;
+deltaLat_m = vvel*time_interval; 
+deltaLon_m = uvel*time_interval;
 
 %Input the latitude value and get m-to-deg conversion multipliers
 [latlen, longlen] = Lat2metersInLatLon(oldLat);
