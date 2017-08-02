@@ -102,11 +102,6 @@ vvelOLD = newVvel;
 %Increase EpSec iteration by one interval
 epSec = epSec + time_interval;
 
-%Debugging
-disp(data_lat);
-disp(data_lon);
-disp(data_alt);
-disp(data_time);
 
 end
 
@@ -145,47 +140,43 @@ end
 %% ---------------Propagate Aircraft Waypoints for Trajectory-----------------------
 % Code to create aircraft waypoints and propogate 
 
-%% Semi test data (Correct Lat/Lon stuff)
+%% Semi test data (Correct Lat/Lon stuff, alt is zero, time is correct)
 wd_latitude = data_lat;
 wd_longitude = data_lon;
-NumWaypoints = length(wd_latitude);
 wd_altitude = data_alt;
-%wd_altitude = 50*ones(1,length(wd_latitude));
-%wd_speed = 5*ones(1,length(wd_latitude));
+wd_time = data_time;
 
+NumWaypoints = length(wd_latitude);
 
 %% Set Aircraft Route Method (and associated properties)
 aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', selected_name); 
 aircraft.SetRouteType('ePropagatorGreatArc');
 route = aircraft.Route;
-route.Method = 'eDetermineTimeAccFromVel';
+route.Method = 'eDetermineVelFromTime';
 route.SetAltitudeRefType('eWayPtAltRefMSL');
 
 %% Add first waypoint 
 % NOTE: first waypoint can't be included in the loop since user specifies
 % launch lat and lon coordinates in GUI
 waypoint = route.Waypoints.Add();
-%waypoint.Time = newRow(1);                  %probably need to use dropdown, select balloon from pg1
-waypoint.Latitude = launchLat;            %probably need to use dropdown, select balloon from pg1
-waypoint.Longitude = launchLon;           %probably need to use dropdown, select balloon from pg1
-waypoint.Altitude = 5;                       % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LAUNCH
-waypoint.Speed = 4;
+waypoint.Time = launchTime;             %should be a string in STK format
+waypoint.Latitude = launchLat;          %probably need to use dropdown, select balloon from pg1
+waypoint.Longitude = launchLon;         %probably need to use dropdown, select balloon from pg1
+waypoint.Altitude = 0;                  % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LAUNCH
 
 %% FOR LOOP: Create 2nd-end waypoints
-tic;
 for i=2:NumWaypoints
     
     % Add waypoints by dynamically adding variables in loop
     % NOTE: not a recommended method, but the best way I've found so far 
     eval(sprintf('waypoint%d = route.Waypoints.Add();', i));
-    %eval(sprintf('waypoint%d.Time = %s',i,cell2mat(wd_time(i))));
+    eval(sprintf('waypoint%d.Time = ''%s'' ',i,str2mat(wd_time{i})));
     eval(sprintf('waypoint%d.Latitude = %d;',i,wd_latitude(i)));       %Get from external pushed wind data
     eval(sprintf('waypoint%d.Longitude = %d;',i,wd_longitude(i)));     %Get from external pushed wind data
     eval(sprintf('waypoint%d.Altitude = %d;',i,wd_altitude(i)));       %km
-    eval(sprintf('waypoint%d.Speed = %d;',i,wd_speed(i)));
     
 end 
-toc;
+
 %% Propagate the route
 route.Propagate;
 
