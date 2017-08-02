@@ -1,16 +1,29 @@
 %% Test Matrix Data
 
-%length of arrays
-idx_end = 3*60*60; %3hrs in seconds
 
-%separate time and position arrays
-time_array = transpose(1:idx_end);
-alt_array = 3*rand(length(time_array),1);
-lat_array = 4*rand(length(time_array),1);
-lon_array = 5*rand(length(time_array),1);
+%% Matrix instantiation
+%length of arrays
+idx_end = 3*60; %3hrs in seconds
+epSec = 10;
+oldDateSTR = '02 Aug 2017 16:00:00.000';
+
+%loop to create datetime strings 
+for i = 1:idx_end;
+[newDateSTR] = epSec2Time(epSec, oldDateSTR);
+time_array{i} = newDateSTR;
+oldDateSTR = newDateSTR;
+end
+
+%position arrays
+alt_array = num2cell(3*rand(length(time_array),1));
+lat_array = num2cell(4*rand(length(time_array),1));
+lon_array = num2cell(5*rand(length(time_array),1));
+time_array = transpose(time_array);
 
 %test matrix
 test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
+
+%% CSV writing
 
 %CSV writing method
 csvwrite('csvlist.dat',test_matrix) 
