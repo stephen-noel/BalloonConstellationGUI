@@ -25,3 +25,7 @@ oldData = set(handles.balloonTable,'Data',emptyTable);
 emptyTable = cell(0,3);
 oldDataTraj = set(handles.balloonTableTraj,'Data',emptyTable);
 
+%% Set up Nctoolbox, Add to path
+setup_nctoolbox;
+
+

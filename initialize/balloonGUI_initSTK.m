@@ -16,13 +16,15 @@ global rootEngine;
 % Set date units to UTCG
 rootEngine.UnitPreferences.Item('DateFormat').SetCurrentUnit('UTCG');
 
-% STK default datetime string format 
-STKdatetime = '31 Jul 2017 16:00:00.000';
-
 
 % Scenario start and stop times
-STKstarttime = 'today';     %local midnight today (12:00AM UTC displayed in computer's local timezone)
-STKstoptime = 'tomorrow';   %local midnight tomorrow (12:00AM UTC displayed in computer's local timezone)
+STKstarttime = '01 Aug 2017 16:00:00.000';     
+STKstoptime =  '05 Aug 2017 16:00:00.000';     
+
+
+% STK default datetime string format 
+%[elapsedSecs,sameday00z] = str2sameday00z(STKstarttime);
+STKdatetime = STKstarttime;
 
 % Set time period, epoch, rewind
 rootEngine.CurrentScenario.SetTimePeriod(STKstarttime,STKstoptime);

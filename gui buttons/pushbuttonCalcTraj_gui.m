@@ -18,11 +18,7 @@ launchLat = cell2mat(tableData(selected_cells_row_traj,2));
 launchLon = cell2mat(tableData(selected_cells_row_traj,3));
 launchTime = cell2mat(tableData(selected_cells_row_traj,4));
 
-
-%% Set up Nctoolbox, Add to path
-setup_nctoolbox;
-
-%% Instantiate Time/Position Matrix Stuff
+%% Instantiate Times and Elapsed Times
 % converts the scenario start time to the date to be entered in NOAA retrieval
 starttime_GUI = rootEngine.CurrentScenario.StartTime;
 [NOAAstring] = STKstr2NOAAstr(starttime_GUI);
@@ -30,9 +26,14 @@ starttime_GUI = rootEngine.CurrentScenario.StartTime;
 % Get elapsed time between scenario start and the balloon's inputted start time
 [init_elapsedSecs] = Times2ElapsedSecs(starttime_GUI, launchTime);
 
+% Get elapsed time between scenario start and 00z of the same day
+[init_from00z] = str2sameday00z(starttime_GUI);
 
-%instantiate old values for loop (initializes as launch values)
-oldTime = init_elapsedSecs;   %the start time of the launch (not the scenario!)
+%time in seconds from 00z to the balloon's launch time
+totalEpSec = init_elapsedSecs + init_from00z;
+
+%% instantiate old values for loop (initializes as launch values)
+oldTime = 0;            %WHAT TO PUT HEREEEEE
 oldAlt = 0;             %altitude is zero, balloon at ground-level
 oldLat = launchLat;     %latitude at launch
 oldLon = launchLon;     %longitude at launch
@@ -55,12 +56,13 @@ data_lon(1) = oldLon;
 
 %time variable instantiation
 time_interval = 60;
+epsecs_loop = 0;
 
 %% FOR LOOP: 
-for timestep = 2:time_interval:60*5
+for timestep = 2:20
 %% get new lat/lon/alt values    
 %Increase EpSec iteration by one interval
-epSec = init_elapsedSecs + time_interval;
+epSec = epsecs_loop + time_interval;
     
 %Call 'convertWind' to get the new latitude and longitude points
 [newLat, newLon] = convertWind(uvelOLD, vvelOLD, oldLat, oldLon);
@@ -75,7 +77,7 @@ epSec = init_elapsedSecs + time_interval;
 data_lat(timestep) = newLat(end);
 data_lon(timestep) = newLon(end);
 data_alt(timestep) = newAlt(end);
-data_time{timestep} = newDateSTR(end);
+data_time{timestep} = cellstr(newDateSTR);
 
 %% calculate wind velocities based on current data for next step 
 %(create updated "old" variables by setting to current variables)
@@ -177,3 +179,5 @@ end
 toc;
 %% Propagate the route
 route.Propagate;
+
+%% Code here for the Excel stuff ....

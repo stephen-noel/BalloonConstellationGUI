@@ -22,5 +22,7 @@ t2 = t1 + seconds(epSec);
 %   FFF -- millisecond in 3 digits
 newDateSTR = datestr(t2,'dd mmm yyyy HH:MM:SS.FFF');
 
+disp(t1);
+disp(t2);
 
 end
