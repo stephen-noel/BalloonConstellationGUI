@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 31-Jul-2017 12:03:29
+% Last Modified by GUIDE v2.5 03-Aug-2017 10:48:06
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -121,6 +121,16 @@ set(handles.editNumBalloonOutput,'Enable','off');
 set(handles.editFilename,'Enable','off');
 set(handles.editLaunchTime,'Enable','off');
 
+%Set scenario start and stop time fields as default values (not inputted
+%into scenario until "Initialize" button is pressed
+global STKstarttimeINIT
+STKstarttimeINIT = '01 Aug 2017 16:00:00.000'; 
+STKstoptimeINIT = '05 Aug 2017 16:00:00.000'; 
+set(handles.editSTKstarttime,'String',STKstarttimeINIT);
+set(handles.editSTKstoptime,'String',STKstoptimeINIT);
+
+
+
 % --- OutputFcn: Outputs from this function are returned to the command line.
 function varargout = balloonGUI_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
@@ -198,7 +208,8 @@ rootEngine.NewScenario('balloonGUIscn');
 balloonGUI_initSTK;
 
 %Set launch textbox as scenario start time in STK format
-set(handles.editLaunchTime,'String',STKdatetime);
+global STKstarttime
+set(handles.editLaunchTime,'String',STKstarttime);
 
 
 % --- Executes on button press in pushbuttonPlayForw.
@@ -1001,6 +1012,75 @@ end
 % --- Executes during object creation, after setting all properties.
 function editLaunchTime_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to editLaunchTime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editSTKstarttime_Callback(hObject, eventdata, handles)
+% hObject    handle to editSTKstarttime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editSTKstarttime as text
+%        str2double(get(hObject,'String')) returns contents of editSTKstarttime as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editSTKstarttime_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editSTKstarttime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editSTKstoptime_Callback(hObject, eventdata, handles)
+% hObject    handle to editSTKstoptime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editSTKstoptime as text
+%        str2double(get(hObject,'String')) returns contents of editSTKstoptime as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editSTKstoptime_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editSTKstoptime (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editSTKtimestep_Callback(hObject, eventdata, handles)
+% hObject    handle to editSTKtimestep (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editSTKtimestep as text
+%        str2double(get(hObject,'String')) returns contents of editSTKtimestep as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editSTKtimestep_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editSTKtimestep (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

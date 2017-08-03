@@ -7,9 +7,12 @@ global rootEngine;
 global selected_cells_traj;
 
 global time_interval;
+global STKtimestep;
+global STKstarttime;
+global STKstoptime;
 
 %global variable instantiation
-time_interval = 1*60*60; %every hour
+time_interval = STKtimestep;
 
 
 %% Select Balloon to Calculate Trajectory For, Get Associated Table Properties
@@ -26,7 +29,7 @@ launchTime = cell2mat(tableData(selected_cells_row_traj,4));
 
 %% Instantiate Times and Elapsed Times
 % converts the scenario start time to the date to be entered in NOAA retrieval
-starttime_GUI = rootEngine.CurrentScenario.StartTime;
+starttime_GUI = STKstarttime;
 [NOAAstring] = STKstr2NOAAstr(starttime_GUI);
 
 % Get elapsed time between scenario start and the balloon's inputted start time
@@ -63,8 +66,14 @@ data_lon(1) = oldLon;
 %time variable instantiation
 epSec = time_interval;
 
+%% Get number of timesteps between launch time and scenario end time
+[timestepNum] = times2timestepNum(launchTime, STKstoptime, time_interval); 
+%after testing period over, change for-loop indexing to:
+% for timestep = 2:timestepNum-2 or something like that
+
 %% FOR LOOP: 
-for timestep = 2:20
+tic; %start timer
+for timestep = 2:40
 %% get new lat/lon/alt values    
 
 epvector(timestep) = epSec; %debugging
@@ -104,7 +113,7 @@ epSec = epSec + time_interval;
 
 
 end
-
+toc; %end timer
 
 %% Get values of textboxes and set into balloon object
 
@@ -155,6 +164,7 @@ route = aircraft.Route;
 route.Method = 'eDetermineVelFromTime';
 route.SetAltitudeRefType('eWayPtAltRefMSL');
 
+
 %% Add first waypoint 
 % NOTE: first waypoint can't be included in the loop since user specifies
 % launch lat and lon coordinates in GUI
@@ -180,4 +190,38 @@ end
 %% Propagate the route
 route.Propagate;
 
-%% Code here for the Excel stuff ....
+%% Code for exporting data to excel
+
+%{
+time_array = data_time;
+alt_array = data_alt;
+lat_array = data_lat;
+lon_array = data_lon;
+
+%test matrix
+test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
+
+%CSV writing method
+csvwrite('csvlist.dat',test_matrix) 
+
+%get data into CSV format
+csvwrite('csvlist.csv',test_matrix) %where test_matrix is matrix output by GUI
+type csvlist.csv
+
+%user input to save as an Excel filename of their choice
+y = test_matrix; 
+xlsFileName = 'CSV'; %the file will save as CSV.xls
+xlswrite(xlsFileName, y,'Sheet1','A2');
+col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
+xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
+
+
+
+%Automatically opens the excel file
+winopen('CSV.xls');
+%}
+
+
+
+
+

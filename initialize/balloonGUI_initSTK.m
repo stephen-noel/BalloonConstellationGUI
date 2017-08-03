@@ -7,8 +7,10 @@
 
 
 %% STK External Scenario Initialization File
-
 global rootEngine;
+global STKstarttime;
+global STKstoptime;
+global STKtimestep;
 
 %% Scenario Time Interval
 % Set Scenario Time Intervals
@@ -16,11 +18,10 @@ global rootEngine;
 % Set date units to UTCG
 rootEngine.UnitPreferences.Item('DateFormat').SetCurrentUnit('UTCG');
 
-
-% Scenario start and stop times
-STKstarttime = '01 Aug 2017 16:00:00.000';     
-STKstoptime =  '05 Aug 2017 16:00:00.000';     
-
+% Scenario start time, stop time, time interval
+STKstarttime = get(handles.editSTKstarttime,'String');
+STKstoptime = get(handles.editSTKstoptime,'String');
+STKtimestep = str2num(get(handles.editSTKtimestep,'String'));
 
 % STK default datetime string format 
 %[elapsedSecs,sameday00z] = str2sameday00z(STKstarttime);
