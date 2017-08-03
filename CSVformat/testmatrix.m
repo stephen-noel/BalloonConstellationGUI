@@ -33,9 +33,8 @@ csvwrite('csvlist.csv',test_matrix) %where test_matrix is matrix output by GUI
 type csvlist.csv
 
 %user input to save as an Excel filename of their choice
-y = test_matrix; 
 xlsFileName = 'CSV'; %the file will save as CSV.xls
-xlswrite(xlsFileName, y,'Sheet1','A2');
+xlswrite(xlsFileName, test_matrix,'Sheet1','A2');
 col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
 xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
 
