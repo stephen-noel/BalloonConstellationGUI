@@ -87,7 +87,6 @@ addpath('initialize');
 balloonGUI_initMATLAB;
 
 % Grey out buttons until "Initialize Scenario" is pressed
-set(handles.editNumBalloons,'Enable','off');
 set(handles.editMinLat,'Enable','off');
 set(handles.editMinLon,'Enable','off');
 set(handles.editMaxLat,'Enable','off');
@@ -113,11 +112,6 @@ set(handles.editFloatAlt,'Enable','off');
 set(handles.editFloatDur,'Enable','off');
 set(handles.popupmenuGasList,'Enable','off');
 set(handles.editOtherBalloon,'Enable','off');
-set(handles.editFloatAlt1,'Enable','off');
-set(handles.editFloatAlt2,'Enable','off');
-set(handles.editLatCovg,'Enable','off');
-set(handles.editLonCovg,'Enable','off');
-set(handles.editNumBalloonOutput,'Enable','off');
 set(handles.editFilename,'Enable','off');
 set(handles.editLaunchTime,'Enable','off');
 
@@ -168,7 +162,6 @@ function pushbuttonInit_Callback(hObject, eventdata, handles)
 global rootEngine
 
 % Un-grey out buttons when "Initialize Scenario" is pressed
-set(handles.editNumBalloons,'Enable','on');
 set(handles.editMinLat,'Enable','on');
 set(handles.editMinLon,'Enable','on');
 set(handles.editMaxLat,'Enable','on');
@@ -193,11 +186,6 @@ set(handles.radiobuttonCustom,'Enable','on');
 set(handles.editFloatAlt,'Enable','on');
 set(handles.editFloatDur,'Enable','on');
 set(handles.popupmenuGasList,'Enable','on');
-set(handles.editFloatAlt1,'Enable','on');
-set(handles.editFloatAlt2,'Enable','on');
-set(handles.editLatCovg,'Enable','on');
-set(handles.editLonCovg,'Enable','on');
-set(handles.editNumBalloonOutput,'Enable','on');
 set(handles.editFilename,'Enable','on');
 set(handles.editLaunchTime,'Enable','on');
 
@@ -768,8 +756,8 @@ function pushbuttonNUMcalc_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-% Execute constellation calculation by pressing "calculate" button
-pushbuttonNUM_gui;
+% Execute area target script by pressing button
+pushbuttonAREAtarget_gui;
 
 
 function editFloatAlt2_Callback(hObject, eventdata, handles)
