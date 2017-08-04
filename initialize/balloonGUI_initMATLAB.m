@@ -25,6 +25,9 @@ oldData = set(handles.balloonTable,'Data',emptyTable);
 emptyTable = cell(0,3);
 oldDataTraj = set(handles.balloonTableTraj,'Data',emptyTable);
 
+%Set default radio button for the "Custom"/"Default" group on Tab 2
+set(handles.uibuttongroup1,'selectedobject',handles.radiobuttonDefault)
+
 %% Set up Nctoolbox, Add to path
 setup_nctoolbox;
 

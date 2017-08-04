@@ -73,7 +73,7 @@ epSec = time_interval;
 
 %% FOR LOOP: 
 tic; %start timer
-for timestep = 2:40
+for timestep = 2:timestepNum
 %% get new lat/lon/alt values    
 
 epvector(timestep) = epSec; %debugging

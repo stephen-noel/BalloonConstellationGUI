@@ -26,8 +26,8 @@ xsensor = 36;       % Width of sensor, [mm]
 ysensor = 24;       % Height of sensor, [mm]
 
 % Degrees of Field of View
-fov_wide = 2*atand( xsensor/(2*flen) );  % [deg]
-fov_tall = 2*atand( ysensor/(2*flen) );  % [deg]
+fov_wide = 2*atand( xsensor./(2*flen) );  % [deg]
+fov_tall = 2*atand( ysensor./(2*flen) );  % [deg]
 
 % Distances from camera to the four corners of the ground frame
 dist_bottom = floatalt2*tand(-0.5*fov_wide);  % [m]   
@@ -44,8 +44,8 @@ yrange = dist_top - dist_bottom;   % [m]
 totalXrange = maxLat - minLat;
 totalYrange = maxLon - minLon;
 
-numX = totalXrange/xrange;
-numY = totalYrange/yrange;
+numX = totalXrange./xrange;
+numY = totalYrange./yrange;
 
 %IF-ELSE: choose highest value of balloons needed to cover X or Y regions
 if numX > numY
