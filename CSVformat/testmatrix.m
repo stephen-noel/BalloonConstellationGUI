@@ -14,9 +14,12 @@ test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
 
 % STK string format: 'DD MMM YYYY HH:MM:SS'
 % STK time will be GUI input
-elasped_time = datetime('now') + seconds(1:10800); %'now' needs to be replaced with GUI's time input
+
+elasped_time = datetime('now') + seconds(1:10800);
 time_column = elasped_time.';
 time_column = transpose(elasped_time);
+str = string(time_column);
+%t = datetime(str,'InputFormat','dd-MMM-yyyy HH:mm:ss');
 
 
 %CSV writing method
@@ -30,11 +33,9 @@ type csvlist.csv
 
 xlsFileName = 'CSV'; %the file will save as CSV.xls
 xlswrite(xlsFileName,test_matrix,'Sheet1','B2');
-xlswrite(xlsFileName,time_column,'Sheet1','A2');
+xlswrite(xlsFileName,str,'Sheet1','A2');
 col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
 xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
-
-
 
 
 %Automatically opens the excel file
