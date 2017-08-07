@@ -14,7 +14,7 @@ test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
 
 % STK string format: 'DD MMM YYYY HH:MM:SS'
 % STK time will be GUI input
-elasped_time = datetime('now') + seconds(1:10800);
+elasped_time = datetime('now') + seconds(1:10800); %'now' needs to be replaced with GUI's time input
 time_column = elasped_time.';
 time_column = transpose(elasped_time);
 
