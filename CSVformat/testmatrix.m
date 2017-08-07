@@ -11,7 +11,13 @@ lon_array = 5*rand(length(time_array),1);
 
 %test matrix
 test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
-elasped_time = datetimeVAR;
+
+% STK string format: 'DD MMM YYYY HH:MM:SS'
+% STK time will be GUI input
+elasped_time = datetime('now') + seconds(1:10800);
+time_column = elasped_time.';
+time_column = transpose(elasped_time);
+
 
 %CSV writing method
 csvwrite('csvlist.dat',test_matrix) 
@@ -24,15 +30,10 @@ type csvlist.csv
 
 xlsFileName = 'CSV'; %the file will save as CSV.xls
 xlswrite(xlsFileName,test_matrix,'Sheet1','B2');
-xlswrite(xlsFileName,elapsed_time,'Sheet1','A2');
+xlswrite(xlsFileName,time_column,'Sheet1','A2');
 col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
 xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
 
-
-%column should be dates, STK dates in strings
-%data type conversion
-%first column: they're all strings, she made them into cells (columns 2,3,4
-%are cells)
 
 
 
