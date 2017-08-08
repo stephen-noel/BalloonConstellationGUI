@@ -8,14 +8,14 @@
 % (balloonGUI_OpeningFcn).
 
 % Add folder paths
-addpath('gui buttons');
-addpath('flight area');
-addpath('trajectory');
-addpath('initialize');
 addpath('Atmosphere');
-addpath('CSVformat');
-addpath('Numerical Int');
 addpath('conversions');
+addpath('CSVformat');
+addpath('gui buttons');
+addpath('initialize');
+addpath('Numerical Int');
+addpath('trajectory');
+
 
 % Set Balloon Table on Constellation page to have empty rows and three columns (name, lat, lon)
 emptyTable = cell(0,3);

@@ -190,38 +190,26 @@ end
 %% Propagate the route
 route.Propagate;
 
-%% Code for exporting data to excel
+%% ------ Code for exporting data to excel --------
 
-%{
-time_array = data_time;
-alt_array = data_alt;
-lat_array = data_lat;
-lon_array = data_lon;
+%position data
+alt_array = transpose(data_alt);
+lat_array = transpose(data_lat);
+lon_array = transpose(data_lon);
+time_array = transpose(data_time);
 
-%test matrix
-test_matrix = horzcat(time_array, alt_array, lat_array, lon_array);
+%reformat time data to excel-supported format
+time_array = string(time_array);
 
-%CSV writing method
-csvwrite('csvlist.dat',test_matrix) 
+%Table
+T = table(time_array, alt_array, lat_array, lon_array);
 
-%get data into CSV format
-csvwrite('csvlist.csv',test_matrix) %where test_matrix is matrix output by GUI
-type csvlist.csv
-
-%user input to save as an Excel filename of their choice
-y = test_matrix; 
-xlsFileName = 'CSV'; %the file will save as CSV.xls
-xlswrite(xlsFileName, y,'Sheet1','A2');
+%Write filename from user input and file extension
+filenameFromUser = get(handles.editFilename,'String');
+filename = strcat(filenameFromUser,'.xlsx');
 col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
-xlswrite('CSV.xls',col_header,'Sheet1'); %write column 1 header
 
-
-
-%Automatically opens the excel file
-winopen('CSV.xls');
-%}
-
-
-
-
+%Use writetable to write table
+writetable(T,filename,'Sheet',1);
+winopen(filename);
 
