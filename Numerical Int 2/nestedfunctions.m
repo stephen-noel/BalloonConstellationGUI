@@ -1,7 +1,8 @@
-function xp = nestedfunctions(t,x,vol,tempK)
-
+function xp = nestedfunctions(t,x,vol)
+    tempK = 288;
     [p,dTempK,RhoA] = atm(t,x,tempK);
 
+    realCD = .4;
     cb = 0.55; % This is the apparent additional mass coefficient for balloons based on a study from UMich in 1995
     g = 9.81;
     r = 8.314; %This is the gas constant. Units are J/(K*mol). 
@@ -14,6 +15,9 @@ function xp = nestedfunctions(t,x,vol,tempK)
     n = 1000*p0*GVol/(r*tempK0); %moles
     Wg = MW*n/1000; % [kg]
     mass = PMass+BMass+Wg;
+    radius = ((3/(4*pi))*vol)^(1/3);
+    Ca = pi*radius^2;
+    
     
     old_z = x(1);
    
@@ -25,7 +29,8 @@ function xp = nestedfunctions(t,x,vol,tempK)
     
     z = x(1);
     dz = z - old_z;
-    dVol = volume(t,x,p,Wg,dTempK,RhoA,vol,dz);
+    dVol = volume(t,x,p,Wg,dTempK,RhoA,vol,dz,MW);
     vol = vol + dVol;
+
 
 end
