@@ -206,7 +206,7 @@ realz_at_timestep = realz_array(timeidx);
 %Scatter plot for real component (just a working hack for now)
 t = 1:length(z_array);
 realz_array = real(z_array);
-scatter(t,realz_array,'filled');
+%scatter(t,realz_array,'filled');   %commented out b/c it's showing up behind panels in the GUI
 
 
 end

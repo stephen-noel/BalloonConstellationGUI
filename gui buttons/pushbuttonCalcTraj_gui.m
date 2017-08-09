@@ -14,6 +14,8 @@ global STKstoptime;
 %global variable instantiation
 time_interval = STKtimestep;
 
+%put this here so it doesn't time out (?)
+setup_nctoolbox;
 
 %% Select Balloon to Calculate Trajectory For, Get Associated Table Properties
 
@@ -32,13 +34,14 @@ launchTime = cell2mat(tableData(selected_cells_row_traj,4));
 starttime_GUI = STKstarttime;
 [NOAAstring] = STKstr2NOAAstr(starttime_GUI);
 
-% Get elapsed time between scenario start and the balloon's inputted start time
+% Get elapsed time between scenario start and the balloon's inputted launch time
 [init_elapsedSecs] = Times2ElapsedSecs(starttime_GUI, launchTime);
 
 % Get elapsed time between scenario start and 00z of the same day
 [init_from00z] = str2sameday00z(starttime_GUI);
 
 %time in seconds from 00z to the balloon's launch time
+%NOTE: need to include this range because NOAA's data starts at 00z
 totalEpSec = init_elapsedSecs + init_from00z;
 
 %% instantiate old values for loop (initializes as launch values)
@@ -47,7 +50,7 @@ oldAlt = 0;             %altitude is zero, balloon at ground-level
 oldLat = launchLat;     %latitude at launch
 oldLon = launchLon;     %longitude at launch
 
-%Convert to new datetime string to put into table
+%Convert to new datetime string to put into data array
 [newDateSTR] = epSec2Time(init_elapsedSecs, starttime_GUI);
 
 %store old values into first index of data arrays
@@ -58,10 +61,13 @@ data_lon(1) = oldLon;
 
 %% Get u- and v- velocities for the launch timestep
 % Call 'dataIndexing' to convert old time-pos values to NOAA indicies
-[time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(oldTime, oldAlt, oldLat, oldLon);
+[time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(totalEpSec, oldAlt, oldLat, oldLon);
+% Initialize timeidx_vec for debugging purposes
+timeidx_vec(1) = time_idx;
+
+
 % Call 'WindData' to set the starting u- and v- velocity for launch point
 [uvelOLD, vvelOLD] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx);  
-
 
 %time variable instantiation
 epSec = time_interval;
@@ -70,6 +76,10 @@ epSec = time_interval;
 [timestepNum] = times2timestepNum(launchTime, STKstoptime, time_interval); 
 %after testing period over, change for-loop indexing to:
 % for timestep = 2:timestepNum-2 or something like that
+
+%% Initialize the timeinterval update variable
+%this is the value for timestep = 2, since it updates at the end of the loop
+updateEpSec = totalEpSec+time_interval;
 
 %% FOR LOOP: 
 tic; %start timer
@@ -100,7 +110,9 @@ data_vvel(timestep) = vvelOLD;
 %(create updated "old" variables by setting to current variables)
 
 %Call 'dataIndexing' to index all values
-[time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(epSec, newAlt, newLat, newLon);
+[time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(updateEpSec, newAlt, newLat, newLon);
+
+timeidx_vec(timestep) = time_idx;
 
 % Call 'windData' with new values to get the new u- and v- velocities
 [newUvel, newVvel] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx);
@@ -111,6 +123,8 @@ vvelOLD = newVvel;
 %Increase EpSec iteration by one interval
 epSec = epSec + time_interval;
 
+%Increase updateEpSec iteration by one interval
+updateEpSec = updateEpSec + time_interval;
 
 end
 toc; %end timer
