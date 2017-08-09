@@ -19,6 +19,5 @@ function [p,dTempK,RhoA] = atm(t,x,tempK)
     
     dTempK = abs(tempK - oldTempK);
     RhoA = (p/(.2869*tempK));  
-    
 end
 

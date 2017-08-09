@@ -1,5 +1,5 @@
-function xp = nestedfunctions(t,x,vol)
-    tempK = 288;
+function xp = nestedfunctions(t,x,vol,tempK)
+    
     [p,dTempK,RhoA] = atm(t,x,tempK);
 
     realCD = .4;
