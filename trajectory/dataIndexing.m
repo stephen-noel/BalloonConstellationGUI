@@ -6,12 +6,12 @@ function [time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(epSec, newAlt, new
 
 %% Take epSec and put into terms of NOAA indexing
 % The 'ugrdprs' and 'vgrdprs' datasets have a time index of 1:121 (0-120
-% values) with a resolution of 0.041666668 days / 150 seconds.
+% values) with a resolution of 0.041666668 days / 3600.00115 seconds.
 
 %time index resolution
 res_sec = 3600.00115; %[s]
 
-%create vector of epSec per index (add 150 sec for each increased timestep)
+%create vector of epSec per index (add 3600.00115 sec for each increased timestep)
 for timeIndex = 2:121
 epSecVec(timeIndex) = (timeIndex-1)*res_sec;
 end
