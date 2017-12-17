@@ -1,2 +1,0 @@
-%% Iterative Vertical Dynamics Model
-

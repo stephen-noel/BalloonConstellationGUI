@@ -11,14 +11,9 @@ global STKstoptime;
 
 [NOAAstring] = STKstr2NOAAstr(STKstarttime);
 
-<<<<<<< HEAD
-%% Select Balloon to Calculate Trajectory For, Get Associated Table Properties
-
-=======
 setup_nctoolbox;
 
 %% Launch Balloon Data
->>>>>>> 34542a4ad5bd9e937a83ec3748ea2a40f9d6e342
 % Retrieve the index of the selected cell in the table
 selected_cells_row_traj = selected_cells_traj(1);
 
@@ -59,44 +54,13 @@ oldLon = launchLon;     %longitude at launch
 
 %% Get u/v velocity at launch
 % Call 'dataIndexing' to convert old time-pos values to NOAA indicies
-<<<<<<< HEAD
-[time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(totalEpSec, oldAlt, oldLat, oldLon);
-% Initialize timeidx_vec for debugging purposes
-timeidx_vec(1) = time_idx;
-
-%put this here so the connection doesn't time out and reset
-setup_nctoolbox;
-=======
 [time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(initEpSec, oldAlt, oldLat, oldLon);
->>>>>>> 34542a4ad5bd9e937a83ec3748ea2a40f9d6e342
 
 % Call 'WindData' to set the starting u- and v- velocity for launch point
 [uvelOLD, vvelOLD] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx); 
 
-<<<<<<< HEAD
-%time variable instantiation
-epSec = time_interval;
-
-%% Get number of timesteps between launch time and scenario end time
-[timestepNum] = times2timestepNum(launchTime, STKstoptime, time_interval); 
-%after testing period over, change for-loop indexing to:
-% for timestep = 2:timestepNum-2 or something like that
-
-%% Initialize the timeinterval update variable
-%this is the value for timestep = 2, since it updates at the end of the loop
-updateEpSec = totalEpSec+time_interval;
-
-%% FOR LOOP: 
-tic; %start timer
-for timestep = 2:20
-%% get new lat/lon/alt values    
-
-epvector(timestep) = epSec; %debugging
-
-=======
 for timestep = 2:timestepNum
 %% Get new lat/lon/alt values    
->>>>>>> 34542a4ad5bd9e937a83ec3748ea2a40f9d6e342
 %Call 'convertWind' to get the new latitude and longitude points
 [newLat, newLon] = convertWind(uvelOLD, vvelOLD, oldLat, oldLon);
 %Call 'vertTraj' to get the new altitude point
