@@ -5,7 +5,7 @@ function [altitudeAtTimestep] = vertTraj(timeidx)
 
 %constant rate
 rate = 1; %m/s
-floatalt = 50000; 
+floatalt = 30; %km/s 
 
 %altitude
 altitudeAtTimestep = timeidx*rate;

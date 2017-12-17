@@ -5,14 +5,15 @@
 
 function [newLat, newLon] = convertWind(uvel, vvel, oldLat, oldLon)
 
-%Initialized time stuff
-global time_interval;
-
+global STKtimestep;
 
 %% Latitude and Longitude Array Loop
 
+% %set "STKtimestep" as a double
+% STKtimestep = double(STKtimestep);
+
 %Find the magnitude of the velocity vector and the direction
-windvec = time_interval*sqrt((uvel)^2+(vvel)^2);
+windvec = STKtimestep*sqrt((uvel)^2+(vvel)^2);
 windtheta = atand(vvel/uvel); %in radians
 
 dlat_m = windvec*sind(windtheta);

@@ -77,9 +77,9 @@ for timestep = 2:timestepNum
 [uvelOLD, vvelOLD] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx); 
 
 %% Store values and increase epSec
-data_lat(timestep) = newLat;
-data_lon(timestep) = newLon;
-data_alt(timestep) = newAlt;
+data_lat(timestep) = newLat(end);
+data_lon(timestep) = newLon(end);
+data_alt(timestep) = newAlt(end);
 data_time{timestep} = cellstr(newDateSTR);
 
 data_uvel(timestep) = uvelOLD;
