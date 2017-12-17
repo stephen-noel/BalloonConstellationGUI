@@ -5,7 +5,8 @@
 
 %NOTE: Nctoolbox must be downloaded and included in the same MATLAB
 %directory for the "ncgeodataset" function to work. In the final product
-%these files will be packaged with the GUI files.
+%these files will be packaged with the GUI files (need professional matlab
+%license to do this). 
 
 %% WindData function
 function [uvel, vvel] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx)

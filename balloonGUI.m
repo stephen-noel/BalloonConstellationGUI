@@ -118,8 +118,8 @@ set(handles.editLaunchTime,'Enable','off');
 %Set scenario start and stop time fields as default values (not inputted
 %into scenario until "Initialize" button is pressed
 global STKstarttimeINIT
-STKstarttimeINIT = '01 Aug 2017 16:00:00.000'; 
-STKstoptimeINIT = '05 Aug 2017 16:00:00.000'; 
+STKstarttimeINIT = '10 Dec 2017 16:00:00.000'; 
+STKstoptimeINIT = '11 Dec 2017 16:00:00.000'; 
 set(handles.editSTKstarttime,'String',STKstarttimeINIT);
 set(handles.editSTKstoptime,'String',STKstoptimeINIT);
 
