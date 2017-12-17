@@ -14,9 +14,6 @@ global STKstoptime;
 %global variable instantiation
 time_interval = STKtimestep;
 
-%put this here so it doesn't time out (?)
-setup_nctoolbox;
-
 %% Select Balloon to Calculate Trajectory For, Get Associated Table Properties
 
 % Retrieve the index of the selected cell in the table
@@ -65,6 +62,8 @@ data_lon(1) = oldLon;
 % Initialize timeidx_vec for debugging purposes
 timeidx_vec(1) = time_idx;
 
+%put this here so the connection doesn't time out and reset
+setup_nctoolbox;
 
 % Call 'WindData' to set the starting u- and v- velocity for launch point
 [uvelOLD, vvelOLD] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx);  
@@ -83,7 +82,7 @@ updateEpSec = totalEpSec+time_interval;
 
 %% FOR LOOP: 
 tic; %start timer
-for timestep = 2:timestepNum
+for timestep = 2:20
 %% get new lat/lon/alt values    
 
 epvector(timestep) = epSec; %debugging
