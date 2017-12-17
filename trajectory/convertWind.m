@@ -11,16 +11,18 @@ global time_interval;
 
 %% Latitude and Longitude Array Loop
 
-%Find change in distance due to wind, [m]
-deltaLat_m = vvel*time_interval; 
-deltaLon_m = uvel*time_interval;
+%Find the magnitude of the velocity vector and the direction
+windvec = time_interval*sqrt((uvel)^2+(vvel)^2);
+windtheta = atand(vvel/uvel); %in radians
+
+dlat_m = windvec*sind(windtheta);
+dlon_m = windvec*cosd(windtheta);
 
 %Input the latitude value and get m-to-deg conversion multipliers
 [latlen, longlen] = Lat2metersInLatLon(oldLat);
 
-%calculate the change in distance in degrees (from meters)
-deltaLat_deg = deltaLat_m*(1/latlen);    
-deltaLon_deg = deltaLon_m*(1/longlen);
+dlat_deg = dlat_m*(1/latlen);
+dlon_deg = dlon_m*(1/longlen);
 
 
 % Check wind's sign: U-vel and Latitude
@@ -38,9 +40,8 @@ else
 end
     
     
-% Calculate new Lat/Lon position
-newLat = oldLat + windSignLat*deltaLat_deg;
-newLon = oldLon + windSignLon*deltaLon_deg;
-    
+% Calculate new Lat/Lon position    
+newLat = oldLat + windSignLat*dlat_deg;
+newLon = oldLon + windSignLon*dlon_deg;
 
 end

@@ -3,7 +3,7 @@
 function  [latlen,longlen] = Lat2metersInLatLon(deglat) %Compute lengths of degrees
      
      % USER INPUT: deglat ;   
-     radlat = deglat*((2.0*pi)/360.0); %Converts degrees to radians
+     radlat = deglat*((1.0*pi)/180.0); %Converts degrees to radians
    
         
 		%Set up "Constants"
