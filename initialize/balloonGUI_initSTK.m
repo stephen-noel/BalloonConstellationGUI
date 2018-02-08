@@ -18,7 +18,7 @@ global STKtimestep;
 % Set date units to UTCG
 rootEngine.UnitPreferences.Item('DateFormat').SetCurrentUnit('UTCG');
 
-% Scenario start time, stop time, time interval
+% Scenario start time, stop time, timestep
 STKstarttime = get(handles.editSTKstarttime,'String');
 STKstoptime = get(handles.editSTKstoptime,'String');
 STKtimestep = str2num(get(handles.editSTKtimestep,'String'));

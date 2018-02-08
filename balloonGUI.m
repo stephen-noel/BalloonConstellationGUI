@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 03-Aug-2017 10:48:06
+% Last Modified by GUIDE v2.5 08-Feb-2018 11:40:38
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -87,39 +87,23 @@ addpath('initialize');
 balloonGUI_initMATLAB;
 
 % Grey out buttons until "Initialize Scenario" is pressed
-set(handles.editMinLat,'Enable','off');
-set(handles.editMinLon,'Enable','off');
-set(handles.editMaxLat,'Enable','off');
-set(handles.editMaxLon,'Enable','off');
-set(handles.editBalloonName,'Enable','off');
-set(handles.editBalloonLat,'Enable','off');
-set(handles.editBalloonLon,'Enable','off');
-set(handles.balloonTable,'Enable','off');
-set(handles.pushbuttonBalloonAdd,'Enable','off');
-set(handles.pushbuttonBalloonDelete,'Enable','off');
-set(handles.editLensFocalLength,'Enable','off');
-set(handles.editFocalLengthMult,'Enable','off');
-set(handles.editImageRatio,'Enable','off');
-set(handles.editPayloadMass,'Enable','off');
-set(handles.editPayloadXdim,'Enable','off');
-set(handles.editPayloadYdim,'Enable','off');
-set(handles.editPayloadZdim,'Enable','off');
-set(handles.editBalloonVolume,'Enable','off');
-set(handles.editBalloonMass,'Enable','off');
-set(handles.radiobuttonDefault,'Enable','off');
-set(handles.radiobuttonCustom,'Enable','off');
-set(handles.editFloatAlt,'Enable','off');
-set(handles.editFloatDur,'Enable','off');
-set(handles.popupmenuGasList,'Enable','off');
-set(handles.editOtherBalloon,'Enable','off');
-set(handles.editFilename,'Enable','off');
-set(handles.editLaunchTime,'Enable','off');
+set(handles.editGATminlat,'Enable','off');
+set(handles.editGATmaxlat,'Enable','off');
+set(handles.editGATminlon,'Enable','off');
+set(handles.editGATmaxlon,'Enable','off');
+set(handles.editGATradlat,'Enable','off');
+set(handles.editGATradlon,'Enable','off');
+set(handles.editBAfilename,'Enable','off');
+set(handles.editTRAJfilename,'Enable','off');
+set(handles.pushbuttonAddTarget,'Enable','off');
+set(handles.pushbuttonImport,'Enable','off');
+set(handles.pushbuttonExport,'Enable','off');
 
 %Set scenario start and stop time fields as default values (not inputted
 %into scenario until "Initialize" button is pressed
 global STKstarttimeINIT
-STKstarttimeINIT = '10 Dec 2017 16:00:00.000'; 
-STKstoptimeINIT = '11 Dec 2017 16:00:00.000'; 
+STKstarttimeINIT = '07 Feb 2018 16:00:00.000'; 
+STKstoptimeINIT = '07 Feb 2018 16:00:00.000'; 
 set(handles.editSTKstarttime,'String',STKstarttimeINIT);
 set(handles.editSTKstoptime,'String',STKstoptimeINIT);
 
@@ -162,32 +146,17 @@ function pushbuttonInit_Callback(hObject, eventdata, handles)
 global rootEngine
 
 % Un-grey out buttons when "Initialize Scenario" is pressed
-set(handles.editMinLat,'Enable','on');
-set(handles.editMinLon,'Enable','on');
-set(handles.editMaxLat,'Enable','on');
-set(handles.editMaxLon,'Enable','on');
-set(handles.editBalloonName,'Enable','on');
-set(handles.editBalloonLat,'Enable','on');
-set(handles.editBalloonLon,'Enable','on');
-set(handles.balloonTable,'Enable','on');
-set(handles.pushbuttonBalloonAdd,'Enable','on');
-set(handles.pushbuttonBalloonDelete,'Enable','on');
-set(handles.editLensFocalLength,'Enable','on');
-set(handles.editFocalLengthMult,'Enable','on');
-set(handles.editImageRatio,'Enable','on');
-set(handles.editPayloadMass,'Enable','on');
-set(handles.editPayloadXdim,'Enable','on');
-set(handles.editPayloadYdim,'Enable','on');
-set(handles.editPayloadZdim,'Enable','on');
-set(handles.editBalloonVolume,'Enable','on');
-set(handles.editBalloonMass,'Enable','on');
-set(handles.radiobuttonDefault,'Enable','on');
-set(handles.radiobuttonCustom,'Enable','on');
-set(handles.editFloatAlt,'Enable','on');
-set(handles.editFloatDur,'Enable','on');
-set(handles.popupmenuGasList,'Enable','on');
-set(handles.editFilename,'Enable','on');
-set(handles.editLaunchTime,'Enable','on');
+set(handles.editGATminlat,'Enable','off');
+set(handles.editGATmaxlat,'Enable','off');
+set(handles.editGATminlon,'Enable','off');
+set(handles.editGATmaxlon,'Enable','off');
+set(handles.editGATradlat,'Enable','off');
+set(handles.editGATradlon,'Enable','off');
+set(handles.editBAfilename,'Enable','off');
+set(handles.editTRAJfilename,'Enable','off');
+set(handles.pushbuttonAddTarget,'Enable','off');
+set(handles.pushbuttonImport,'Enable','off');
+set(handles.pushbuttonExport,'Enable','off');
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
@@ -1069,6 +1038,264 @@ function editSTKtimestep_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function editSTKtimestep_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to editSTKtimestep (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbuttonAddTarget.
+function pushbuttonAddTarget_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonAddTarget (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function editGATminlat_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATminlat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATminlat as text
+%        str2double(get(hObject,'String')) returns contents of editGATminlat as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATminlat_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATminlat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATmaxlat_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATmaxlat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATmaxlat as text
+%        str2double(get(hObject,'String')) returns contents of editGATmaxlat as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATmaxlat_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATmaxlat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATminlon_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATminlon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATminlon as text
+%        str2double(get(hObject,'String')) returns contents of editGATminlon as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATminlon_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATminlon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATmaxlon_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATmaxlon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATmaxlon as text
+%        str2double(get(hObject,'String')) returns contents of editGATmaxlon as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATmaxlon_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATmaxlon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATradlat_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATradlat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATradlat as text
+%        str2double(get(hObject,'String')) returns contents of editGATradlat as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATradlat_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATradlat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATradlon_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATradlon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATradlon as text
+%        str2double(get(hObject,'String')) returns contents of editGATradlon as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATradlon_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATradlon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbuttonImportBA.
+function pushbuttonImportBA_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonImportBA (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function editBAfilename_Callback(hObject, eventdata, handles)
+% hObject    handle to editBAfilename (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editBAfilename as text
+%        str2double(get(hObject,'String')) returns contents of editBAfilename as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editBAfilename_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editBAfilename (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton14.
+function pushbutton14_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton14 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbuttonOutputExcel.
+function pushbuttonOutputExcel_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonOutputExcel (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function editTRAJfilename_Callback(hObject, eventdata, handles)
+% hObject    handle to editTRAJfilename (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editTRAJfilename as text
+%        str2double(get(hObject,'String')) returns contents of editTRAJfilename as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editTRAJfilename_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editTRAJfilename (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATcomplat_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATcomplat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATcomplat as text
+%        str2double(get(hObject,'String')) returns contents of editGATcomplat as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATcomplat_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATcomplat (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATcomplon_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATcomplon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATcomplon as text
+%        str2double(get(hObject,'String')) returns contents of editGATcomplon as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATcomplon_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATcomplon (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

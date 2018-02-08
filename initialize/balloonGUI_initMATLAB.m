@@ -16,7 +16,7 @@ addpath('initialize');
 addpath('Numerical Int');
 addpath('trajectory');
 
-
+%{
 % Set Balloon Table on Constellation page to have empty rows and three columns (name, lat, lon)
 emptyTable = cell(0,3);
 oldData = set(handles.balloonTable,'Data',emptyTable);
@@ -27,7 +27,7 @@ oldDataTraj = set(handles.balloonTableTraj,'Data',emptyTable);
 
 %Set default radio button for the "Custom"/"Default" group on Tab 2
 set(handles.uibuttongroup1,'selectedobject',handles.radiobuttonDefault)
-
+%}
 %% Set up Nctoolbox, Add to path
 setup_nctoolbox;
 

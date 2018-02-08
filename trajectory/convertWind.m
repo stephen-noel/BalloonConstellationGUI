@@ -14,10 +14,10 @@ global STKtimestep;
 
 %Find the magnitude of the velocity vector and the direction
 windvec = STKtimestep*sqrt((uvel)^2+(vvel)^2);
-windtheta = atand(vvel/uvel); %in radians
+windtheta = atand(vvel/uvel); %degrees
 
-dlat_m = windvec*sind(windtheta);
-dlon_m = windvec*cosd(windtheta);
+dlat_m = windvec*sind(windtheta); %degrees
+dlon_m = windvec*cosd(windtheta); %degrees
 
 %Input the latitude value and get m-to-deg conversion multipliers
 [latlen, longlen] = Lat2metersInLatLon(oldLat);
