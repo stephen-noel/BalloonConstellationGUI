@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 08-Feb-2018 11:40:38
+% Last Modified by GUIDE v2.5 08-Feb-2018 15:10:20
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -67,9 +67,6 @@ function balloonGUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for balloonGUI
 handles.output = hObject;
 
-% Initialize Tab Manager Class
-handles.tabManager = TabManager( hObject );
-
 % Update handles structure
 guidata(hObject, handles);
 
@@ -93,17 +90,22 @@ set(handles.editGATminlon,'Enable','off');
 set(handles.editGATmaxlon,'Enable','off');
 set(handles.editGATradlat,'Enable','off');
 set(handles.editGATradlon,'Enable','off');
+set(handles.editGATcomplat,'Enable','off');
+set(handles.editGATcomplon,'Enable','off');
 set(handles.editBAfilename,'Enable','off');
 set(handles.editTRAJfilename,'Enable','off');
 set(handles.pushbuttonAddTarget,'Enable','off');
 set(handles.pushbuttonImport,'Enable','off');
 set(handles.pushbuttonExport,'Enable','off');
+set(handles.radioGATlatlon,'Enable','off');
+set(handles.radioGATradius,'Enable','off');
+set(handles.editGATradius,'Enable','off');
 
 %Set scenario start and stop time fields as default values (not inputted
 %into scenario until "Initialize" button is pressed
 global STKstarttimeINIT
 STKstarttimeINIT = '07 Feb 2018 16:00:00.000'; 
-STKstoptimeINIT = '07 Feb 2018 16:00:00.000'; 
+STKstoptimeINIT = '08 Feb 2018 16:00:00.000'; 
 set(handles.editSTKstarttime,'String',STKstarttimeINIT);
 set(handles.editSTKstoptime,'String',STKstoptimeINIT);
 
@@ -146,17 +148,22 @@ function pushbuttonInit_Callback(hObject, eventdata, handles)
 global rootEngine
 
 % Un-grey out buttons when "Initialize Scenario" is pressed
-set(handles.editGATminlat,'Enable','off');
-set(handles.editGATmaxlat,'Enable','off');
-set(handles.editGATminlon,'Enable','off');
-set(handles.editGATmaxlon,'Enable','off');
-set(handles.editGATradlat,'Enable','off');
-set(handles.editGATradlon,'Enable','off');
-set(handles.editBAfilename,'Enable','off');
-set(handles.editTRAJfilename,'Enable','off');
-set(handles.pushbuttonAddTarget,'Enable','off');
-set(handles.pushbuttonImport,'Enable','off');
-set(handles.pushbuttonExport,'Enable','off');
+set(handles.editGATminlat,'Enable','on');
+set(handles.editGATmaxlat,'Enable','on');
+set(handles.editGATminlon,'Enable','on');
+set(handles.editGATmaxlon,'Enable','on');
+set(handles.editGATradlat,'Enable','on');
+set(handles.editGATradlon,'Enable','on');
+set(handles.editGATcomplat,'Enable','on');
+set(handles.editGATcomplon,'Enable','on');
+set(handles.editBAfilename,'Enable','on');
+set(handles.editTRAJfilename,'Enable','on');
+set(handles.pushbuttonAddTarget,'Enable','on');
+set(handles.pushbuttonImport,'Enable','on');
+set(handles.pushbuttonExport,'Enable','on');
+set(handles.radioGATlatlon,'Enable','on');
+set(handles.radioGATradius,'Enable','on');
+set(handles.editGATradius,'Enable','on');
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
@@ -164,10 +171,11 @@ rootEngine.NewScenario('balloonGUIscn');
 % Execute external STK scenario initialization
 balloonGUI_initSTK;
 
+%{
 %Set launch textbox as scenario start time in STK format
 global STKstarttime
 set(handles.editLaunchTime,'String',STKstarttime);
-
+%}
 
 % --- Executes on button press in pushbuttonPlayForw.
 function pushbuttonPlayForw_Callback(hObject, eventdata, handles)
@@ -1053,7 +1061,7 @@ function pushbuttonAddTarget_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonAddTarget (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+pushbuttonAddTarget_gui;
 
 
 function editGATminlat_Callback(hObject, eventdata, handles)
@@ -1193,9 +1201,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbuttonImportBA.
-function pushbuttonImportBA_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbuttonImportBA (see GCBO)
+% --- Executes on button press in pushbuttonImport.
+function pushbuttonImport_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonImport (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -1230,9 +1238,9 @@ function pushbutton14_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 
-% --- Executes on button press in pushbuttonOutputExcel.
-function pushbuttonOutputExcel_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbuttonOutputExcel (see GCBO)
+% --- Executes on button press in pushbuttonExport.
+function pushbuttonExport_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonExport (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
@@ -1296,6 +1304,29 @@ function editGATcomplon_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function editGATcomplon_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to editGATcomplon (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editGATradius_Callback(hObject, eventdata, handles)
+% hObject    handle to editGATradius (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGATradius as text
+%        str2double(get(hObject,'String')) returns contents of editGATradius as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGATradius_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGATradius (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 

@@ -1,6 +1,7 @@
 %balloonGUI_init
 % Julianna Evans
 % 06.22.17
+% last rev. 02.08.18
 
 %% Initialization for Balloon GUI
 % NOTE: This script initializes any Balloon GUI object settings that must be
@@ -17,14 +18,6 @@ addpath('Numerical Int');
 addpath('trajectory');
 
 %{
-% Set Balloon Table on Constellation page to have empty rows and three columns (name, lat, lon)
-emptyTable = cell(0,3);
-oldData = set(handles.balloonTable,'Data',emptyTable);
-
-% Set Balloon Table on Trajectory page to have empty rows and three columns (name, lat, lon)
-emptyTable = cell(0,3);
-oldDataTraj = set(handles.balloonTableTraj,'Data',emptyTable);
-
 %Set default radio button for the "Custom"/"Default" group on Tab 2
 set(handles.uibuttongroup1,'selectedobject',handles.radiobuttonDefault)
 %}

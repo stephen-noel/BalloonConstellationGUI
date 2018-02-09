@@ -1,6 +1,7 @@
 %% balloon object class
 % Julianna Evans
 % 06.22.17
+% last rev: 02.08.18
 
 %% Define a class where balloon components can be stored
 classdef balloonObj
@@ -11,24 +12,7 @@ classdef balloonObj
         LaunchLon;          % [deg]
         LaunchTime;         % ['DD MMM YYYY HH:MM:SS.SSS']
         
-        LensFocalLength;    % [mm]
-        FlenMultiplier;     % []
-        ImgRatio;           % []
-        
-        PayloadMass;        % [kg]
-        PayloadXdim;        % [m]
-        PayloadYdim;        % [m]
-        PayloadZdim;        % [m]
-        
-        BalloonVolInf;      % [m^3]
-        BalloonMass;        % [kg]
-        
-        BalloonGas;         % [g/mol]
-        
-        FloatAlt;           % [km]
-        FloatDur;           % [s]
-        MolWeight;          % [g/mol]
-        
+        FOV;                % [deg]
         
     end
 end
