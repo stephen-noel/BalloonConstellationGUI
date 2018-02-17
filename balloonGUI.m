@@ -33,7 +33,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 08-Feb-2018 15:10:20
+% Last Modified by GUIDE v2.5 17-Feb-2018 11:00:37
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -1061,7 +1061,7 @@ function pushbuttonAddTarget_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonAddTarget (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-pushbuttonAddTarget_gui;
+pushbutton_AddTarget;
 
 
 function editGATminlat_Callback(hObject, eventdata, handles)
@@ -1206,7 +1206,8 @@ function pushbuttonImport_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonImport (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global fullname
+pushbutton_Import;
 
 
 function editBAfilename_Callback(hObject, eventdata, handles)
@@ -1231,12 +1232,17 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton14.
-function pushbutton14_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton14 (see GCBO)
+% --- Executes on button press in pushbuttonBrowseXLSX.
+function pushbuttonBrowseXLSX_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonBrowseXLSX (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global fullname;
 
+[FileName,PathName] = uigetfile('*.xlsx','Select the EXCEL code file');
+fullname = [PathName FileName];
+
+set(handles.editBAfilename,'String',fullname);
 
 % --- Executes on button press in pushbuttonExport.
 function pushbuttonExport_Callback(hObject, eventdata, handles)

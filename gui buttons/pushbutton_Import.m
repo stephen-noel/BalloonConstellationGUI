@@ -4,9 +4,21 @@
 
 % This script will import balloon data using a user-specified filename
 
+%% Initialization
+global rootEngine;
+global STKtimestep;
+global STKstarttime;
+global STKstoptime; 
+
+[NOAAstring] = STKstr2NOAAstr(STKstarttime);
+setup_nctoolbox;
+
 %% Import Excel Data and Assign to 'balloonObj' Method
-filename = 'BalloonData_template';  %file has to be in the working folder
-[num,txt,raw] = xlsread(filename);
+global fullname;
+
+%get filename from user (uses Callbacks from 'pushbuttonBrowseXLSX' and 'pushbuttonImport')
+longfilename = fullname;
+[num,txt,raw] = xlsread(longfilename);
 
 %get dimensions
 [nrows,ncols] = size(raw);
@@ -23,3 +35,23 @@ balloon(j).LaunchLon = cell2mat(raw(j,4));  %get balloon launch longitudes and c
 balloon(j).LaunchAlt = cell2mat(raw(j,5));  %get balloon launch altitudes and convert to number
 balloon(j).FOV = cell2mat(raw(j,6));        %get balloon FOV values and convert to number
 end
+
+%% Time Stuff
+
+for i = 1:index
+% Get elapsed time between scenario start and the balloon's inputted launch time
+[init_elapsedSecs(i)] = Times2ElapsedSecs(STKstarttime, launchTime(i));  
+    
+end
+
+% Get elapsed time between scenario start and the balloon's inputted launch time
+[init_elapsedSecs] = Times2ElapsedSecs(STKstarttime, launchTime);
+
+% Get elapsed time between scenario start and 00z of the same day
+[init_from00z] = str2sameday00z(STKstarttime);
+
+%time in seconds from 00z to the balloon's launch time (INDEXING PURPOSES)
+initEpSec = init_elapsedSecs + init_from00z;
+
+%get number of timesteps from STKstopttime
+[timestepNum] = times2timestepNum(launchTime, STKstoptime, STKtimestep); 

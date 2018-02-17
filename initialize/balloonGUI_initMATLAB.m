@@ -11,10 +11,8 @@
 % Add folder paths
 addpath('Atmosphere');
 addpath('conversions');
-addpath('CSVformat');
 addpath('gui buttons');
 addpath('initialize');
-addpath('Numerical Int');
 addpath('trajectory');
 
 %{
