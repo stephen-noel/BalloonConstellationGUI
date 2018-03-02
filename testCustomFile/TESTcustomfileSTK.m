@@ -14,15 +14,19 @@ uiApplication = actxGetRunningServer('STK11.application');
 root = uiApplication.Personality2;
 
 %% Initialization
-STKstarttime = '17 Feb 2018 16:00:00.000'; 
-STKstoptime = '18 Feb 2018 16:00:00.000'; 
+
+global STKtimestep;
+
+STKstarttime = '27 Feb 2018 16:00:00.000'; 
+STKstoptime = '28 Feb 2018 16:00:00.000'; 
 STKtimestep = 3600;
+
 
 [NOAAstring] = STKstr2NOAAstr(STKstarttime);
 setup_nctoolbox;
 
 %% Import Excel Data and Assign to 'balloonObj' Method
-filename = 'BalloonData_templateTEST';  %file has to be in the working folder
+filename = 'BalloonData_1obj';  %file has to be in the working folder
 [num,txt,raw] = xlsread(filename);
 
 %get dimensions
@@ -35,9 +39,9 @@ for j = 1:index
 balloon(j) = balloonObj;
 balloon(j).Name = cellstr(raw(j,1));        %get balloon names and convert to string type
 balloon(j).LaunchTime = cellstr(raw(j,2));  %get balloon launch times and convert to string type
-balloon(j).LaunchAlt = cell2mat(raw(j,3));  %get balloon launch latitudes and convert to number
-balloon(j).LaunchLat = cell2mat(raw(j,4));  %get balloon launch longitudes and convert to number
-balloon(j).LaunchLon = cell2mat(raw(j,5));  %get balloon launch altitudes and convert to number
+balloon(j).LaunchLat = cell2mat(raw(j,3));  %get balloon launch latitudes and convert to number
+balloon(j).LaunchLon = cell2mat(raw(j,4));  %get balloon launch longitudes and convert to number
+balloon(j).LaunchAlt = cell2mat(raw(j,5));  %get balloon launch altitudes and convert to number
 balloon(j).FOV = cell2mat(raw(j,6));        %get balloon FOV values and convert to number
 end
 
@@ -65,9 +69,9 @@ epSec = STKtimestep;                             %Initialize 'epSec' (used in lo
 newDateSTRpre = char(balloon(i).LaunchTime);        %used in epSec2Time function
 newDateSTR = newDateSTRpre(1:end-1);
 data{1,1,i} = balloon(i).LaunchTime;
-data{1,2,i} = balloon(i).LaunchAlt;
-data{1,3,i} = balloon(i).LaunchLat;
-data{1,4,i} = balloon(i).LaunchLon;
+data{1,2,i} = balloon(i).LaunchLat;
+data{1,3,i} = balloon(i).LaunchLon;
+data{1,4,i} = balloon(i).LaunchAlt;
 
 %Initial values for Lat/Lon
 oldTime = 0;                        %elapsed time is zero seconds
@@ -102,9 +106,9 @@ for timestep = 2:timestepNum(i)
 
 %% Store values into data matrix and increase epSec
 data{timestep,1,i} = cellstr(newDateSTR);
-data{timestep,2,i} = newAlt(end);
-data{timestep,3,i} = newLat(end);
-data{timestep,4,i} = newLon(end);
+data{timestep,2,i} = newLat(end);
+data{timestep,3,i} = newLon(end);
+data{timestep,4,i} = newAlt(end);
 
 data{timestep,5,i} = uvelOLD;
 data{timestep,6,i} = vvelOLD;
@@ -117,12 +121,82 @@ oldLon = newLon;                    %update Lon
 uvelOLDstore(timestep) = uvelOLD;
 vvelOLDstore(timestep) = vvelOLD;
 
+end
+
 testval = 1;
-
-
-
-
-
-
 end
-end
+
+%% ---------------Propagate Aircraft Waypoints for Trajectory-----------------------
+% Code to create aircraft waypoints and propogate using STK method
+
+%% Data from 3D data object
+
+%for i = 2:index
+i = 1;
+
+%initialize data at first instance (??)
+wd_time = data(1,1,i);
+wd_latitude = data(1,2,i);
+wd_longitude = data(1,3,i);
+wd_altitude = data(1,4,i);
+
+NumWaypoints = size(data,1); %get first dimension of the data matrix
+
+%% Set Aircraft Route Method (and associated properties)
+aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', string(raw(i,1))); 
+aircraft.SetRouteType('ePropagatorGreatArc');
+route = aircraft.Route;
+route.Method = 'eDetermineVelFromTime';
+route.SetAltitudeRefType('eWayPtAltRefMSL');
+
+
+%% Add first waypoint 
+% NOTE: first waypoint isn't included in the loop since user specifies
+% launch lat and lon coordinates in GUI
+waypoint = route.Waypoints.Add();
+waypoint.Time = launchTime;             %should be a string in STK format
+waypoint.Latitude = launchLat;          % [deg]
+waypoint.Longitude = launchLon;         % [deg]
+waypoint.Altitude = 0;                  % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LAUNCH
+
+%% FOR LOOP: Create 2nd-end waypoints
+for i=2:NumWaypoints
+    
+    % Add waypoints by dynamically adding variables in loop
+    % NOTE: not a recommended method, but the best way I've found so far 
+    eval(sprintf('waypoint%d = route.Waypoints.Add();', i));
+    eval(sprintf('waypoint%d.Time = ''%s'' ',i,str2mat(wd_time{i})));
+    eval(sprintf('waypoint%d.Latitude = %d;',i,wd_latitude(i)));       %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Longitude = %d;',i,wd_longitude(i)));     %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Altitude = %d;',i,wd_altitude(i)));       %km
+    
+end 
+
+%% Propagate the route
+route.Propagate;
+
+%% ------ Code for exporting data to excel --------
+
+%position data
+alt_array = transpose(data_alt);
+lat_array = transpose(data_lat);
+lon_array = transpose(data_lon);
+time_array = transpose(data_time);
+
+%reformat time data to excel-supported format
+time_array = string(time_array);
+
+%Table
+T = table(time_array, alt_array, lat_array, lon_array);
+
+%Write filename from user input and file extension
+filenameFromUser = get(handles.editFilename,'String');
+filename = strcat(filenameFromUser,'.xlsx');
+col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
+
+%Use writetable to write table
+writetable(T,filename,'Sheet',1);
+winopen(filename);
+
+
+
