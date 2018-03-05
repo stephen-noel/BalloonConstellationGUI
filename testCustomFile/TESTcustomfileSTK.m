@@ -11,7 +11,7 @@
 % Get reference to running STK 64-bit instance
 uiApplication = actxGetRunningServer('STK11.application');
 %Get our IAgStkObjectRoot interface
-root = uiApplication.Personality2;
+rootEngine = uiApplication.Personality2;
 
 %% Initialization
 
@@ -19,14 +19,14 @@ global STKtimestep;
 
 STKstarttime = '27 Feb 2018 16:00:00.000'; 
 STKstoptime = '28 Feb 2018 16:00:00.000'; 
-STKtimestep = 3600;
+STKtimestep = 3600*6;
 
 
 [NOAAstring] = STKstr2NOAAstr(STKstarttime);
 setup_nctoolbox;
 
 %% Import Excel Data and Assign to 'balloonObj' Method
-filename = 'BalloonData_1obj';  %file has to be in the working folder
+filename = 'BalloonData_2obj';  %file has to be in the working folder
 [num,txt,raw] = xlsread(filename);
 
 %get dimensions
@@ -131,14 +131,13 @@ end
 
 %% Data from 3D data object
 
-%for i = 2:index
-i = 1;
+for i = 2:index
 
-%initialize data at first instance (??)
-wd_time = data(1,1,i);
-wd_latitude = data(1,2,i);
-wd_longitude = data(1,3,i);
-wd_altitude = data(1,4,i);
+%initialize data (vector of values for the specific balloon object at index i)
+wd_time = data(:,1,i);
+wd_latitude = data(:,2,i);
+wd_longitude = data(:,3,i);
+wd_altitude = data(:,4,i);
 
 NumWaypoints = size(data,1); %get first dimension of the data matrix
 
@@ -154,30 +153,48 @@ route.SetAltitudeRefType('eWayPtAltRefMSL');
 % NOTE: first waypoint isn't included in the loop since user specifies
 % launch lat and lon coordinates in GUI
 waypoint = route.Waypoints.Add();
-waypoint.Time = launchTime;             %should be a string in STK format
-waypoint.Latitude = launchLat;          % [deg]
-waypoint.Longitude = launchLon;         % [deg]
-waypoint.Altitude = 0;                  % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LAUNCH
+timetempvar = char(string(data(1,1,i)));
+waypoint.Time = timetempvar(1:end-1);              %should be a string in STK format
+waypoint.Latitude = str2mat(string(data(1,2,i)));          % [deg]
+waypoint.Longitude = str2mat(string(data(1,3,i)));         % [deg]
+waypoint.Altitude = 0;          % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LAUNCH
 
 %% FOR LOOP: Create 2nd-end waypoints
-for i=2:NumWaypoints
+for wpt=2:NumWaypoints
     
     % Add waypoints by dynamically adding variables in loop
     % NOTE: not a recommended method, but the best way I've found so far 
-    eval(sprintf('waypoint%d = route.Waypoints.Add();', i));
-    eval(sprintf('waypoint%d.Time = ''%s'' ',i,str2mat(wd_time{i})));
-    eval(sprintf('waypoint%d.Latitude = %d;',i,wd_latitude(i)));       %Get from external pushed wind data
-    eval(sprintf('waypoint%d.Longitude = %d;',i,wd_longitude(i)));     %Get from external pushed wind data
-    eval(sprintf('waypoint%d.Altitude = %d;',i,wd_altitude(i)));       %km
+    eval(sprintf('waypoint%d = route.Waypoints.Add();', wpt));
+    eval(sprintf('waypoint%d.Time = ''%s'' ',wpt,str2mat(wd_time{wpt})));
+    eval(sprintf('waypoint%d.Latitude = %d;',wpt,str2mat(wd_latitude{wpt})));       %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Longitude = %d;',wpt,str2mat(wd_longitude{wpt})));     %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Altitude = %d;',wpt,str2mat(wd_altitude{wpt})));       %km
     
 end 
 
 %% Propagate the route
 route.Propagate;
 
+end
+testval = 1;
+
 %% ------ Code for exporting data to excel --------
 
-%position data
+%initialize arrays
+time_array = ones(size(data,1),1);
+lat_array = ones(size(data,1),1);
+lon_array = ones(size(data,1),1);
+alt_array = ones(size(data,1),1);
+
+
+for n = 2:size(data,3)
+%time and position data
+time_array(:,n) = data(:,1,n);
+lat_array(:,n) = data(:,2,n);
+lon_array(:,n) = data(:,3,n);
+alt_array(:,n) = data(:,4,n);
+end
+
 alt_array = transpose(data_alt);
 lat_array = transpose(data_lat);
 lon_array = transpose(data_lon);
