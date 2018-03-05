@@ -180,40 +180,28 @@ testval = 1;
 
 %% ------ Code for exporting data to excel --------
 
-%initialize arrays
-time_array = ones(size(data,1),1);
-lat_array = ones(size(data,1),1);
-lon_array = ones(size(data,1),1);
-alt_array = ones(size(data,1),1);
-
-
-for n = 2:size(data,3)
-%time and position data
-time_array(:,n) = data(:,1,n);
-lat_array(:,n) = data(:,2,n);
-lon_array(:,n) = data(:,3,n);
-alt_array(:,n) = data(:,4,n);
-end
-
-alt_array = transpose(data_alt);
-lat_array = transpose(data_lat);
-lon_array = transpose(data_lon);
-time_array = transpose(data_time);
-
-%reformat time data to excel-supported format
-time_array = string(time_array);
-
-%Table
-T = table(time_array, alt_array, lat_array, lon_array);
+for i = 2:index
+  
+%set up the column arrays
+time = string(data(:,1,i));
+latitude = data(:,2,i);
+longitude = data(:,3,i);
+altitude = data(:,4,i);
+u_velocity = data(:,5,i);
+v_velocity = data(:,6,i);
+    
+%Table    
+T = table(time, latitude, longitude, altitude, u_velocity, v_velocity);
 
 %Write filename from user input and file extension
-filenameFromUser = get(handles.editFilename,'String');
-filename = strcat(filenameFromUser,'.xlsx');
-col_header={'Elapsed Time [s]','Altitude [m]','Latitude [deg]','Longitude [deg]','','','','','','',''};
+%filenameFromUser = get(handles.editTRAJfilename,'String');
+%filename = strcat(filenameFromUser,'.xlsx');
+filename = 'testoutput.xls';
+col_header={'Time [s]','Latitude [m]','Longitude [deg]','Altitude [deg]','u-velocity [m/s]','v-velocity [m/s]','','','','','','',''};
 
 %Use writetable to write table
-writetable(T,filename,'Sheet',1);
+writetable(T,filename,'Sheet',i);
+
+end
+
 winopen(filename);
-
-
-

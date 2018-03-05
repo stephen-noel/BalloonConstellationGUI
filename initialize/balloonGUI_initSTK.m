@@ -40,3 +40,6 @@ rootEngine.Rewind;
 % Create New Default Facility in Roswell, NM
 facility = rootEngine.CurrentScenario.Children.New('eFacility', 'RoswellNM');
 facility.Position.AssignGeodetic(33.3943, -104.5230, 0); % Argument: Latitude, Longitude, Altitude
+
+%test print statement
+disp('Done initializing STK');

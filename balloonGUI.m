@@ -104,8 +104,8 @@ set(handles.editGATradius,'Enable','off');
 %Set scenario start and stop time fields as default values (not inputted
 %into scenario until "Initialize" button is pressed
 global STKstarttimeINIT
-STKstarttimeINIT = '07 Feb 2018 16:00:00.000'; 
-STKstoptimeINIT = '08 Feb 2018 16:00:00.000'; 
+STKstarttimeINIT = '27 Feb 2018 16:00:00.000'; 
+STKstoptimeINIT = '28 Feb 2018 16:00:00.000'; 
 set(handles.editSTKstarttime,'String',STKstarttimeINIT);
 set(handles.editSTKstoptime,'String',STKstoptimeINIT);
 
@@ -1249,7 +1249,7 @@ function pushbuttonExport_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonExport (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+pushbutton_Export;
 
 
 function editTRAJfilename_Callback(hObject, eventdata, handles)
