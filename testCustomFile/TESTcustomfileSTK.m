@@ -26,7 +26,7 @@ STKtimestep = 3600*6;
 setup_nctoolbox;
 
 %% Import Excel Data and Assign to 'balloonObj' Method
-filename = 'BalloonData_2obj';  %file has to be in the working folder
+filename = 'BalloonData_1obj';  %file has to be in the working folder
 [num,txt,raw] = xlsread(filename);
 
 %get dimensions

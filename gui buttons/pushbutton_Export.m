@@ -129,6 +129,9 @@ wd_latitude = data(:,2,i);
 wd_longitude = data(:,3,i);
 wd_altitude = data(:,4,i);
 
+noNANlength = length(wd_latitude(~isnan(wd_latitude)));
+
+
 NumWaypoints = size(data,1); %get first dimension of the data matrix
 
 %% Set Aircraft Route Method (and associated properties)
@@ -151,14 +154,27 @@ waypoint.Altitude = 0;          % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LA
 
 %% FOR LOOP: Create 2nd-end waypoints
 for wpt=2:NumWaypoints
+    %{
+    waypoint(wpt) = route.Waypoints.Add();
+    
+    if wpt == 2
+       timetempvar = char(wd_time{1,1});
+       waypoint(wpt).Time = timetempvar(1:end-1); 
+    else
+    waypoint(wpt).Time = char(wd_time{wpt,1});
+    end
+    waypoint(wpt).Latitude = wd_latitude{wpt,1};
+    waypoint(wpt).Longitude = wd_longitude{wpt,1};
+    waypoint(wpt).Altitude = wd_altitude{wpt,1};
+    %}
     
     % Add waypoints by dynamically adding variables in loop
     % NOTE: not a recommended method, but the best way I've found so far 
     eval(sprintf('waypoint%d = route.Waypoints.Add();', wpt));
-    eval(sprintf('waypoint%d.Time = ''%s'' ',wpt,str2mat(wd_time{wpt})));
-    eval(sprintf('waypoint%d.Latitude = %d;',wpt,str2mat(wd_latitude{wpt})));       %Get from external pushed wind data
-    eval(sprintf('waypoint%d.Longitude = %d;',wpt,str2mat(wd_longitude{wpt})));     %Get from external pushed wind data
-    eval(sprintf('waypoint%d.Altitude = %d;',wpt,str2mat(wd_altitude{wpt})));       %km
+    eval(sprintf('waypoint%d.Time = ''%s'' ',wpt,str2mat(wd_time{wpt,1})));
+    eval(sprintf('waypoint%d.Latitude = %d;',wpt,str2mat(wd_latitude{wpt,1})));       %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Longitude = %d;',wpt,str2mat(wd_longitude{wpt,1})));     %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Altitude = %d;',wpt,str2mat(wd_altitude{wpt,1})));       %km
     
 end 
 
