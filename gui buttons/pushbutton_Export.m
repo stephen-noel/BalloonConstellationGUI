@@ -124,15 +124,12 @@ end
 for i = 2:index
 
 %initialize data (vector of values for the specific balloon object at index i)
-wd_time = data(:,1,i);
-wd_latitude = data(:,2,i);
-wd_longitude = data(:,3,i);
-wd_altitude = data(:,4,i);
+wd_latitude = cell2mat(data(:,2,i));
 
-noNANlength = length(wd_latitude(~isnan(wd_latitude)));
-
-
-NumWaypoints = size(data,1); %get first dimension of the data matrix
+%find length of non-NAN variables
+nonNANlength = length(wd_latitude(~isnan(wd_latitude))); %%--- don't remember what this is
+NumWaypoints = nonNANlength;
+%NumWaypoints = size(data,1); %get first dimension of the data matrix
 
 %% Set Aircraft Route Method (and associated properties)
 aircraft = rootEngine.CurrentScenario.Children.New('eAircraft', string(raw(i,1))); 
@@ -154,28 +151,15 @@ waypoint.Altitude = 0;          % [km] SHOULD PROBABLY BE ZERO SINCE IT IS AT LA
 
 %% FOR LOOP: Create 2nd-end waypoints
 for wpt=2:NumWaypoints
-    %{
-    waypoint(wpt) = route.Waypoints.Add();
-    
-    if wpt == 2
-       timetempvar = char(wd_time{1,1});
-       waypoint(wpt).Time = timetempvar(1:end-1); 
-    else
-    waypoint(wpt).Time = char(wd_time{wpt,1});
-    end
-    waypoint(wpt).Latitude = wd_latitude{wpt,1};
-    waypoint(wpt).Longitude = wd_longitude{wpt,1};
-    waypoint(wpt).Altitude = wd_altitude{wpt,1};
-    %}
-    
+
     % Add waypoints by dynamically adding variables in loop
-    % NOTE: not a recommended method, but the best way I've found so far 
+    % NOTE: not a MATLAB-recommended method, but the best way I've found so far 
     eval(sprintf('waypoint%d = route.Waypoints.Add();', wpt));
-    eval(sprintf('waypoint%d.Time = ''%s'' ',wpt,str2mat(wd_time{wpt,1})));
-    eval(sprintf('waypoint%d.Latitude = %d;',wpt,str2mat(wd_latitude{wpt,1})));       %Get from external pushed wind data
-    eval(sprintf('waypoint%d.Longitude = %d;',wpt,str2mat(wd_longitude{wpt,1})));     %Get from external pushed wind data
-    eval(sprintf('waypoint%d.Altitude = %d;',wpt,str2mat(wd_altitude{wpt,1})));       %km
-    
+    eval(sprintf('waypoint%d.Time = ''%s'' ',wpt,char(string(data(wpt,1,i)))));
+    eval(sprintf('waypoint%d.Latitude = %d;',wpt,cell2mat(data(wpt,2,i))));       %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Longitude = %d;',wpt,cell2mat(data(wpt,3,i))));     %Get from external pushed wind data
+    eval(sprintf('waypoint%d.Altitude = %d;',wpt,cell2mat(data(wpt,4,i))));       %km
+
 end 
 
 %% Propagate the route
@@ -187,14 +171,20 @@ testval = 1;
 %% ------ Code for exporting data to excel --------
 
 for i = 2:index
-  
+
+%get NumWaypoints for the sheet i
+wd_latitude = cell2mat(data(:,2,i));
+nonNANlength = length(wd_latitude(~isnan(wd_latitude))); %%--- don't remember what this is
+NumWaypoints = nonNANlength;    
+    
+    
 %set up the column arrays
-time = string(data(:,1,i));
-latitude = data(:,2,i);
-longitude = data(:,3,i);
-altitude = data(:,4,i);
-u_velocity = data(:,5,i);
-v_velocity = data(:,6,i);
+time = string(data(1:NumWaypoints,1,i));
+latitude = data(1:NumWaypoints,2,i);
+longitude = data(1:NumWaypoints,3,i);
+altitude = data(1:NumWaypoints,4,i);
+u_velocity = data(1:NumWaypoints,5,i);
+v_velocity = data(1:NumWaypoints,6,i);
     
 %Table    
 T = table(time, latitude, longitude, altitude, u_velocity, v_velocity);
