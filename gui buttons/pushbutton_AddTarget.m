@@ -16,7 +16,9 @@ if (get(handles.radioGATlatlon,'Value') == 0 && get(handles.radioGATradius,'Valu
 
 else
     %do this if a user selected a radio button
-    switch get(get(handles.uibuttongroupAT,'SelectedObject'),'Tag')
+    %always select lat/lon since I probably will delete the radius one soon
+    switch 'radioGATlatlon'
+    %switch get(get(handles.uibuttongroupAT,'SelectedObject'),'Tag')
         case 'radioGATlatlon'
             %use rectangular Area Target code
             
