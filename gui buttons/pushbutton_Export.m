@@ -91,7 +91,7 @@ for timestep = 2:timestepNum(i)
 % Call 'dataIndexing' to convert old time-pos values to NOAA indicies
 [idx_time, idx_alt, idx_lat, idx_lon] = dataIndexing(initEpSec(i), oldAlt, oldLat, oldLon);
 
-% Call 'WindData' to set the starting u- and v- velocity for launch point
+% Call 'WindData' to set the next (old) u- and v- velocity
 [uvelOLD, vvelOLD] = WindData(NOAAstring, idx_time, idx_alt, idx_lat, idx_lon); 
 
 %% Store values into data matrix and increase epSec

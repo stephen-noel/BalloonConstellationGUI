@@ -1,12 +1,12 @@
 %% pushbuttonAREAtarget_gui.m
-% Julianna Evans
-% 08.04.17
-% last revision: 02.15.18
+% Author: Julianna Evans
+% Date: 08.04.17
+% Last revision: 03.29.18
 
-%% Code to run Number calculation
+%% Global variables
 
-% Get inputs from GUI strings
 global rootEngine;
+global minLat; global minLon; global maxLat; global maxLon; %used in downloadWind.m script
 
 %% Switch structure to determine which (if any) radio button has been pressed
 

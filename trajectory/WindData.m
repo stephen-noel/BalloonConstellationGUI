@@ -5,8 +5,8 @@
 
 %NOTE: Nctoolbox must be downloaded and included in the same MATLAB
 %directory for the "ncgeodataset" function to work. In the final product
-%these files will be packaged with the GUI files (need professional matlab
-%license to do this). 
+%these files would be packaged with the GUI files (need professional matlab
+%license to do this, so not really possible at the moment). 
 
 %% WindData function
 function [uvel, vvel] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx)
@@ -23,7 +23,6 @@ url = ['http://nomads.ncep.noaa.gov:9090/dods/gfs_0p25_1hr/gfs',NOAAstring,'/gfs
 % NOTE:    
     % The u-component velocity is the northerly wind component
     % The v-component velocity is the easterly wind component
-    
     
 %% Download dataset and appropriate lat/lon index
 % Instantiate ncgeodataset object using url
