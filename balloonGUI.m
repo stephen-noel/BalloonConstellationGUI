@@ -1,10 +1,12 @@
 %% Balloon Constellation GUI
 % MATLAB GUIDE Sourcecode
 
-% Julianna Evans
-% 06.19.17
- 
-%--------------% RUN THIS FILE TO EXECUTE GUI  %---------------------------
+% Author: Julianna Evans
+% Date: 06.19.17
+% Last Revision: 04.01.18 
+
+
+%--------------% RUN THIS SCRIPT TO EXECUTE GUI  %---------------------------
 
 
 %% -----------------START GUIDE CODE---------------------------------------
@@ -33,7 +35,7 @@ function varargout = balloonGUI(varargin)
 
 % Edit the above text to modify the response to help balloonGUI
 
-% Last Modified by GUIDE v2.5 17-Feb-2018 11:00:37
+% Last Modified by GUIDE v2.5 01-Apr-2018 17:14:39
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -88,8 +90,6 @@ set(handles.editGATminlat,'Enable','off');
 set(handles.editGATmaxlat,'Enable','off');
 set(handles.editGATminlon,'Enable','off');
 set(handles.editGATmaxlon,'Enable','off');
-set(handles.editGATradlat,'Enable','off');
-set(handles.editGATradlon,'Enable','off');
 set(handles.editGATcomplat,'Enable','off');
 set(handles.editGATcomplon,'Enable','off');
 set(handles.editBAfilename,'Enable','off');
@@ -97,9 +97,7 @@ set(handles.editTRAJfilename,'Enable','off');
 set(handles.pushbuttonAddTarget,'Enable','off');
 set(handles.pushbuttonImport,'Enable','off');
 set(handles.pushbuttonExport,'Enable','off');
-set(handles.radioGATlatlon,'Enable','off');
-set(handles.radioGATradius,'Enable','off');
-set(handles.editGATradius,'Enable','off');
+
 
 %Set scenario start and stop time fields as default values (not inputted
 %into scenario until "Initialize" button is pressed
@@ -152,8 +150,6 @@ set(handles.editGATminlat,'Enable','on');
 set(handles.editGATmaxlat,'Enable','on');
 set(handles.editGATminlon,'Enable','on');
 set(handles.editGATmaxlon,'Enable','on');
-set(handles.editGATradlat,'Enable','on');
-set(handles.editGATradlon,'Enable','on');
 set(handles.editGATcomplat,'Enable','on');
 set(handles.editGATcomplon,'Enable','on');
 set(handles.editBAfilename,'Enable','on');
@@ -161,9 +157,6 @@ set(handles.editTRAJfilename,'Enable','on');
 set(handles.pushbuttonAddTarget,'Enable','on');
 set(handles.pushbuttonImport,'Enable','on');
 set(handles.pushbuttonExport,'Enable','on');
-set(handles.radioGATlatlon,'Enable','on');
-set(handles.radioGATradius,'Enable','on');
-set(handles.editGATradius,'Enable','on');
 
 % Create New Scenario
 rootEngine.NewScenario('balloonGUIscn');
@@ -1333,6 +1326,45 @@ function editGATradius_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function editGATradius_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to editGATradius (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in dataDownloadGUI.
+function dataDownloadGUI_Callback(hObject, eventdata, handles)
+% hObject    handle to dataDownloadGUI (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+launchDataGUI;
+
+
+% --- Executes on button press in pushbuttonLocalData.
+function pushbuttonLocalData_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbuttonLocalData (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+getlocaldata
+
+
+
+function editDataStatus_Callback(hObject, eventdata, handles)
+% hObject    handle to editDataStatus (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editDataStatus as text
+%        str2double(get(hObject,'String')) returns contents of editDataStatus as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editDataStatus_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editDataStatus (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
