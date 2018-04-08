@@ -1,4 +1,7 @@
 %% convertWind.m
+% Author: Julianna Evans
+% Date: 06.28.17
+% Last Revision: 02.08.2018 
 
 % Converts wind velocities and initial lat/lon coords to calculate new
 % lat/lon coordinates.

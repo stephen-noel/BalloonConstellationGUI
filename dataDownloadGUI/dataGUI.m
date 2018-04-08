@@ -1,3 +1,12 @@
+%% dataGUI.m
+% MATLAB GUIDE Sourcecode for sub-GUI
+
+% Author: Julianna Evans
+% Date: 04.01.18
+% Last Revision: 04.06.18 
+
+%--------------% RUN THIS SCRIPT TO EXECUTE GUI  %---------------------------
+
 function varargout = dataGUI(varargin)
 % DATAGUI MATLAB code for dataGUI.fig
 %      DATAGUI, by itself, creates a new DATAGUI or raises the existing

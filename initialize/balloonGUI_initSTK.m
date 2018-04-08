@@ -1,8 +1,9 @@
-%% Balloon GUI: STK Scenario Initialization
-%  Julianna Evans
-%  06.19.17
+%% balloonGUI_initSTK.m
+% Author: Julianna Evans
+% Date: 06.22.17
+% Last Revision: 04.06.18
 
-% NOTE: This script initializes the STK scenario time period and test objects.
+% This script initializes the STK scenario time period and test objects.
 % Runs through GUI opening function (pushbuttonInit_Callback).
 
 

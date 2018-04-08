@@ -1,6 +1,11 @@
 %% str2sameday00z.m
-% Julianna Evans
-% 08.01.17
+% Author: Julianna Evans
+% Date: 08.01.17
+% Last Revision: 08.01.17
+
+% Finds the total number of elapsed seconds between the scenario start time
+% and 00:00:00.000 UTC of the same day. This is used for data indexing
+% purposes. 
 
 function [elapsedSecs,sameday00z] = str2sameday00z(SCNstarttime)
 

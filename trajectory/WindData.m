@@ -1,14 +1,11 @@
 %% WindData.m
+% Author: Julianna Evans
+% Date: 07.21.17
+% Last Revision: 04.01.18 
 
-%% Nctoolbox
-%Nctoolbox downloaded from: ('https://github.com/nctoolbox/nctoolbox/releases')
+% Retrieves the u- and v- velocities for the next timestep using the
+% current time-position data. 
 
-%NOTE: Nctoolbox must be downloaded and included in the same MATLAB
-%directory for the "ncgeodataset" function to work. In the final product
-%these files would be packaged with the GUI files (need professional matlab
-%license to do this, so not really possible at the moment). 
-
-%% WindData function
 function [uvel, vvel] = WindData(NOAAstring, time_idx, alt_idx, lat_idx, lon_idx)
 % Nctoolbox set-up occurs in 'pushbuttomCalcTraj_gui.m' for optimization
 

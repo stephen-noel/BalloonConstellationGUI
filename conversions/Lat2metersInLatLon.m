@@ -1,4 +1,9 @@
-%% calculates how many meters in 1 deg of lat/lon at the given latitude
+%% Lat2metersInLatLon.m
+% Author: Siwani Regmi and Julianna Evans
+% Date: 08.01.17
+% Last Revision: 08.01.17
+
+% Calculates how many meters in 1 deg of lat/lon at the given latitude
 
 function  [latlen,longlen] = Lat2metersInLatLon(deglat) %Compute lengths of degrees
      

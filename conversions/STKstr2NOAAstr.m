@@ -1,6 +1,9 @@
-%% Convert GUI inputs into MATLAB-readable form
-% Julianna Evans
-% 07.18.17
+%% STKstr2NOAA.m
+% Author: Julianna Evans
+% Date: 07.18.17
+% Last Revision: 07.18.17
+
+% Converts GUI inputs into MATLAB-readable form
 
 function [NOAAstring] = STKstr2NOAAstr(starttime_GUI)
 %INPUTS: GUI user-input (as strings)

@@ -1,17 +1,18 @@
-%% balloonGUI_init
+%% balloonGUI_initMATLAB.m
 % Author: Julianna Evans
 % Date: 06.22.17
-% Last revision: 04.01.18
+% Last revision: 04.06.18
 
 %% Initialization for Balloon GUI
-% NOTE: This script initializes any Balloon GUI object settings that must be
-% changed before utilizing the GUI. Runs through GUI opening function
+% NOTE: This script initializes all of the associated folders and adds them
+% to the MATLAB path. It runs through the GUI opening function
 % (balloonGUI_OpeningFcn).
 
-% Add folder paths
+% Add folders to path
 addpath('conversions');
+addpath('dataDownloadGUI');
 addpath('gui buttons');
 addpath('initialize');
 addpath('trajectory');
-addpath('dataDownloadGUI');
+
 

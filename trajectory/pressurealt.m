@@ -1,13 +1,11 @@
 %% pressurealt.m
-% Julianna Evans
-% 07.25.17
+% Author: Julianna Evans
+% Date: 07.25.17
+% Last Revsion: 04.01.18
 
-%% Function converts pressure altitude to pressure
-% Purpose of this is to get the altitude in m and convert into a pressure,
-% in order to match the closest dataset index.
+% Convert pressure altitude (m) to pressure in millibars (used for indexing)
 
-
-% based off of equation and matlab script from: 
+% NOTE: code based off of equation and matlab script from: 
 % 'https://physics.stackexchange.com/questions/14678/pressure-at-a-given-altitude'
 
 function [pressure_mbar] = pressurealt(h)

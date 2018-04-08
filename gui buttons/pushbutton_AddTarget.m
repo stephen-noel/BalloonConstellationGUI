@@ -1,7 +1,11 @@
-%% pushbuttonAREAtarget_gui.m
+%% pushbutton_AddTarget.m
 % Author: Julianna Evans
 % Date: 08.04.17
-% Last revision: 03.29.18
+% Last revision: 04.06.18
+
+% This script is tied to the "Add Target" button on the main GUI. This
+% fetches the min/max lat/lon data from the GUI and generates an AreaTarget
+% object in the embedded STK scenario. 
 
 %% Global variables
 
@@ -11,7 +15,7 @@ global minLat; global minLon; global maxLat; global maxLon; %used in downloadWin
 %% Switch structure to determine which (if any) radio button has been pressed
 
 %Check if a button has been pushed (if not-use error message)
-if (get(handles.radioGATlatlon,'Value') == 0 && get(handles.radioGATradius,'Value') == 0)
+if (get(handles.radioGATlatlon,'Value') == 0)
     %error message
 
 else

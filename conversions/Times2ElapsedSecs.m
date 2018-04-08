@@ -1,6 +1,7 @@
 %% Times2ElapsedSecs.m
-% Julianna Evans
-% 07.31.17
+% Author: Julianna Evans
+% Date: 07.31.17
+% Last Revision: 07.31.17
 
 % Converts time from the inputted STK datetime string to elapsed seconds
 % from the scenario starttime

@@ -1,6 +1,7 @@
 %% epSec2Time.m
-% Julianna Evans
-% 07.31.17
+% Author: Julianna Evans
+% Date: 07.31.17
+% Last Revision: 04.06.18
 
 % Converts elapsed time from the launch time into a new datestring to be
 % inputted into the data table

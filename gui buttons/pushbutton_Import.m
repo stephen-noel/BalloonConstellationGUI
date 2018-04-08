@@ -1,8 +1,10 @@
 %% pushbutton_Import.m
-% Julianna Evans
-% 02.17.2018
+% Author: Julianna Evans
+% Date: 02.17.2018
+% Last Revision: 04.01.18
 
-% This script will import balloon data using a user-specified filename
+% This script is tied to the "Import" pushbutton on the main GUI.
+% Imports balloon data from a user-specified filename
 
 %% Initialization
 global rootEngine;
@@ -11,7 +13,7 @@ global STKstarttime;
 global STKstoptime; 
 
 [NOAAstring] = STKstr2NOAAstr(STKstarttime);
-setup_nctoolbox;
+%setup_nctoolbox; %not needed anymore
 
 %% Import Excel Data and Assign to 'balloonObj' Method
 global fullname;

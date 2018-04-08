@@ -1,9 +1,10 @@
 %% pushbutton_Export.m
-% Julianna Evans
-% 02.17.2018
+% Author: Julianna Evans
+% Date: 02.17.2018
+% Last Revision: 04.01.18
 
-% Attached to the "Calculate and Export" button.
-% Calculate everything and export to an excel file.
+% This script is attached to the "Calculate and Export" button.
+% Calculates the balloon trajectory and exports time/position data to an excel file.
 
 %% Initialization
 global rootEngine;

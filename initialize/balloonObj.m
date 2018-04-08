@@ -1,7 +1,7 @@
-%% balloon object class
-% Julianna Evans
-% 06.22.17
-% last rev: 02.17.18
+%% balloonObj.m
+% Author: Julianna Evans
+% Date: 06.22.17
+% Last Revision: 04.06.18
 
 %% Define a class where balloon components can be stored
 classdef balloonObj

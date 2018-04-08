@@ -1,6 +1,10 @@
 %% dataIndexing.m
-% Julianna Evans
-% 07.26.17
+% Author: Julianna Evans and Siwani Regmi
+% Data: 07.26.17
+% Last Revision: 08.09.18
+
+% Finds the indices of the dataset using the input time, alt, lat, and lon
+% values
 
 function [time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(epSec, newAlt, newLat, newLon)
 

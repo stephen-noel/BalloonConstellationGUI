@@ -1,8 +1,10 @@
 %% STK2Datetime.m
-% Julianna Evans
-% 08.01.2017
+% Author: Julianna Evans
+% Date: 08.01.17
+% Last Revision: 08.01.18
 
-%% Converts STK strings to MATLAB datetime variable
+% Converts STK strings to MATLAB datetime variable based on position of
+% characters in the string.
 
 function [datetimeVAR] = STK2Datetime(stkSTR)
 
