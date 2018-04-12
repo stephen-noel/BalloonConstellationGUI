@@ -71,11 +71,14 @@ oldLat = balloon(i).LaunchLat;      %latitude at launch
 oldLon = balloon(i).LaunchLon;      %longitude at launch
 
 %% Get u/v velocity at launch
-% Call 'dataIndexing' to convert old time-pos values to NOAA indicies
-[idx_time, idx_alt, idx_lat, idx_lon] = dataIndexing(initEpSec(i), oldAlt, oldLat, oldLon);
 
-% Call 'WindData' to set the starting u- and v- velocity for launch point
-[uvelOLD, vvelOLD] = WindData(NOAAstring, idx_time, idx_alt, idx_lat, idx_lon); 
+%%% Call 'dataIndexing' to convert old time-pos values to NOAA indicies
+%%[idx_time, idx_alt, idx_lat, idx_lon] = dataIndexing(initEpSec(i), oldAlt, oldLat, oldLon);
+%%% Call 'WindData' to set the starting u- and v- velocity for launch point
+%%[uvelOLD, vvelOLD] = WindData(NOAAstring, idx_time, idx_alt, idx_lat, idx_lon); 
+
+% Call SCRIPT to get u- and v- velocities from datasubset
+
 
 %% Loop for Timestep iteration (to create rows 2:end)
 for timestep = 2:timestepNum(i)   

@@ -63,6 +63,9 @@ alt_idx = pressure_idx;
 % values) and 1:1441 (1440 values), respectively. They both have a
 % resolution of 0.25 deg.
 
+% However, we are only using a subset of this, but it shouldn't change the
+% script from before. 
+
 % Round user-inputed latitude and longitude to nearest 0.25 degree
 lat_round25 = round(newLat*4)/4;
 lon_round25 = round(newLon*4)/4;
@@ -126,6 +129,8 @@ end
 %Indices for latitude and longitude for NOAA databases
 % NOTE:  start at 361 for latitudes, since the latitude range is (-90 < x < 90)
 %        start at 0 for longitudes, since the longitude range is (0 < x < 360)
+% NOTE:  we have to start at 361 for the lat because there are 720 total
+% indexes, and we start at the middle, which is zero.
 if (lat_round25 > 0)
 index_lat = 361 + abs(4*lat25_int) + index_dec_lat;
 index_lon = 0 + abs(4*lon25_int) + index_dec_lon;
