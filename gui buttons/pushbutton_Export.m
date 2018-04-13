@@ -1,7 +1,7 @@
 %% pushbutton_Export.m
 % Author: Julianna Evans
 % Date: 02.17.2018
-% Last Revision: 04.01.18
+% Last Revision: 04.12.18
 
 % This script is attached to the "Calculate and Export" button.
 % Calculates the balloon trajectory and exports time/position data to an excel file.
@@ -13,7 +13,9 @@ global STKstarttime;
 global STKstoptime; 
 
 global fullname;
+global fullname2b;
 
+load(fullname2b);
 [NOAAstring] = STKstr2NOAAstr(STKstarttime);
 
 %get filename from user (uses Callbacks from 'pushbuttonBrowseXLSX' and 'pushbuttonImport')
@@ -72,13 +74,8 @@ oldLon = balloon(i).LaunchLon;      %longitude at launch
 
 %% Get u/v velocity at launch
 
-%%% Call 'dataIndexing' to convert old time-pos values to NOAA indicies
-%%[idx_time, idx_alt, idx_lat, idx_lon] = dataIndexing(initEpSec(i), oldAlt, oldLat, oldLon);
-%%% Call 'WindData' to set the starting u- and v- velocity for launch point
-%%[uvelOLD, vvelOLD] = WindData(NOAAstring, idx_time, idx_alt, idx_lat, idx_lon); 
-
-% Call SCRIPT to get u- and v- velocities from datasubset
-
+% Call 'datasub' to get u- and v- velocities from datasubset
+[uvelOLD, vvelOLD] = datasub(initEpSec(i), oldAlt, oldLat, oldLon,uvelTIME,vvelTIME);
 
 %% Loop for Timestep iteration (to create rows 2:end)
 for timestep = 2:timestepNum(i)   
@@ -92,12 +89,9 @@ for timestep = 2:timestepNum(i)
 [newDateSTR] = epSec2Time(STKtimestep, newDateSTR);
 
 %% Get new u/v velocities and set as old
-% Call 'dataIndexing' to convert old time-pos values to NOAA indicies
-[idx_time, idx_alt, idx_lat, idx_lon] = dataIndexing(initEpSec(i), oldAlt, oldLat, oldLon);
 
-% Call 'WindData' to set the next (old) u- and v- velocity
-[uvelOLD, vvelOLD] = WindData(NOAAstring, idx_time, idx_alt, idx_lat, idx_lon); 
-
+% Call 'datasub' to set the next (old) u- and v- velocity
+[uvelOLD, vvelOLD] = datasub(initEpSec(i), oldAlt, oldLat, oldLon,uvelTIME,vvelTIME);
 %% Store values into data matrix and increase epSec
 data{timestep,1,i} = cellstr(newDateSTR);
 data{timestep,2,i} = newLat(end);
