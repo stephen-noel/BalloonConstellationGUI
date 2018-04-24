@@ -8,8 +8,6 @@
 
 function [time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(epSec, newAlt, newLat, newLon)
 
-global minLat; global minLon; global maxLat; global maxLon; 
-
 %% Take epSec and put into terms of NOAA indexing
 % The 'ugrdprs' and 'vgrdprs' datasets have a time index of 1:121 (0-120
 % values) with a resolution of 0.041666668 days / 3600.00115 seconds.
@@ -61,22 +59,23 @@ alt_idx = pressure_idx;
 
 
 %% Get the datasubset indices for lat and lon
+[lat_idx,lon_idx]= latlonSUBindex(newLat,newLon);
 
 % Get indices of Area Target bounds
-[idx_AT_minlat,idx_AT_minlon]= latlonSUBindex(minLat,minLon);
-[idx_AT_maxlat,idx_AT_maxlon]= latlonSUBindex(maxLat,maxLon);
+%[idx_AT_minlat,idx_AT_minlon]= latlonSUBindex(minLat,minLon);
+%[idx_AT_maxlat,idx_AT_maxlon]= latlonSUBindex(maxLat,maxLon);
 
 % Get indices of newLat and newLon
-[idx_newLat,idx_newLon] = latlonSUBindex(newLat,newLon);
+%[idx_newLat,idx_newLon] = latlonSUBindex(newLat,newLon);
 
 %set lat/lon index relative to AT
 %sub_idxnewLat = idx_newLat-idx_AT_minlat+1;
 %sub_idxnewLon = idx_newLon-idx_AT_minlon+1;
 
-sub_idxnewLon = randi([1 12]);
-sub_idxnewLat = randi([1 8]);
+%sub_idxnewLon = randi([1 12]);
+%sub_idxnewLat = randi([1 8]);
 
-lat_idx = sub_idxnewLat;
-lon_idx = sub_idxnewLon;
+%lat_idx = sub_idxnewLat;
+%lon_idx = sub_idxnewLon;
 
 end

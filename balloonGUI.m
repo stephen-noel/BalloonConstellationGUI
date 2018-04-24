@@ -94,7 +94,6 @@ set(handles.editGATcomplat,'Enable','off');
 set(handles.editGATcomplon,'Enable','off');
 set(handles.editBAfilename,'Enable','off');
 set(handles.editTRAJfilename,'Enable','off');
-set(handles.pushbuttonAddTarget,'Enable','off');
 set(handles.pushbuttonImport,'Enable','off');
 set(handles.pushbuttonExport,'Enable','off');
 
@@ -102,8 +101,8 @@ set(handles.pushbuttonExport,'Enable','off');
 %Set scenario start and stop time fields as default values (not inputted
 %into scenario until "Initialize" button is pressed
 global STKstarttimeINIT
-STKstarttimeINIT = '10 Apr 2018 16:00:00.000'; 
-STKstoptimeINIT = '11 Apr 2018 16:00:00.000'; 
+STKstarttimeINIT = '21 Apr 2018 16:00:00.000'; 
+STKstoptimeINIT = '22 Apr 2018 16:00:00.000'; 
 set(handles.editSTKstarttime,'String',STKstarttimeINIT);
 set(handles.editSTKstoptime,'String',STKstoptimeINIT);
 
@@ -154,7 +153,6 @@ set(handles.editGATcomplat,'Enable','on');
 set(handles.editGATcomplon,'Enable','on');
 set(handles.editBAfilename,'Enable','on');
 set(handles.editTRAJfilename,'Enable','on');
-set(handles.pushbuttonAddTarget,'Enable','on');
 set(handles.pushbuttonImport,'Enable','on');
 set(handles.pushbuttonExport,'Enable','on');
 
@@ -1054,7 +1052,7 @@ function pushbuttonAddTarget_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbuttonAddTarget (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-pushbutton_AddTarget;
+
 
 
 function editGATminlat_Callback(hObject, eventdata, handles)

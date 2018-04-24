@@ -8,8 +8,6 @@
 
 function [latindex,lonindex]= latlonSUBindex(latval,lonval)
 
-global minLat; global minLon; global maxLat; global maxLon; 
-
 %% Take newLat and newLon and get the corresponding NOAA dataset index
 % The 'ugrdprs' and 'vgrdprs' datasets have lat/lon indices of 1:721 (720
 % values) and 1:1441 (1440 values), respectively. They both have a
