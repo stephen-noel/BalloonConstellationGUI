@@ -11,7 +11,8 @@ function [uvelOLD, vvelOLD] = datasub(epSec, oldAlt, oldLat, oldLon,uvelTIME,vve
 [time_idx, alt_idx, lat_idx, lon_idx] = dataIndexing(epSec, oldAlt, oldLat, oldLon);
 
 %get indices of ATdata
-[idx_AT_minlat,idx_AT_minlon]= latlonSUBindex(ATdata{1,1},ATdata{1,2});
+load('winddownload.mat');
+[idx_AT_minlat,idx_AT_minlon]= latlonSUBindex(ATdata{1,1},ATdata{2,1});
 
 %convert to datasubset indices, relative to AT
 idx_newLat = lat_idx;
